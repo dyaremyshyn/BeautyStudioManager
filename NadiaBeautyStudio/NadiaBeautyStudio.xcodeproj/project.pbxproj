@@ -1,0 +1,614 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8C2A083A2BF12397006021A9 /* NadiaBeautyStudioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A08392BF12397006021A9 /* NadiaBeautyStudioApp.swift */; };
+		8C2A083C2BF12397006021A9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A083B2BF12397006021A9 /* ContentView.swift */; };
+		8C2A083E2BF12399006021A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C2A083D2BF12399006021A9 /* Assets.xcassets */; };
+		8C2A08412BF12399006021A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C2A08402BF12399006021A9 /* Preview Assets.xcassets */; };
+		8C2A08432BF12399006021A9 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A08422BF12399006021A9 /* Persistence.swift */; };
+		8C2A08462BF12399006021A9 /* NadiaBeautyStudio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A08442BF12399006021A9 /* NadiaBeautyStudio.xcdatamodeld */; };
+		8C2A08502BF12399006021A9 /* NadiaBeautyStudioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A084F2BF12399006021A9 /* NadiaBeautyStudioTests.swift */; };
+		8C2A085A2BF12399006021A9 /* NadiaBeautyStudioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A08592BF12399006021A9 /* NadiaBeautyStudioUITests.swift */; };
+		8C2A085C2BF12399006021A9 /* NadiaBeautyStudioUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A085B2BF12399006021A9 /* NadiaBeautyStudioUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8C2A084C2BF12399006021A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C2A082E2BF12397006021A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8C2A08352BF12397006021A9;
+			remoteInfo = NadiaBeautyStudio;
+		};
+		8C2A08562BF12399006021A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C2A082E2BF12397006021A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8C2A08352BF12397006021A9;
+			remoteInfo = NadiaBeautyStudio;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8C2A08362BF12397006021A9 /* NadiaBeautyStudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NadiaBeautyStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C2A08392BF12397006021A9 /* NadiaBeautyStudioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NadiaBeautyStudioApp.swift; sourceTree = "<group>"; };
+		8C2A083B2BF12397006021A9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8C2A083D2BF12399006021A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8C2A08402BF12399006021A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8C2A08422BF12399006021A9 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		8C2A08452BF12399006021A9 /* NadiaBeautyStudio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NadiaBeautyStudio.xcdatamodel; sourceTree = "<group>"; };
+		8C2A084B2BF12399006021A9 /* NadiaBeautyStudioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NadiaBeautyStudioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C2A084F2BF12399006021A9 /* NadiaBeautyStudioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NadiaBeautyStudioTests.swift; sourceTree = "<group>"; };
+		8C2A08552BF12399006021A9 /* NadiaBeautyStudioUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NadiaBeautyStudioUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C2A08592BF12399006021A9 /* NadiaBeautyStudioUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NadiaBeautyStudioUITests.swift; sourceTree = "<group>"; };
+		8C2A085B2BF12399006021A9 /* NadiaBeautyStudioUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NadiaBeautyStudioUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8C2A08332BF12397006021A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C2A08482BF12399006021A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C2A08522BF12399006021A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8C2A082D2BF12397006021A9 = {
+			isa = PBXGroup;
+			children = (
+				8C2A08382BF12397006021A9 /* NadiaBeautyStudio */,
+				8C2A084E2BF12399006021A9 /* NadiaBeautyStudioTests */,
+				8C2A08582BF12399006021A9 /* NadiaBeautyStudioUITests */,
+				8C2A08372BF12397006021A9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8C2A08372BF12397006021A9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8C2A08362BF12397006021A9 /* NadiaBeautyStudio.app */,
+				8C2A084B2BF12399006021A9 /* NadiaBeautyStudioTests.xctest */,
+				8C2A08552BF12399006021A9 /* NadiaBeautyStudioUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8C2A08382BF12397006021A9 /* NadiaBeautyStudio */ = {
+			isa = PBXGroup;
+			children = (
+				8C2A08392BF12397006021A9 /* NadiaBeautyStudioApp.swift */,
+				8C2A083B2BF12397006021A9 /* ContentView.swift */,
+				8C2A083D2BF12399006021A9 /* Assets.xcassets */,
+				8C2A08422BF12399006021A9 /* Persistence.swift */,
+				8C2A08442BF12399006021A9 /* NadiaBeautyStudio.xcdatamodeld */,
+				8C2A083F2BF12399006021A9 /* Preview Content */,
+			);
+			path = NadiaBeautyStudio;
+			sourceTree = "<group>";
+		};
+		8C2A083F2BF12399006021A9 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				8C2A08402BF12399006021A9 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8C2A084E2BF12399006021A9 /* NadiaBeautyStudioTests */ = {
+			isa = PBXGroup;
+			children = (
+				8C2A084F2BF12399006021A9 /* NadiaBeautyStudioTests.swift */,
+			);
+			path = NadiaBeautyStudioTests;
+			sourceTree = "<group>";
+		};
+		8C2A08582BF12399006021A9 /* NadiaBeautyStudioUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8C2A08592BF12399006021A9 /* NadiaBeautyStudioUITests.swift */,
+				8C2A085B2BF12399006021A9 /* NadiaBeautyStudioUITestsLaunchTests.swift */,
+			);
+			path = NadiaBeautyStudioUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8C2A08352BF12397006021A9 /* NadiaBeautyStudio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C2A085F2BF12399006021A9 /* Build configuration list for PBXNativeTarget "NadiaBeautyStudio" */;
+			buildPhases = (
+				8C2A08322BF12397006021A9 /* Sources */,
+				8C2A08332BF12397006021A9 /* Frameworks */,
+				8C2A08342BF12397006021A9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NadiaBeautyStudio;
+			productName = NadiaBeautyStudio;
+			productReference = 8C2A08362BF12397006021A9 /* NadiaBeautyStudio.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8C2A084A2BF12399006021A9 /* NadiaBeautyStudioTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C2A08622BF12399006021A9 /* Build configuration list for PBXNativeTarget "NadiaBeautyStudioTests" */;
+			buildPhases = (
+				8C2A08472BF12399006021A9 /* Sources */,
+				8C2A08482BF12399006021A9 /* Frameworks */,
+				8C2A08492BF12399006021A9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8C2A084D2BF12399006021A9 /* PBXTargetDependency */,
+			);
+			name = NadiaBeautyStudioTests;
+			productName = NadiaBeautyStudioTests;
+			productReference = 8C2A084B2BF12399006021A9 /* NadiaBeautyStudioTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8C2A08542BF12399006021A9 /* NadiaBeautyStudioUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C2A08652BF12399006021A9 /* Build configuration list for PBXNativeTarget "NadiaBeautyStudioUITests" */;
+			buildPhases = (
+				8C2A08512BF12399006021A9 /* Sources */,
+				8C2A08522BF12399006021A9 /* Frameworks */,
+				8C2A08532BF12399006021A9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8C2A08572BF12399006021A9 /* PBXTargetDependency */,
+			);
+			name = NadiaBeautyStudioUITests;
+			productName = NadiaBeautyStudioUITests;
+			productReference = 8C2A08552BF12399006021A9 /* NadiaBeautyStudioUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8C2A082E2BF12397006021A9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					8C2A08352BF12397006021A9 = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					8C2A084A2BF12399006021A9 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = 8C2A08352BF12397006021A9;
+					};
+					8C2A08542BF12399006021A9 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = 8C2A08352BF12397006021A9;
+					};
+				};
+			};
+			buildConfigurationList = 8C2A08312BF12397006021A9 /* Build configuration list for PBXProject "NadiaBeautyStudio" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8C2A082D2BF12397006021A9;
+			productRefGroup = 8C2A08372BF12397006021A9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8C2A08352BF12397006021A9 /* NadiaBeautyStudio */,
+				8C2A084A2BF12399006021A9 /* NadiaBeautyStudioTests */,
+				8C2A08542BF12399006021A9 /* NadiaBeautyStudioUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8C2A08342BF12397006021A9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C2A08412BF12399006021A9 /* Preview Assets.xcassets in Resources */,
+				8C2A083E2BF12399006021A9 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C2A08492BF12399006021A9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C2A08532BF12399006021A9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8C2A08322BF12397006021A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C2A08432BF12399006021A9 /* Persistence.swift in Sources */,
+				8C2A08462BF12399006021A9 /* NadiaBeautyStudio.xcdatamodeld in Sources */,
+				8C2A083C2BF12397006021A9 /* ContentView.swift in Sources */,
+				8C2A083A2BF12397006021A9 /* NadiaBeautyStudioApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C2A08472BF12399006021A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C2A08502BF12399006021A9 /* NadiaBeautyStudioTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C2A08512BF12399006021A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C2A085C2BF12399006021A9 /* NadiaBeautyStudioUITestsLaunchTests.swift in Sources */,
+				8C2A085A2BF12399006021A9 /* NadiaBeautyStudioUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8C2A084D2BF12399006021A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8C2A08352BF12397006021A9 /* NadiaBeautyStudio */;
+			targetProxy = 8C2A084C2BF12399006021A9 /* PBXContainerItemProxy */;
+		};
+		8C2A08572BF12399006021A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8C2A08352BF12397006021A9 /* NadiaBeautyStudio */;
+			targetProxy = 8C2A08562BF12399006021A9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		8C2A085D2BF12399006021A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8C2A085E2BF12399006021A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8C2A08602BF12399006021A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"NadiaBeautyStudio/Preview Content\"";
+				DEVELOPMENT_TEAM = 62QSFUN7S7;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dyaremyshyn.NadiaBeautyStudio;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8C2A08612BF12399006021A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"NadiaBeautyStudio/Preview Content\"";
+				DEVELOPMENT_TEAM = 62QSFUN7S7;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dyaremyshyn.NadiaBeautyStudio;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8C2A08632BF12399006021A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 62QSFUN7S7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dyaremyshyn.NadiaBeautyStudioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NadiaBeautyStudio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NadiaBeautyStudio";
+			};
+			name = Debug;
+		};
+		8C2A08642BF12399006021A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 62QSFUN7S7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dyaremyshyn.NadiaBeautyStudioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NadiaBeautyStudio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NadiaBeautyStudio";
+			};
+			name = Release;
+		};
+		8C2A08662BF12399006021A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 62QSFUN7S7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dyaremyshyn.NadiaBeautyStudioUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NadiaBeautyStudio;
+			};
+			name = Debug;
+		};
+		8C2A08672BF12399006021A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 62QSFUN7S7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dyaremyshyn.NadiaBeautyStudioUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NadiaBeautyStudio;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8C2A08312BF12397006021A9 /* Build configuration list for PBXProject "NadiaBeautyStudio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C2A085D2BF12399006021A9 /* Debug */,
+				8C2A085E2BF12399006021A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8C2A085F2BF12399006021A9 /* Build configuration list for PBXNativeTarget "NadiaBeautyStudio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C2A08602BF12399006021A9 /* Debug */,
+				8C2A08612BF12399006021A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8C2A08622BF12399006021A9 /* Build configuration list for PBXNativeTarget "NadiaBeautyStudioTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C2A08632BF12399006021A9 /* Debug */,
+				8C2A08642BF12399006021A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8C2A08652BF12399006021A9 /* Build configuration list for PBXNativeTarget "NadiaBeautyStudioUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C2A08662BF12399006021A9 /* Debug */,
+				8C2A08672BF12399006021A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8C2A08442BF12399006021A9 /* NadiaBeautyStudio.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8C2A08452BF12399006021A9 /* NadiaBeautyStudio.xcdatamodel */,
+			);
+			currentVersion = 8C2A08452BF12399006021A9 /* NadiaBeautyStudio.xcdatamodel */;
+			path = NadiaBeautyStudio.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 8C2A082E2BF12397006021A9 /* Project object */;
+}
