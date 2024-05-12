@@ -58,6 +58,25 @@ struct PersistenceController: Cache {
         self.saveData()
     }
     
+    func deleteAppointment(appointment: Appointment) -> Bool {
+        let request = NSFetchRequest<AppointmentEntity>(entityName: PersistenceController.entity)
+        request.predicate = NSPredicate(format: "id == %@", appointment.id as CVarArg)
+        
+        do {
+            let result = try PersistenceController.shared.container.viewContext.fetch(request)
+            
+            guard let entry = result.first else { return false }
+            
+            container.viewContext.delete(entry)
+            saveData()
+            
+            return true
+        } catch {
+            print(error.localizedDescription)
+            return false
+        }
+    }
+    
     private func saveData() {
         do {
             try container.viewContext.save()
