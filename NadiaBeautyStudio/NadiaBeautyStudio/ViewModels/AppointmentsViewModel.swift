@@ -13,7 +13,7 @@ final class AppointmentsViewModel: ObservableObject {
     func fetchAppointments() {
         appointments = PersistenceController.shared.getAppointments()
 #if DEBUG
-    appointments = Appointment.allCustomers
+//    appointments = Appointment.allCustomers
 #endif
     }
     

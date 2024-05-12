@@ -38,7 +38,7 @@ class NewAppointmentViewModel: ObservableObject {
     
     func saveAppointment() {
         let appointment = Appointment(
-            id: UUID(),
+            id: appointment?.id ?? UUID(),
             clientName: clientName,
             date: appointmentDate,
             price: Double(price.replacingOccurrences(of: ",", with: ".")) ?? 0,
@@ -49,6 +49,7 @@ class NewAppointmentViewModel: ObservableObject {
         PersistenceController.shared.saveAppointment(appointment: appointment)
         
         // Reset fields after saving if needed
+        self.appointment = nil
         clientName = ""
         clientNumber = ""
         appointmentDate = Date()

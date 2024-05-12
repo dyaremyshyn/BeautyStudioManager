@@ -20,6 +20,7 @@ struct NewAppointmentView: View {
                     Section {
                         TextField("Nome da Cliente", text: $viewModel.clientName)
                         TextField("Número da Cliente", text: $viewModel.clientNumber)
+                            .keyboardType(.numberPad)
                     } header: {
                         Text("Detalhes da Cliente")
                     }

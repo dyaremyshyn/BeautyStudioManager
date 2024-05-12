@@ -47,16 +47,46 @@ struct PersistenceController: Cache {
     }
     
     func saveAppointment(appointment: Appointment) {
-        let newEntry = AppointmentEntity(context: container.viewContext)
-        newEntry.id = appointment.id
-        newEntry.clientName = appointment.clientName
-        newEntry.date = appointment.date
-        newEntry.inResidence = appointment.inResidence
-        newEntry.price = appointment.price
-        newEntry.type = appointment.type
-        newEntry.clientNumber = appointment.clientNumber
+        // Check if the appointment exists
+
+        let request = NSFetchRequest<AppointmentEntity>(entityName: PersistenceController.entity)
+        request.predicate = NSPredicate(format: "id == %@", appointment.id as CVarArg)
         
-        self.saveData()
+        do {
+            let result = try PersistenceController.shared.container.viewContext.fetch(request)
+            
+            guard let editAppointment = result.first else {
+                print("Appointment entity not found with id: \(appointment.id)")
+                
+                let newEntry = AppointmentEntity(context: container.viewContext)
+                newEntry.id = appointment.id
+                newEntry.clientName = appointment.clientName
+                newEntry.date = appointment.date
+                newEntry.inResidence = appointment.inResidence
+                newEntry.price = appointment.price
+                newEntry.type = appointment.type
+                newEntry.clientNumber = appointment.clientNumber
+                
+                self.saveData()
+                
+                return
+            }
+            
+            // Modify the properties of the fetched appointment
+            editAppointment.clientName = appointment.clientName
+            editAppointment.date = appointment.date
+            editAppointment.inResidence = appointment.inResidence
+            editAppointment.price = appointment.price
+            editAppointment.type = appointment.type
+            editAppointment.clientNumber = appointment.clientNumber
+            
+            self.saveData()
+            
+            print("Appointment entity with id \(appointment.id) edited successfully")
+            
+        } catch {
+            print("Error editing appointment entity: \(error)")
+        }
     }
     
     func deleteAppointment(appointment: Appointment) -> Bool {
