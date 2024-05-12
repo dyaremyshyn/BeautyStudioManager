@@ -24,10 +24,10 @@ struct AppointmentListView: View {
                     .font(.headline)
                 Spacer()
                     .frame(height: 8)
-                Text(appointment.date)
+                Text(Appointment.dateFormatter.string(from: appointment.date))
                 Spacer()
                     .frame(height: 8)
-                if !appointment.inStudio {
+                if appointment.inResidence {
                     Text("Ir ao domicílio")
                 }
             }

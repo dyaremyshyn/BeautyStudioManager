@@ -16,14 +16,18 @@ struct AppointmentsView: View {
                 Text(viewModel.calculateMonthlyProfit())
             }
             ForEach(viewModel.appointments) { item in
-                AppointmentListView(appointment: item)
+                NavigationLink {
+                    NewAppointmentView(appointment: item)
+                } label: {
+                    AppointmentListView(appointment: item)
+                }
             }
             .onDelete(perform: deleteItems)
         }
         .navigationTitle("Marcações")
         .toolbar {
             ToolbarItem {
-                NavigationLink(destination: NewAppointmentView()) {
+                NavigationLink(destination: NewAppointmentView(appointment: nil)) {
                     Label("Nova Marcação", systemImage: "plus")
                 }
             }

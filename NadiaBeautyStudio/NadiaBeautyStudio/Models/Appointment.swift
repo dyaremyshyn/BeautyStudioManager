@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum AppointmentType: String {
-    case makeup = "Makeup"
+enum AppointmentType: String, CaseIterable {
+    case makeup = "Maquilhagem"
     case bride = "Noiva"
     case nailsType1 = "Unhas verniz gel"
     case nailsType2 = "Unhas gel"
     case nailsType3 = "Unhas acrílico"
-    case lashes = "Pestanas"
+    case lashes = "Lifting de pestanas"
     case skinCleansing = "Limpeza de pele"
     case brideTest = "Prova de noiva"
     case eyebrow = "Sobrancelha"
@@ -23,10 +23,11 @@ enum AppointmentType: String {
 struct Appointment: Equatable, Identifiable {
     let id: UUID
     let clientName: String
-    let date: String
+    let date: Date
     let price: Double
     let type: String
-    let inStudio: Bool
+    let inResidence: Bool
+    let clientNumber: String?
     
     func initials() -> String {
         let words = clientName.components(separatedBy: " ")
@@ -43,10 +44,11 @@ struct Appointment: Equatable, Identifiable {
         Appointment(
             id: appointment.id ?? UUID(),
             clientName: appointment.clientName ?? "Sem nome",
-            date: dateFormatter.string(from: appointment.date!),
+            date: appointment.date!,
             price: appointment.price,
             type: appointment.type ?? "Sem tipo",
-            inStudio: appointment.inStudio
+            inResidence: appointment.inResidence,
+            clientNumber: appointment.clientNumber
         )
     }
     
@@ -57,55 +59,72 @@ struct Appointment: Equatable, Identifiable {
         return formatter
     }()
     
+    public static let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 0
+        formatter.currencyCode = "EUR"
+        formatter.numberStyle = .currency
+        formatter.locale = .current
+        formatter.decimalSeparator = "."
+        return formatter
+    }()
+    
 #if DEBUG
     static let example = Appointment(
         id: UUID(),
         clientName: "Nádia Nunes",
-        date: dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: 1, to: .now)!),
+        date: Calendar.current.date(byAdding: .day, value: 1, to: .now)!,
         price: 30,
         type: AppointmentType.makeup.rawValue,
-        inStudio: false
+        inResidence: false,
+        clientNumber: "914535341"
     )
     static let allCustomers = [
         Appointment(
             id: UUID(),
             clientName: "Vera Nunes",
-            date: dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: 2, to: .now)!),
+            date: Calendar.current.date(byAdding: .day, value: 2, to: .now)!,
             price: 12.5,
             type: AppointmentType.nailsType1.rawValue,
-            inStudio: true
+            inResidence: false,
+            clientNumber: nil
         ),
         Appointment(
             id: UUID(),
             clientName: "Anabela Nunes",
-            date: dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: 3, to: .now)!),
+            date: Calendar.current.date(byAdding: .day, value: 3, to: .now)!,
             price: 30,
             type: AppointmentType.skinCleansing.rawValue,
-            inStudio: true
+            inResidence: false,
+            clientNumber: nil
         ),
         Appointment(
             id: UUID(),
             clientName: "Patricia Nunes",
-            date: dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: 4, to: .now)!),
+            date: Calendar.current.date(byAdding: .day, value: 4, to: .now)!,
             price: 10,
             type: AppointmentType.lashes.rawValue,
-            inStudio: true
+            inResidence: false,
+            clientNumber: nil
         ),
         Appointment(
             id: UUID(),
             clientName: "Clara Cruz",
-            date: dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: 5, to: .now)!),
+            date: Calendar.current.date(byAdding: .day, value: 5, to: .now)!,
             price: 30,
             type: AppointmentType.makeup.rawValue,
-            inStudio: false
+            inResidence: true,
+            clientNumber: nil
         ),
         Appointment(
             id: UUID(),
-            clientName: "Marilia Casamento",
-            date: dateFormatter.string(from: Calendar.current.date(byAdding: .month, value: 2, to: .now)!),
-            price: 100,
+            clientName: "Marilia Prima",
+            date: Calendar.current.date(byAdding: .month, value: 2, to: .now)!,
+            price: 150,
             type: AppointmentType.bride.rawValue,
-            inStudio: false
+            inResidence: true,
+            clientNumber: nil
         )
     ]
 #endif

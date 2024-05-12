@@ -20,6 +20,8 @@
 		8C2A08712BF1258B006021A9 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A08702BF1258B006021A9 /* Appointment.swift */; };
 		8C2A08732BF13069006021A9 /* NewAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A08722BF13069006021A9 /* NewAppointmentView.swift */; };
 		8C2A08762BF13F35006021A9 /* AppointmentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A08752BF13F35006021A9 /* AppointmentListView.swift */; };
+		8C2A08782BF15599006021A9 /* NewAppointmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A08772BF15599006021A9 /* NewAppointmentViewModel.swift */; };
+		8C2A087B2BF174C8006021A9 /* CheckboxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A087A2BF174C8006021A9 /* CheckboxToggleStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		8C2A08702BF1258B006021A9 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
 		8C2A08722BF13069006021A9 /* NewAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAppointmentView.swift; sourceTree = "<group>"; };
 		8C2A08752BF13F35006021A9 /* AppointmentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentListView.swift; sourceTree = "<group>"; };
+		8C2A08772BF15599006021A9 /* NewAppointmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAppointmentViewModel.swift; sourceTree = "<group>"; };
+		8C2A087A2BF174C8006021A9 /* CheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxToggleStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				8C2A086D2BF1251B006021A9 /* AppointmentsViewModel.swift */,
+				8C2A08772BF15599006021A9 /* NewAppointmentViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -162,6 +167,7 @@
 		8C2A086A2BF124AE006021A9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8C2A08792BF174A3006021A9 /* Helpers */,
 				8C2A08742BF13F17006021A9 /* CustomViews */,
 				8C2A086B2BF124D4006021A9 /* AppointmentsView.swift */,
 				8C2A08722BF13069006021A9 /* NewAppointmentView.swift */,
@@ -181,8 +187,16 @@
 			isa = PBXGroup;
 			children = (
 				8C2A08752BF13F35006021A9 /* AppointmentListView.swift */,
+				8C2A087A2BF174C8006021A9 /* CheckboxToggleStyle.swift */,
 			);
 			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		8C2A08792BF174A3006021A9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,11 +329,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C2A08782BF15599006021A9 /* NewAppointmentViewModel.swift in Sources */,
 				8C2A08432BF12399006021A9 /* Persistence.swift in Sources */,
 				8C2A08462BF12399006021A9 /* NadiaBeautyStudio.xcdatamodeld in Sources */,
 				8C2A08762BF13F35006021A9 /* AppointmentListView.swift in Sources */,
 				8C2A086C2BF124D4006021A9 /* AppointmentsView.swift in Sources */,
 				8C2A083A2BF12397006021A9 /* NadiaBeautyStudioApp.swift in Sources */,
+				8C2A087B2BF174C8006021A9 /* CheckboxToggleStyle.swift in Sources */,
 				8C2A08712BF1258B006021A9 /* Appointment.swift in Sources */,
 				8C2A086E2BF1251B006021A9 /* AppointmentsViewModel.swift in Sources */,
 				8C2A08732BF13069006021A9 /* NewAppointmentView.swift in Sources */,

@@ -22,7 +22,7 @@ final class AppointmentsViewModel: ObservableObject {
         let currentMonth = Calendar.current.component(.month, from: Date())
         
         let appointmentsInCurrentMonth = appointments.filter { appointment in
-            let appointmentDate = Appointment.dateFormatter.date(from: appointment.date)!
+            let appointmentDate = appointment.date
             let appointmentMonth = Calendar.current.component(.month, from: appointmentDate)
             return appointmentMonth == currentMonth
         }

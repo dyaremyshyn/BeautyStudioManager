@@ -50,10 +50,11 @@ struct PersistenceController: Cache {
         let newEntry = AppointmentEntity(context: container.viewContext)
         newEntry.id = appointment.id
         newEntry.clientName = appointment.clientName
-        newEntry.date = Appointment.dateFormatter.date(from: appointment.date)
-        newEntry.inStudio = appointment.inStudio
+        newEntry.date = appointment.date
+        newEntry.inResidence = appointment.inResidence
         newEntry.price = appointment.price
         newEntry.type = appointment.type
+        newEntry.clientNumber = appointment.clientNumber
         
         self.saveData()
     }
