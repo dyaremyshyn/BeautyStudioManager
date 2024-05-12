@@ -98,11 +98,11 @@
 		8C2A08382BF12397006021A9 /* NadiaBeautyStudio */ = {
 			isa = PBXGroup;
 			children = (
+				8C2A08692BF123E1006021A9 /* ViewModels */,
+				8C2A08682BF123C0006021A9 /* Persistence */,
 				8C2A08392BF12397006021A9 /* NadiaBeautyStudioApp.swift */,
 				8C2A083B2BF12397006021A9 /* ContentView.swift */,
 				8C2A083D2BF12399006021A9 /* Assets.xcassets */,
-				8C2A08422BF12399006021A9 /* Persistence.swift */,
-				8C2A08442BF12399006021A9 /* NadiaBeautyStudio.xcdatamodeld */,
 				8C2A083F2BF12399006021A9 /* Preview Content */,
 			);
 			path = NadiaBeautyStudio;
@@ -131,6 +131,22 @@
 				8C2A085B2BF12399006021A9 /* NadiaBeautyStudioUITestsLaunchTests.swift */,
 			);
 			path = NadiaBeautyStudioUITests;
+			sourceTree = "<group>";
+		};
+		8C2A08682BF123C0006021A9 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				8C2A08422BF12399006021A9 /* Persistence.swift */,
+				8C2A08442BF12399006021A9 /* NadiaBeautyStudio.xcdatamodeld */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		8C2A08692BF123E1006021A9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
