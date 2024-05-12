@@ -13,16 +13,30 @@ struct AppointmentsView: View {
     var body: some View {
         List {
             Section("Ganho mensal") {
-                Text(viewModel.calculateMonthlyProfit())
+                Text(viewModel.profit)
+                    .font(.title)
+                    .frame(width: 400, alignment: .center)
             }
-            ForEach(viewModel.appointments) { item in
-                NavigationLink {
-                    NewAppointmentView(appointment: item)
-                } label: {
-                    AppointmentListView(appointment: item)
+            Section("Marcações desta semana") {
+                ForEach(viewModel.appointmentsForCurrentWeek) { item in
+                    NavigationLink {
+                        NewAppointmentView(appointment: item)
+                    } label: {
+                        AppointmentListView(appointment: item)
+                    }
                 }
+                .onDelete(perform: deleteItems)
             }
-            .onDelete(perform: deleteItems)
+            Section("Próximas Marcações") {
+                ForEach(viewModel.appointments) { item in
+                    NavigationLink {
+                        NewAppointmentView(appointment: item)
+                    } label: {
+                        AppointmentListView(appointment: item)
+                    }
+                }
+                .onDelete(perform: deleteItems)
+            }
         }
         .navigationTitle("Marcações")
         .toolbar {

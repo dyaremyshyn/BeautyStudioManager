@@ -15,7 +15,6 @@ protocol Cache {
 struct PersistenceController: Cache {
     private static let modelName = "NadiaBeautyStudio"
     private static let entity = "AppointmentEntity"
-    private let currentDate = Date()
 
     let container: NSPersistentContainer
     static let shared = PersistenceController()
@@ -34,11 +33,11 @@ struct PersistenceController: Cache {
         var appointments: [Appointment] = []
         
         let request = NSFetchRequest<AppointmentEntity>(entityName: PersistenceController.entity)
-        request.predicate = NSPredicate(format: "date >= %@", currentDate as NSDate)
         
         do {
             let result = try PersistenceController.shared.container.viewContext.fetch(request)
             appointments =  result.map { Appointment.map(appointment: $0 ) }
+            appointments.sort(by: { $0.date < $1.date })
         } catch {
             print(error.localizedDescription)
         }
