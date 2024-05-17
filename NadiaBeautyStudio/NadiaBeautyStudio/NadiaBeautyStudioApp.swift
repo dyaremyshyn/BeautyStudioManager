@@ -12,7 +12,7 @@ struct NadiaBeautyStudioApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {   
-                AppointmentsView()
+                ContainerView()
             }
         }
     }
