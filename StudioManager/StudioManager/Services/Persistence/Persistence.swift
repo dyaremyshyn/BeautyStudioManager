@@ -7,12 +7,7 @@
 
 import CoreData
 
-protocol Cache {
-    func getAppointments() -> [Appointment]
-    func saveAppointments(to client: Client)
-}
-
-struct PersistenceController: Cache {
+struct PersistenceController: Persist {
     private static let modelName = "StudioManager"
     private static let appointmentEntity = "AppointmentEntity"
     private static let clientEntity = "ClientEntity"
