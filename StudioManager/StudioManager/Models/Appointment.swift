@@ -7,21 +7,8 @@
 
 import Foundation
 
-enum AppointmentType: String, CaseIterable {
-    case makeup = "Maquilhagem"
-    case bride = "Noiva"
-    case nailsType1 = "Unhas verniz gel"
-    case nailsType2 = "Unhas gel"
-    case nailsType3 = "Unhas acrílico"
-    case lashes = "Lifting de pestanas"
-    case skinCleansing = "Limpeza de pele"
-    case brideTest = "Prova de noiva"
-    case eyebrow = "Sobrancelha"
-    case hairstyle = "Penteado"
-}
-
-struct Appointment: Equatable, Identifiable {
-    let id: UUID
+public struct Appointment: Equatable, Identifiable {
+    public let id: UUID
     let date: Date
     let price: Double
     let type: String
@@ -54,4 +41,53 @@ struct Appointment: Equatable, Identifiable {
         formatter.decimalSeparator = "."
         return formatter
     }()
+    
+    
+    static let allCustomers = [
+        StudioAppointment(
+            id: UUID(),
+            date: Calendar.current.date(byAdding: .day, value: 2, to: .now)!,
+            price: 12.5,
+            type: AppointmentType.nailsType1.rawValue,
+            inResidence: false,
+            name: "Vera Nunes",
+            phoneNumber: "912325234"
+        ),
+        StudioAppointment(
+            id: UUID(),
+            date: Calendar.current.date(byAdding: .day, value: 3, to: .now)!,
+            price: 30,
+            type: AppointmentType.skinCleansing.rawValue,
+            inResidence: false,
+            name: "Anabela Nunes",
+            phoneNumber: "912325234"
+        ),
+        StudioAppointment(
+            id: UUID(),
+            date: Calendar.current.date(byAdding: .day, value: 4, to: .now)!,
+            price: 25,
+            type: AppointmentType.lashes.rawValue,
+            inResidence: false,
+            name: "Patricia Nunes",
+            phoneNumber: "912325234"
+        ),
+        StudioAppointment(
+            id: UUID(),
+            date: Calendar.current.date(byAdding: .weekday, value: 4, to: .now)!,
+            price: 35,
+            type: AppointmentType.makeup.rawValue,
+            inResidence: false,
+            name: "Clara Cruz",
+            phoneNumber: "912325234"
+        ),
+        StudioAppointment(
+            id: UUID(),
+            date: Calendar.current.date(byAdding: .month, value: 2, to: .now)!,
+            price: 150,
+            type: AppointmentType.bride.rawValue,
+            inResidence: false,
+            name: "Marilia Prima",
+            phoneNumber: "912325234"
+        )        
+    ]
 }

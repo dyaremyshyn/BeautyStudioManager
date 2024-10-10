@@ -17,7 +17,7 @@ final class AppointmentsViewModel: ObservableObject {
         calculateMonthlyProfit()
         getAppointmentsForCurrentWeek()
 #if DEBUG
-    //appointments = Appointment.allCustomers
+    appointments = Appointment.allCustomers
 #endif
     }
     

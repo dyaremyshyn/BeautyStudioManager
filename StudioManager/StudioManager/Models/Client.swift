@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Client: Equatable, Identifiable {
-    let id: UUID
+public struct Client: Equatable, Identifiable {
+    public let id: UUID
     let name: String
     let phoneNumber: String?
     let appointments: [Appointment]

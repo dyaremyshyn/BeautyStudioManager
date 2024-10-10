@@ -7,16 +7,16 @@
 
 import CoreData
 
-struct PersistenceController: Persist {
+struct PersistenceService: PersistenceLoader {
     private static let modelName = "StudioManager"
     private static let appointmentEntity = "AppointmentEntity"
     private static let clientEntity = "ClientEntity"
+    private static let studioEntity = "StudioEntity"
 
     let container: NSPersistentContainer
-    static let shared = PersistenceController()
 
-    private init() {
-        container = NSPersistentContainer(name: PersistenceController.modelName)
+    public init() {
+        container = NSPersistentContainer(name: PersistenceService.modelName)
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 print(error.localizedDescription)
@@ -28,10 +28,10 @@ struct PersistenceController: Persist {
     func getAppointments() -> [Appointment] {
         var appointments: [Appointment] = []
         
-        let request = NSFetchRequest<ClientEntity>(entityName: PersistenceController.clientEntity)
+        let request = NSFetchRequest<ClientEntity>(entityName: PersistenceService.clientEntity)
         
         do {
-            let result = try PersistenceController.shared.container.viewContext.fetch(request)
+            let result = try container.viewContext.fetch(request)
             let clients = result.map { Client.map(client: $0) }
             
             clients.forEach {
@@ -45,14 +45,74 @@ struct PersistenceController: Persist {
         return appointments
     }
     
+    func getStudioAppointments() -> [StudioAppointment] {
+        var appointments: [StudioAppointment] = []
+        
+        let request = NSFetchRequest<StudioEntity>(entityName: PersistenceService.studioEntity)
+        
+        do {
+            let result = try container.viewContext.fetch(request)
+            let clients = result.map { StudioAppointment.map(appointment: $0) }
+        
+            appointments.sort(by: { $0.date < $1.date })
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        return appointments
+    }
+    
+    func saveStudioAppointment(appointment: StudioAppointment) {
+        // Check if the appointment exists
+
+        let request = NSFetchRequest<StudioEntity>(entityName: PersistenceService.studioEntity)
+        request.predicate = NSPredicate(format: "id == %@", appointment.id as CVarArg)
+        
+        do {
+            let result = try container.viewContext.fetch(request)
+            
+            guard let editClient = result.first else {
+                print("Client entity not found with id: \(appointment.id)")
+                
+                let newEntry = StudioEntity(context: container.viewContext)
+                newEntry.id = appointment.id
+                newEntry.name = appointment.name
+                newEntry.phoneNumber = appointment.phoneNumber
+                newEntry.date = appointment.date
+                newEntry.inResidence = appointment.inResidence
+                newEntry.price = appointment.price
+                newEntry.type = appointment.type
+                
+                saveData()
+                
+                return
+            }
+            
+            // Modify the properties of the fetched appointment
+            editClient.name = appointment.name
+            editClient.phoneNumber = appointment.phoneNumber
+            editClient.date = appointment.date
+            editClient.price = appointment.price
+            editClient.type = appointment.type
+            editClient.inResidence = appointment.inResidence
+            
+            saveData()
+            
+            print("Client entity with id \(appointment.id) edited successfully")
+            
+        } catch {
+            print("Error editing appointment entity: \(error)")
+        }
+    }
+    
     func saveAppointments(to client: Client) {
         // Check if the appointment exists
 
-        let request = NSFetchRequest<ClientEntity>(entityName: PersistenceController.clientEntity)
+        let request = NSFetchRequest<ClientEntity>(entityName: PersistenceService.clientEntity)
         request.predicate = NSPredicate(format: "id == %@", client.id as CVarArg)
         
         do {
-            let result = try PersistenceController.shared.container.viewContext.fetch(request)
+            let result = try container.viewContext.fetch(request)
             
             guard let editClient = result.first else {
                 print("Client entity not found with id: \(client.id)")
@@ -83,11 +143,11 @@ struct PersistenceController: Persist {
     }
     
     func deleteAppointment(appointment: Appointment) -> Bool {
-        let request = NSFetchRequest<AppointmentEntity>(entityName: PersistenceController.appointmentEntity)
+        let request = NSFetchRequest<AppointmentEntity>(entityName: PersistenceService.appointmentEntity)
         request.predicate = NSPredicate(format: "id == %@", appointment.id as CVarArg)
         
         do {
-            let result = try PersistenceController.shared.container.viewContext.fetch(request)
+            let result = try container.viewContext.fetch(request)
             
             guard let entry = result.first else { return false }
             

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AppointmentsViewCell: UICollectionViewCell {
+class AppointmentsViewCell: UITableViewCell {
     static let reuseIdentifier = String(describing: AppointmentsViewCell.self)
     
     private lazy var containerView: UIView = {
@@ -45,13 +45,14 @@ class AppointmentsViewCell: UICollectionViewCell {
         return label
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
         setupView()
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupView()
     }
     
     override func prepareForReuse() {
@@ -60,6 +61,7 @@ class AppointmentsViewCell: UICollectionViewCell {
     }
     
     private func setupView() {
+        selectionStyle = .none
         contentView.addSubview(containerView)
         containerView.addSubview(clientNameLabel)
         containerView.addSubview(appointmentsLabel)
@@ -89,19 +91,10 @@ class AppointmentsViewCell: UICollectionViewCell {
         inResidenceLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8).isActive = true
     }
     
-    
-}
-    
-extension AppointmentsViewCell {
-    public func configure(model: Client?) {
-        var appointments: String = ""
-        model?.appointments.forEach {
-            appointments += $0.type + "\n"
-        }
-        
-        clientNameLabel.text = model?.name
-        appointmentsLabel.text = appointments
-        appointmentsDurationLabel.text = "\(model?.appointments.first?.date) - \(model?.appointments.last?.date)"
-        inResidenceLabel.text = model?.appointments.first(where: { $0.inResidence }) != nil ? "Yes" : "No"
+    public func configure(model: StudioAppointment) {
+        clientNameLabel.text = model.name
+        appointmentsLabel.text = model.type
+        appointmentsDurationLabel.text = model.date.description
+        inResidenceLabel.text = model.inResidence ? "Ir ao domicilio" : "No estudio"
     }
 }
