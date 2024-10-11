@@ -42,6 +42,15 @@ public struct Appointment: Equatable, Identifiable {
         return formatter
     }()
     
+    static let example = StudioAppointment(
+        id: UUID(),
+        date: Calendar.current.date(byAdding: .day, value: 0, to: .now)!,
+        price: 12.5,
+        type: AppointmentType.nailsType1.rawValue,
+        inResidence: false,
+        name: "Vera Nunes",
+        phoneNumber: "912325234"
+    )
     
     static let allCustomers = [
         StudioAppointment(
