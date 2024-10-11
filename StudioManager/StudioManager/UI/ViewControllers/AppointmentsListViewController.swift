@@ -26,12 +26,13 @@ public class AppointmentsListViewController: UIViewController {
     
     private lazy var segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: [
-            FilterCalendar.today.rawValue,
-            FilterCalendar.week.rawValue,
-            FilterCalendar.month.rawValue,
-            FilterCalendar.all.rawValue])
+            "Hoje",
+            "Semana",
+            "Mês",
+            "Todas"])
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.addTarget(self, action: #selector (segmentedControlValueChanged), for: .valueChanged)
         return segmentedControl
     }()
    
@@ -54,6 +55,7 @@ public class AppointmentsListViewController: UIViewController {
     }
 
     private func setupView() {
+        title = "Marcações"
         view.backgroundColor = .systemBackground
         view.addSubview(segmentedControl)
         view.addSubview(tableView)
@@ -94,6 +96,15 @@ public class AppointmentsListViewController: UIViewController {
         snapshot.appendItems(appointments, toSection: 0)
         
         dataSource.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+// MARK: - Filter calendar 
+extension AppointmentsListViewController {
+    
+    @objc private func segmentedControlValueChanged() {
+        let filterCalendar = FilterCalendar(rawValue: segmentedControl.selectedSegmentIndex) ?? .today
+        viewModel?.filterAppointments(by: filterCalendar)
     }
 }
 

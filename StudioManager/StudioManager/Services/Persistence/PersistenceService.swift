@@ -52,8 +52,7 @@ struct PersistenceService: PersistenceLoader {
         
         do {
             let result = try container.viewContext.fetch(request)
-            let clients = result.map { StudioAppointment.map(appointment: $0) }
-        
+            appointments = result.map { StudioAppointment.map(appointment: $0) }
             appointments.sort(by: { $0.date < $1.date })
         } catch {
             print(error.localizedDescription)

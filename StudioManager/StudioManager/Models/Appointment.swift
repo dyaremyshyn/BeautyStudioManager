@@ -46,7 +46,7 @@ public struct Appointment: Equatable, Identifiable {
     static let allCustomers = [
         StudioAppointment(
             id: UUID(),
-            date: Calendar.current.date(byAdding: .day, value: 2, to: .now)!,
+            date: Calendar.current.date(byAdding: .day, value: 0, to: .now)!,
             price: 12.5,
             type: AppointmentType.nailsType1.rawValue,
             inResidence: false,
@@ -55,7 +55,7 @@ public struct Appointment: Equatable, Identifiable {
         ),
         StudioAppointment(
             id: UUID(),
-            date: Calendar.current.date(byAdding: .day, value: 3, to: .now)!,
+            date: Calendar.current.date(byAdding: .day, value: 2, to: .now)!,
             price: 30,
             type: AppointmentType.skinCleansing.rawValue,
             inResidence: false,
