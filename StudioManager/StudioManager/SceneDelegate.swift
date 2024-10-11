@@ -11,18 +11,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    private lazy var navigationController = UINavigationController(
+    private lazy var appointmentsListController = UINavigationController(
         rootViewController: AppointmentsComposer.appointmentsComposedWith(
             persistenceService: PersistenceService()
         )
     )
+    
+    private lazy var newAppointmentViewController = UINavigationController(
+        rootViewController: NewEditAppointmentViewController()
+    )
+    
+    private lazy var balanceViewController = UINavigationController(
+        rootViewController: UIViewController()
+    )
+    
+    private lazy var tabBarController = UITabBarController()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        navigationController.navigationBar.prefersLargeTitles = true
-        window?.rootViewController = navigationController
+        configureTabBar()
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
+    }
+    
+    private func configureTabBar() {
+        appointmentsListController.navigationBar.prefersLargeTitles = true
+        appointmentsListController.tabBarItem = UITabBarItem(title: "Marcações", image: UIImage(systemName: "list.bullet.clipboard"), tag: 0)
+        newAppointmentViewController.tabBarItem = UITabBarItem(title: "Nova Marcação", image: UIImage(systemName: "plus.circle"), tag: 1)
+        balanceViewController.tabBarItem = UITabBarItem(title: "Balanço", image: UIImage(systemName: "chart.xyaxis.line"), tag: 2)
+        tabBarController.viewControllers = [appointmentsListController, newAppointmentViewController, balanceViewController]
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

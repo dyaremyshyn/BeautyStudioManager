@@ -99,7 +99,7 @@ public class AppointmentsListViewController: UIViewController {
     }
 }
 
-// MARK: - Filter calendar 
+// MARK: - Filter calendar
 extension AppointmentsListViewController {
     
     @objc private func segmentedControlValueChanged() {
