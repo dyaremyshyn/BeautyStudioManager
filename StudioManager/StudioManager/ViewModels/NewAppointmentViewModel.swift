@@ -14,7 +14,7 @@ class NewAppointmentViewModel: ObservableObject {
     @Published var clientPhoneNumber: String!
     @Published var appointmentDate: Date!
     @Published var price: String!
-    @Published var type: AppointmentType!
+    @Published var type: AppointmentType = .makeup
     @Published var inResidence: Bool!
     
     private let persistenceService: PersistenceLoader
@@ -51,7 +51,7 @@ class NewAppointmentViewModel: ObservableObject {
         )
         
         // Save created appointment to core data
-        //persistenceService.saveStudioAppointment(appointment: appointment)
+        persistenceService.saveStudioAppointment(appointment: appointment)
         
         // Reset fields after saving if needed
         resetFields()

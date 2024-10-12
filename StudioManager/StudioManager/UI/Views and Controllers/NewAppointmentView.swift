@@ -21,12 +21,12 @@ public struct NewAppointmentView: View {
                     Text("Detalhes da Cliente")
                 }
                 Section {
-                    DatePicker("Data da marcação", selection: $viewModel.appointmentDate, displayedComponents: [.date, .hourAndMinute])
+                    DatePicker("Data", selection: $viewModel.appointmentDate, displayedComponents: [.date, .hourAndMinute])
                     
                     TextField("Preço", text: $viewModel.price)
                         .keyboardType(.numbersAndPunctuation)
                     
-                    Picker("Marcação de", selection: $viewModel.type) {
+                    Picker("Tipo de marcação", selection: $viewModel.type) {
                         ForEach(AppointmentType.allCases, id: \.self) { type in
                             Text(type.rawValue)
                         }
