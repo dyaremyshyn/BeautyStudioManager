@@ -11,6 +11,7 @@ class AppointmentsListViewModel: ObservableObject {
     private var allAppointments: [StudioAppointment] = []
     @Published private(set) var appointments: [StudioAppointment] = []
     @Published private(set) var errorMessage: String? = nil
+    weak var coordinator: AppointmentsListCoordinator?
     
     private let persistenceService: PersistenceLoader
     
@@ -64,5 +65,9 @@ class AppointmentsListViewModel: ObservableObject {
         case .all:
             appointments = allAppointments
         }
+    }
+    
+    public func goToAppointmentDetails(appointment: StudioAppointment) {
+        coordinator?.goToAppointmentDetails(appointment: appointment)
     }
 }

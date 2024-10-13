@@ -21,6 +21,7 @@ public class AppointmentsListViewController: UIViewController {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(AppointmentsViewCell.self, forCellReuseIdentifier: AppointmentsViewCell.reuseIdentifier)
+        tableView.delegate = self
         return tableView
     }()
     
@@ -108,3 +109,12 @@ extension AppointmentsListViewController {
     }
 }
 
+// MARK: - UITableViewDelegate - didSelectRowAt
+extension AppointmentsListViewController: UITableViewDelegate {
+
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let selectedAppointment = dataSource.itemIdentifier(for: indexPath) {
+            viewModel?.goToAppointmentDetails(appointment: selectedAppointment)
+        }
+    }
+}
