@@ -12,6 +12,7 @@ class AppointmentsListViewModel: ObservableObject {
     @Published private(set) var appointments: [StudioAppointment] = []
     @Published private(set) var errorMessage: String? = nil
     weak var coordinator: AppointmentsListCoordinator?
+    private var filterCalendar: FilterCalendar = .today
     
     private let persistenceService: PersistenceLoader
     
@@ -26,14 +27,14 @@ class AppointmentsListViewModel: ObservableObject {
 #if DEBUG
         allAppointments = allAppointments.count == 0 ? Appointment.allCustomers : allAppointments
 #endif
-        filterAppointments()
-        
+        filterAppointments(by: filterCalendar)
     }
     
-    public func filterAppointments(by filterCalendar: FilterCalendar = .today) {
+    public func filterAppointments(by filterCalendar: FilterCalendar) {
+        self.filterCalendar = filterCalendar
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(secondsFromGMT: 3600)! // UTC+1
-        calendar.locale = .current
+        calendar.locale = Locale(identifier: "pt_PT")
         calendar.firstWeekday = 2 // Set the first weekday to Monday
 
         let now = Date()
