@@ -50,9 +50,6 @@ class AppointmentsListViewModel: ObservableObject {
             let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: now))!
             let startOfWeekLocal = calendar.startOfDay(for: startOfWeek) // Start of the week at midnight
             let endOfWeek = calendar.date(byAdding: .day, value: 7, to: startOfWeekLocal)! // End of the week
-
-            print(startOfWeek)
-            print(endOfWeek)
             appointments = allAppointments.filter { $0.date > startOfWeekLocal && $0.date <= endOfWeek }
             
         case .month:
@@ -69,5 +66,20 @@ class AppointmentsListViewModel: ObservableObject {
     
     public func goToAppointmentDetails(appointment: StudioAppointment) {
         coordinator?.goToAppointmentDetails(appointment: appointment)
+    }
+    
+    public func removeAppointment(index: Int) {
+        let appointment = appointments[index]
+        // First remove the appointment from persistence
+        let success = persistenceService.deleteStudioAppointment(appointment: appointment)
+        guard success else {
+            errorMessage = "Erro ao apagar marcação"
+            return
+        }
+        // Remove the appointment from both the current appointments array and the allAppointments array
+        appointments.remove(at: index)
+        if let allAppointmentsIndex = allAppointments.firstIndex(where: { $0.id == appointment.id }) {
+            allAppointments.remove(at: allAppointmentsIndex)
+        }
     }
 }

@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum StudioSection: CaseIterable {
+    case main
+}
+
 public struct StudioAppointment: Equatable, Identifiable, Hashable {
     public let id: UUID
     let date: Date

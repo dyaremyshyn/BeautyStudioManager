@@ -14,7 +14,7 @@ public class AppointmentsListViewController: UIViewController {
     var viewModel: AppointmentsListViewModel? {
         didSet { bind() }
     }
-    private var dataSource: UITableViewDiffableDataSource<Int, StudioAppointment>!
+    private var dataSource: AppointmentsDiffableDataSource!
     
     // MARK: - UI
     private lazy var tableView: UITableView = {
@@ -43,15 +43,24 @@ public class AppointmentsListViewController: UIViewController {
         super.viewDidLoad()
         setupDataSource()
         setupView()
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         viewModel?.fetchAppointments()
     }
     
     private func setupDataSource() {
-        dataSource = UITableViewDiffableDataSource<Int, StudioAppointment>(tableView: tableView) { tableView, indexPath, appointment in
-            let cell = tableView.dequeueReusableCell(withIdentifier: AppointmentsViewCell.reuseIdentifier, for: indexPath) as! AppointmentsViewCell
-            cell.configure(model: appointment)
-            return cell
-        }
+        dataSource = AppointmentsDiffableDataSource(
+            tableView: tableView,
+            viewModel: viewModel,
+            cellProvider: { tableView, indexPath, appointment in
+                let cell = tableView.dequeueReusableCell(withIdentifier: AppointmentsViewCell.reuseIdentifier, for: indexPath) as! AppointmentsViewCell
+                cell.configure(model: appointment)
+                return cell
+            }
+        )
+        dataSource.defaultRowAnimation = .fade
         tableView.dataSource = dataSource
     }
 
@@ -85,16 +94,16 @@ public class AppointmentsListViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] errorMessage in
                 guard let self, let message = errorMessage else { return }
-                print(message)
+                showErrorDialog(title: "Erro", message: message, cancelTitle: "Cancelar")
             }
             .store(in: &cancellables)
     }
     
     private func applySnapshot(appointments: [StudioAppointment]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, StudioAppointment>()
+        var snapshot = NSDiffableDataSourceSnapshot<StudioSection, StudioAppointment>()
         
-        snapshot.appendSections([0])
-        snapshot.appendItems(appointments, toSection: 0)
+        snapshot.appendSections([.main])
+        snapshot.appendItems(appointments, toSection: .main)
         
         dataSource.apply(snapshot, animatingDifferences: true)
     }
