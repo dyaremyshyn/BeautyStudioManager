@@ -20,21 +20,30 @@ class AppointmentsViewCell: UITableViewCell {
     private lazy var clientNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 16)
         return label
     }()
     
-    private lazy var appointmentsLabel: UILabel = {
+    private lazy var appointmentTypeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 12)
+        label.font = .boldSystemFont(ofSize: 20)
         return label
     }()
     
-    private lazy var appointmentsDurationLabel: UILabel = {
+    private lazy var appointmentDateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 12)
+        label.textAlignment = .right
+        label.font = .systemFont(ofSize: 20)
+        return label
+    }()
+    
+    private lazy var appointmentDurationLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .right
+        label.font = .systemFont(ofSize: 16)
         return label
     }()
     
@@ -57,15 +66,16 @@ class AppointmentsViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         clientNameLabel.text = ""
-        appointmentsLabel.text = ""
+        appointmentTypeLabel.text = ""
     }
     
     private func setupView() {
         selectionStyle = .none
         contentView.addSubview(containerView)
+        containerView.addSubview(appointmentDateLabel)
+        containerView.addSubview(appointmentDurationLabel)
+        containerView.addSubview(appointmentTypeLabel)
         containerView.addSubview(clientNameLabel)
-        containerView.addSubview(appointmentsLabel)
-        containerView.addSubview(appointmentsDurationLabel)
         containerView.addSubview(inResidenceLabel)
         
         containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
@@ -73,19 +83,22 @@ class AppointmentsViewCell: UITableViewCell {
         containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
         containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
         
-        clientNameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8).isActive = true
+        appointmentDateLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8).isActive = true
+        appointmentDateLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8).isActive = true
+        
+        appointmentDurationLabel.topAnchor.constraint(equalTo: appointmentDateLabel.bottomAnchor, constant: 5).isActive = true
+        appointmentDurationLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8).isActive = true
+                
+        appointmentTypeLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8).isActive = true
+        appointmentTypeLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8).isActive = true
+        appointmentTypeLabel.trailingAnchor.constraint(equalTo: appointmentDateLabel.leadingAnchor, constant: -8).isActive = true
+        
+        clientNameLabel.topAnchor.constraint(equalTo: appointmentTypeLabel.bottomAnchor, constant: 5).isActive = true
         clientNameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8).isActive = true
-        clientNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8).isActive = true
+        clientNameLabel.trailingAnchor.constraint(equalTo: appointmentDateLabel.leadingAnchor, constant: -8).isActive = true
         
-        appointmentsLabel.topAnchor.constraint(equalTo: clientNameLabel.bottomAnchor, constant: 5).isActive = true
-        appointmentsLabel.leadingAnchor.constraint(equalTo: clientNameLabel.leadingAnchor, constant: 8).isActive = true
-        appointmentsLabel.trailingAnchor.constraint(equalTo: clientNameLabel.trailingAnchor, constant: -8).isActive = true
         
-        appointmentsDurationLabel.topAnchor.constraint(equalTo: appointmentsLabel.bottomAnchor, constant: 5).isActive = true
-        appointmentsDurationLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8).isActive = true
-        appointmentsDurationLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8).isActive = true
-        
-        inResidenceLabel.topAnchor.constraint(equalTo: appointmentsDurationLabel.bottomAnchor, constant: 5).isActive = true
+        inResidenceLabel.topAnchor.constraint(equalTo: clientNameLabel.bottomAnchor, constant: 5).isActive = true
         inResidenceLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8).isActive = true
         inResidenceLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8).isActive = true
         inResidenceLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8).isActive = true
@@ -93,8 +106,26 @@ class AppointmentsViewCell: UITableViewCell {
     
     public func configure(model: StudioAppointment) {
         clientNameLabel.text = model.name
-        appointmentsLabel.text = model.type
-        appointmentsDurationLabel.text = model.date.description
-        inResidenceLabel.text = model.inResidence ? "Ir ao domicilio" : "No estudio"
+        appointmentTypeLabel.text = model.type
+        appointmentDateLabel.text = model.date.appointmentDate
+        appointmentDurationLabel.text = model.date.appointmentDateTime + " - " + model.date.addingTimeInterval(3600).appointmentDateTime
+        inResidenceLabel.text = model.inResidence ? "Ao domicílio" : "" // "No estúdio"
+    }
+}
+
+extension Date{
+    
+    var appointmentDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "pt_PT")
+        dateFormatter.dateFormat = "E, dd MMM"
+        return dateFormatter.string(from: self)
+    }
+    
+    var appointmentDateTime: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "pt_PT")
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: self)
     }
 }
