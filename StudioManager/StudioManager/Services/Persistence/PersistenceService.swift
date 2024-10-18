@@ -25,26 +25,6 @@ struct PersistenceService: PersistenceLoader {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
-    func getAppointments() -> [Appointment] {
-        var appointments: [Appointment] = []
-        
-        let request = NSFetchRequest<ClientEntity>(entityName: PersistenceService.clientEntity)
-        
-        do {
-            let result = try container.viewContext.fetch(request)
-            let clients = result.map { Client.map(client: $0) }
-            
-            clients.forEach {
-                appointments += $0.appointments
-            }
-            appointments.sort(by: { $0.date < $1.date })
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        return appointments
-    }
-    
     func getStudioAppointments() -> [StudioAppointment] {
         var appointments: [StudioAppointment] = []
         
@@ -104,45 +84,8 @@ struct PersistenceService: PersistenceLoader {
         }
     }
     
-    func saveAppointments(to client: Client) {
-        // Check if the appointment exists
-
-        let request = NSFetchRequest<ClientEntity>(entityName: PersistenceService.clientEntity)
-        request.predicate = NSPredicate(format: "id == %@", client.id as CVarArg)
-        
-        do {
-            let result = try container.viewContext.fetch(request)
-            
-            guard let editClient = result.first else {
-                print("Client entity not found with id: \(client.id)")
-                
-                let newEntry = ClientEntity(context: container.viewContext)
-                newEntry.id = client.id
-                newEntry.name = client.name
-                newEntry.phoneNumber = client.phoneNumber
-                newEntry.appointments = NSSet(array: client.appointments)
-                
-                self.saveData()
-                
-                return
-            }
-            
-            // Modify the properties of the fetched appointment
-            editClient.name = client.name
-            editClient.phoneNumber = client.phoneNumber
-            editClient.appointments = NSSet(array: client.appointments)
-            
-            self.saveData()
-            
-            print("Client entity with id \(client.id) edited successfully")
-            
-        } catch {
-            print("Error editing appointment entity: \(error)")
-        }
-    }
-    
-    func deleteAppointment(appointment: Appointment) -> Bool {
-        let request = NSFetchRequest<AppointmentEntity>(entityName: PersistenceService.appointmentEntity)
+    func deleteStudioAppointment(appointment: StudioAppointment) -> Bool {
+        let request = NSFetchRequest<StudioEntity>(entityName: PersistenceService.studioEntity)
         request.predicate = NSPredicate(format: "id == %@", appointment.id as CVarArg)
         
         do {

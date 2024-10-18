@@ -7,8 +7,7 @@
 
 
 public protocol PersistenceLoader {
-    func getAppointments() -> [Appointment]
     func getStudioAppointments() -> [StudioAppointment]
     func saveStudioAppointment(appointment: StudioAppointment)
-    func saveAppointments(to client: Client)
+    func deleteStudioAppointment(appointment: StudioAppointment) -> Bool
 }
