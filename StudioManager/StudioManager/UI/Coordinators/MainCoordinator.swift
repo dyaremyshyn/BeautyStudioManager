@@ -23,7 +23,9 @@ class MainCoordinator: Coordinator {
     )
     
     private lazy var balanceViewController = UINavigationController(
-        rootViewController: UIViewController()
+        rootViewController: BalanceComposer.balanceComposedWith(
+            persistenceService: PersistenceService()
+        )
     )
     
     init(navigationController: UINavigationController) {
