@@ -10,7 +10,6 @@ import Foundation
 class BalanceViewModel: ObservableObject {
     private var allAppointments: [StudioAppointment] = []
     private var appointments: [StudioAppointment] = []
-    @Published private(set) var currentBalance: String = ""
     @Published private(set) var expectedBalance: String = ""
     @Published private(set) var errorMessage: String? = nil
     private var filterCalendar: FilterCalendar = .today
@@ -40,13 +39,11 @@ class BalanceViewModel: ObservableObject {
     
     private func calculateBalance() {
         var expectedBalance: Double = 0
-        var currentBalance: Double = 0
         
         for appointment in appointments {
             expectedBalance += appointment.price
         }
         
         self.expectedBalance = String(format: "%.2f", expectedBalance) + "€"
-        self.currentBalance = String(format: "%.2f", currentBalance) + "€"
     }
 }
