@@ -6,7 +6,6 @@
 //
 
 public protocol ExpensePersistenceLoader {
-    func getExpenses() -> [StudioAppointment]
-    func saveExpense(expense: StudioAppointment)
-    func deleteStudioAppointment(appointment: StudioAppointment) -> Bool
+    func getExpenses() -> [Expense]
+    func saveExpense(expense: Expense)
 }

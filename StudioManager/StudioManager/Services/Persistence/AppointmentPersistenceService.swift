@@ -7,14 +7,14 @@
 
 import CoreData
 
-struct AppointmentsPersistenceService: AppointmentsPersistenceLoader {
+struct AppointmentPersistenceService: AppointmentPersistenceLoader {
     private static let modelName = "StudioManager"
     private static let studioEntity = "StudioEntity"
 
     let container: NSPersistentContainer
 
     public init() {
-        container = NSPersistentContainer(name: AppointmentsPersistenceService.modelName)
+        container = NSPersistentContainer(name: AppointmentPersistenceService.modelName)
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 print(error.localizedDescription)
@@ -26,7 +26,7 @@ struct AppointmentsPersistenceService: AppointmentsPersistenceLoader {
     func getStudioAppointments() -> [StudioAppointment] {
         var appointments: [StudioAppointment] = []
         
-        let request = NSFetchRequest<StudioEntity>(entityName: AppointmentsPersistenceService.studioEntity)
+        let request = NSFetchRequest<StudioEntity>(entityName: AppointmentPersistenceService.studioEntity)
         
         do {
             let result = try container.viewContext.fetch(request)
@@ -42,7 +42,7 @@ struct AppointmentsPersistenceService: AppointmentsPersistenceLoader {
     func saveStudioAppointment(appointment: StudioAppointment) {
         // Check if the appointment exists
 
-        let request = NSFetchRequest<StudioEntity>(entityName: AppointmentsPersistenceService.studioEntity)
+        let request = NSFetchRequest<StudioEntity>(entityName: AppointmentPersistenceService.studioEntity)
         request.predicate = NSPredicate(format: "id == %@", appointment.id as CVarArg)
         
         do {
@@ -83,7 +83,7 @@ struct AppointmentsPersistenceService: AppointmentsPersistenceLoader {
     }
     
     func deleteStudioAppointment(appointment: StudioAppointment) -> Bool {
-        let request = NSFetchRequest<StudioEntity>(entityName: AppointmentsPersistenceService.studioEntity)
+        let request = NSFetchRequest<StudioEntity>(entityName: AppointmentPersistenceService.studioEntity)
         request.predicate = NSPredicate(format: "id == %@", appointment.id as CVarArg)
         
         do {

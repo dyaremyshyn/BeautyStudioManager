@@ -15,9 +15,9 @@ class BalanceViewModel: ObservableObject {
     @Published private(set) var errorMessage: String? = nil
     private var filterCalendar: FilterCalendar = .today
 
-    private let persistenceService: AppointmentsPersistenceLoader
+    private let persistenceService: AppointmentPersistenceLoader
 
-    init(persistenceService: AppointmentsPersistenceLoader) {
+    init(persistenceService: AppointmentPersistenceLoader) {
         self.persistenceService = persistenceService
     }
     

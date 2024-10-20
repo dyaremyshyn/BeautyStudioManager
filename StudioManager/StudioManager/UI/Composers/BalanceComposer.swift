@@ -9,7 +9,7 @@ public final class BalanceComposer {
     
     private init() {}
     
-    public static func balanceComposedWith(persistenceService: AppointmentsPersistenceLoader) -> BalanceViewController {
+    public static func balanceComposedWith(persistenceService: AppointmentPersistenceLoader) -> BalanceViewController {
         let viewModel = BalanceViewModel(persistenceService: persistenceService)
         let viewController = BalanceViewController.makeWith(viewModel: viewModel)
         return viewController

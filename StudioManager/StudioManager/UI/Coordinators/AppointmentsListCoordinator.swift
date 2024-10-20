@@ -20,7 +20,7 @@ class AppointmentsListCoordinator: Coordinator {
     func start() {
         navigationController.navigationBar.prefersLargeTitles = true
         let viewController = AppointmentsComposer.appointmentsComposedWith(
-            persistenceService: AppointmentsPersistenceService()
+            persistenceService: AppointmentPersistenceService()
         )
         viewController.viewModel?.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
@@ -29,7 +29,7 @@ class AppointmentsListCoordinator: Coordinator {
     public func goToAppointmentDetails(appointment: StudioAppointment) {
         let editAppointmentController = NewAppointmentComposer.newAppointmentComposedWith(
             appointment: appointment,
-            persistenceLoader: AppointmentsPersistenceService()
+            persistenceLoader: AppointmentPersistenceService()
         )
         navigationController.pushViewController(editAppointmentController, animated: true)
     }
