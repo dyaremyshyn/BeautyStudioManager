@@ -46,7 +46,7 @@ public struct Appointment: Equatable, Identifiable {
         id: UUID(),
         date: Calendar.current.date(byAdding: .day, value: 0, to: .now)!,
         price: 12.5,
-        type: AppointmentType.nailsType1.rawValue,
+        type: AppointmentType.nailsType1,
         inResidence: false,
         name: "Vera Nunes",
         phoneNumber: "912325234"
@@ -57,7 +57,7 @@ public struct Appointment: Equatable, Identifiable {
             id: UUID(),
             date: Calendar.current.date(byAdding: .day, value: 0, to: .now)!,
             price: 12.5,
-            type: AppointmentType.nailsType1.rawValue,
+            type: AppointmentType.nailsType1,
             inResidence: false,
             name: "Vera Nunes",
             phoneNumber: "912325234"
@@ -66,7 +66,7 @@ public struct Appointment: Equatable, Identifiable {
             id: UUID(),
             date: Calendar.current.date(byAdding: .day, value: 2, to: .now)!,
             price: 30,
-            type: AppointmentType.skinCleansing.rawValue,
+            type: AppointmentType.skinCleansing,
             inResidence: false,
             name: "Anabela Nunes",
             phoneNumber: "912325234"
@@ -75,7 +75,7 @@ public struct Appointment: Equatable, Identifiable {
             id: UUID(),
             date: Calendar.current.date(byAdding: .day, value: 4, to: .now)!,
             price: 25,
-            type: AppointmentType.lashes.rawValue,
+            type: AppointmentType.lashes,
             inResidence: false,
             name: "Patricia Nunes",
             phoneNumber: "912325234"
@@ -84,7 +84,7 @@ public struct Appointment: Equatable, Identifiable {
             id: UUID(),
             date: Calendar.current.date(byAdding: .weekday, value: 4, to: .now)!,
             price: 35,
-            type: AppointmentType.makeup.rawValue,
+            type: AppointmentType.makeup,
             inResidence: false,
             name: "Clara Cruz",
             phoneNumber: "912325234"
@@ -93,7 +93,7 @@ public struct Appointment: Equatable, Identifiable {
             id: UUID(),
             date: Calendar.current.date(byAdding: .month, value: 2, to: .now)!,
             price: 150,
-            type: AppointmentType.bride.rawValue,
+            type: AppointmentType.bride,
             inResidence: false,
             name: "Marilia Prima",
             phoneNumber: "912325234"

@@ -60,7 +60,7 @@ struct PersistenceService: PersistenceLoader {
                 newEntry.date = appointment.date
                 newEntry.inResidence = appointment.inResidence
                 newEntry.price = appointment.price
-                newEntry.type = appointment.type
+                newEntry.type = appointment.type.rawValue
                 
                 saveData()
                 
@@ -72,7 +72,7 @@ struct PersistenceService: PersistenceLoader {
             editClient.phoneNumber = appointment.phoneNumber
             editClient.date = appointment.date
             editClient.price = appointment.price
-            editClient.type = appointment.type
+            editClient.type = appointment.type.rawValue
             editClient.inResidence = appointment.inResidence
             
             saveData()

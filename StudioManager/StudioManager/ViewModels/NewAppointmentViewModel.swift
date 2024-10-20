@@ -34,7 +34,7 @@ class NewAppointmentViewModel: ObservableObject {
             self.clientPhoneNumber = item.phoneNumber ?? ""
             self.appointmentDate = item.date
             self.price = item.price.formatted()
-            self.type = AppointmentType(rawValue: item.type) ?? .makeup
+            self.type = AppointmentType(rawValue: item.type.rawValue) ?? .makeup
             self.inResidence = item.inResidence 
         }
     }
@@ -44,7 +44,7 @@ class NewAppointmentViewModel: ObservableObject {
             id: appointment?.id ?? UUID(),
             date: appointmentDate,
             price: Double(price.replacingOccurrences(of: ",", with: ".")) ?? 0,
-            type: type.rawValue,
+            type: type,
             inResidence: inResidence,
             name: clientName,
             phoneNumber: clientPhoneNumber

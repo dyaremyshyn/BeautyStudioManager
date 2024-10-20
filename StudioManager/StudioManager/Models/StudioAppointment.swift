@@ -15,7 +15,7 @@ public struct StudioAppointment: Equatable, Identifiable, Hashable {
     public let id: UUID
     let date: Date
     let price: Double
-    let type: String
+    let type: AppointmentType
     let inResidence: Bool
     let name: String
     let phoneNumber: String?
@@ -25,7 +25,7 @@ public struct StudioAppointment: Equatable, Identifiable, Hashable {
             id: appointment.id ?? UUID(),
             date: appointment.date!,
             price: appointment.price,
-            type: appointment.type ?? "Sem tipo",
+            type: AppointmentType(rawValue: appointment.type ?? "Maquilhagem")!,
             inResidence: appointment.inResidence,
             name: appointment.name ?? "Sem nome",
             phoneNumber: appointment.phoneNumber
