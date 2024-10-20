@@ -7,22 +7,7 @@
 
 import Foundation
 
-public struct Appointment: Equatable, Identifiable {
-    public let id: UUID
-    let date: Date
-    let price: Double
-    let type: String
-    let inResidence: Bool
-        
-    public static func map(appointment: AppointmentEntity) -> Appointment {
-        Appointment(
-            id: appointment.id ?? UUID(),
-            date: appointment.date!,
-            price: appointment.price,
-            type: appointment.type ?? "Sem tipo",
-            inResidence: appointment.inResidence
-        )
-    }
+public struct Appointment {
     
     public static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()

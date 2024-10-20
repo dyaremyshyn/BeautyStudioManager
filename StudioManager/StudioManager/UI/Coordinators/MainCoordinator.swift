@@ -18,13 +18,13 @@ class MainCoordinator: Coordinator {
     private lazy var newAppointmentViewController = UINavigationController(
         rootViewController: NewAppointmentComposer.newAppointmentComposedWith(
             appointment: nil,
-            persistenceLoader: PersistenceService()
+            persistenceLoader: AppointmentsPersistenceService()
         )
     )
     
     private lazy var balanceViewController = UINavigationController(
         rootViewController: BalanceComposer.balanceComposedWith(
-            persistenceService: PersistenceService()
+            persistenceService: AppointmentsPersistenceService()
         )
     )
     

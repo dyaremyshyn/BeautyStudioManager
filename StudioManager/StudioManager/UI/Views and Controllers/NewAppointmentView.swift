@@ -54,6 +54,6 @@ public struct NewAppointmentView: View {
 
 struct NewAppointmentView_Previews: PreviewProvider {
     static var previews: some View {
-        NewAppointmentView(viewModel: NewAppointmentViewModel(appointment: Appointment.example, persistenceService: PersistenceService()))
+        NewAppointmentView(viewModel: NewAppointmentViewModel(appointment: Appointment.example, persistenceService: AppointmentsPersistenceService()))
     }
 }

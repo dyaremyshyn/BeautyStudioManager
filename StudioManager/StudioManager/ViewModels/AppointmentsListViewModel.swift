@@ -14,9 +14,9 @@ class AppointmentsListViewModel: ObservableObject {
     weak var coordinator: AppointmentsListCoordinator?
     private var filterCalendar: FilterCalendar = .today
     
-    private let persistenceService: PersistenceLoader
+    private let persistenceService: AppointmentsPersistenceLoader
     
-    init(persistenceService: PersistenceLoader) {
+    init(persistenceService: AppointmentsPersistenceLoader) {
         self.persistenceService = persistenceService
     }
     

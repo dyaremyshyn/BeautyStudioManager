@@ -11,7 +11,7 @@ public final class AppointmentsComposer {
     
     private init() {}
     
-    public static func appointmentsComposedWith(persistenceService: PersistenceLoader) -> AppointmentsListViewController {
+    public static func appointmentsComposedWith(persistenceService: AppointmentsPersistenceLoader) -> AppointmentsListViewController {
         let viewModel = AppointmentsListViewModel(persistenceService: persistenceService)
         let viewController = AppointmentsListViewController.makeWith(viewModel: viewModel)
         return viewController

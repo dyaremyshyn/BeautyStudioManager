@@ -14,7 +14,7 @@ public final class NewAppointmentComposer {
     
     public static func newAppointmentComposedWith(
         appointment: StudioAppointment?,
-        persistenceLoader: PersistenceLoader
+        persistenceLoader: AppointmentsPersistenceLoader
     ) -> UIHostingController<NewAppointmentView> {
         let viewModel = NewAppointmentViewModel(appointment: appointment, persistenceService: persistenceLoader)
         let newAppointmentView = NewAppointmentView(viewModel: viewModel)

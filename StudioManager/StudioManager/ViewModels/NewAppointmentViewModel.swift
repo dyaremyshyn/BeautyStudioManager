@@ -17,9 +17,9 @@ class NewAppointmentViewModel: ObservableObject {
     @Published var type: AppointmentType = .makeup
     @Published var inResidence: Bool!
     
-    private let persistenceService: PersistenceLoader
+    private let persistenceService: AppointmentsPersistenceLoader
     
-    init(appointment: StudioAppointment?, persistenceService: PersistenceLoader) {
+    init(appointment: StudioAppointment?, persistenceService: AppointmentsPersistenceLoader) {
         self.appointment = appointment
         self.persistenceService = persistenceService
         clientName = ""
