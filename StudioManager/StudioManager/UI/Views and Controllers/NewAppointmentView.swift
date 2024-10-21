@@ -43,7 +43,7 @@ public struct NewAppointmentView: View {
                     viewModel.saveAppointment()
                 }, label: {
                     Text("Guardar")
-                        .foregroundColor(.primary)
+                        .foregroundColor(.blue)
                 })
                 .frame(width: 400, height: 30, alignment: .center)
             }
