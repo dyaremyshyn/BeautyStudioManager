@@ -35,6 +35,7 @@ class TabCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
 
     private func getTabController(_ page: TabBarPage) -> UINavigationController {
         let navController = UINavigationController()
+        navController.navigationBar.prefersLargeTitles = true
         navController.tabBarItem = UITabBarItem(
             title: page.getTitleName(),
             image: UIImage(systemName: page.getIconName()),
@@ -65,5 +66,6 @@ class TabCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
 
         /// In this step, we attach tabBarController to navigation controller associated with this coordanator
         navigationController.viewControllers = [tabBarController]
+        navigationController.setNavigationBarHidden(true, animated: true)
     }
 }

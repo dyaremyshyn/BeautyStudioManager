@@ -29,7 +29,6 @@ class BalanceCoordinator: Coordinator {
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.navigationController.navigationBar.prefersLargeTitles = true
     }
     
     func start() {
