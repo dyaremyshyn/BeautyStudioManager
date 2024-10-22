@@ -16,9 +16,7 @@ class ExpenseViewModel: ObservableObject {
     
     init(persistenceService: ExpensePersistenceLoader) {
         self.persistenceService = persistenceService
-        expenseName = ""
-        expenseAmount = ""
-        expenseDate = .now
+        resetAllFields()
     }
     
     public func saveExpense() {
@@ -31,5 +29,14 @@ class ExpenseViewModel: ObservableObject {
         
         // Save created expense to core data
         persistenceService.saveExpense(expense: expense)
+        
+        // Reset all fields
+        resetAllFields()
+    }
+    
+    private func resetAllFields() {
+        expenseName = ""
+        expenseAmount = ""
+        expenseDate = .now
     }
 }

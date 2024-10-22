@@ -8,21 +8,30 @@
 import Foundation
 
 class BalanceViewModel: ObservableObject {
+    // Appointments
     private var allAppointments: [StudioAppointment] = []
     private var appointments: [StudioAppointment] = []
+    // Expenses
+    private var allExpenses: [Expense] = []
+    private var expenses: [Expense] = []
+    // Prop
     @Published private(set) var appointmentsType: [AppointmentType] = []
     @Published private(set) var expectedBalance: String = ""
     @Published private(set) var errorMessage: String? = nil
     private var filterCalendar: FilterCalendar = .today
+    weak var coordinator: BalanceCoordinator?
 
-    private let persistenceService: AppointmentPersistenceLoader
+    private let appointmentPersistenceService: AppointmentPersistenceLoader
+    private let expensePersistenceService: ExpensePersistenceLoader
 
-    init(persistenceService: AppointmentPersistenceLoader) {
-        self.persistenceService = persistenceService
+    init(appointmentPersistenceService: AppointmentPersistenceLoader, expensePersistenceService: ExpensePersistenceLoader) {
+        self.appointmentPersistenceService = appointmentPersistenceService
+        self.expensePersistenceService = expensePersistenceService
     }
     
     public func fetchAppointments() {
-        allAppointments = persistenceService.getStudioAppointments()
+        allAppointments = appointmentPersistenceService.getStudioAppointments()
+        allExpenses = expensePersistenceService.getExpenses()
         errorMessage = nil
         
 #if DEBUG
@@ -37,6 +46,10 @@ class BalanceViewModel: ObservableObject {
         
         calculateBalance()
         calculateAppointmentsType()
+    }
+    
+    public func addExpense() {
+        coordinator?.addExpense()
     }
     
     private func calculateBalance() {

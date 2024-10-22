@@ -9,8 +9,11 @@ public final class BalanceComposer {
     
     private init() {}
     
-    public static func balanceComposedWith(persistenceService: AppointmentPersistenceLoader) -> BalanceViewController {
-        let viewModel = BalanceViewModel(persistenceService: persistenceService)
+    public static func balanceComposedWith(
+        appointmentPersistenceService: AppointmentPersistenceLoader,
+        expensePersistenceService: ExpensePersistenceLoader
+    ) -> BalanceViewController {
+        let viewModel = BalanceViewModel(appointmentPersistenceService: appointmentPersistenceService, expensePersistenceService: expensePersistenceService)
         let viewController = BalanceViewController.makeWith(viewModel: viewModel)
         return viewController
     }

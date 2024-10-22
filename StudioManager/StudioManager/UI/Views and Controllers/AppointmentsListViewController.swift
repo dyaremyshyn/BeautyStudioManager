@@ -14,7 +14,7 @@ public class AppointmentsListViewController: UIViewController {
     var viewModel: AppointmentsListViewModel? {
         didSet { bind() }
     }
-    private var dataSource: AppointmentsDiffableDataSource!
+    private var dataSource: AppointmentsDiffableDataSource?
     
     // MARK: - UI
     private lazy var tableView: UITableView = {
@@ -60,7 +60,7 @@ public class AppointmentsListViewController: UIViewController {
                 return cell
             }
         )
-        dataSource.defaultRowAnimation = .fade
+        dataSource?.defaultRowAnimation = .fade
         tableView.dataSource = dataSource
     }
 
@@ -105,7 +105,7 @@ public class AppointmentsListViewController: UIViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(appointments, toSection: .main)
         
-        dataSource.apply(snapshot, animatingDifferences: true)
+        dataSource?.apply(snapshot, animatingDifferences: true)
     }
 }
 
@@ -122,7 +122,7 @@ extension AppointmentsListViewController {
 extension AppointmentsListViewController: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let selectedAppointment = dataSource.itemIdentifier(for: indexPath) {
+        if let selectedAppointment = dataSource?.itemIdentifier(for: indexPath) {
             viewModel?.goToAppointmentDetails(appointment: selectedAppointment)
         }
     }

@@ -11,13 +11,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    private lazy var mainCoordinator: MainCoordinator = .init(navigationController: UINavigationController())
+    private lazy var appCoordinator: AppCoordinator = AppCoordinator(navigationController: UINavigationController())
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        mainCoordinator.start()
-        window?.rootViewController = mainCoordinator.tabBarController
+        appCoordinator.start()
+        window?.rootViewController = appCoordinator.navigationController
         window?.makeKeyAndVisible()
     }
     

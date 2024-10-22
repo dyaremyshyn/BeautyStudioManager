@@ -8,23 +8,41 @@
 import Foundation
 import UIKit
 
+protocol AppointmentsListDelegate {
+    func goToAppointmentDetails(appointment: StudioAppointment)
+}
+
 class AppointmentsListCoordinator: Coordinator {
+    weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
-    weak var parentCoordinator: MainCoordinator?
+    var type: CoordinatorType = .tabItem
     
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
-    
-    func start() {
-        navigationController.navigationBar.prefersLargeTitles = true
+    private lazy var appointmentListViewController: AppointmentsListViewController = {
         let viewController = AppointmentsComposer.appointmentsComposedWith(
             persistenceService: AppointmentPersistenceService()
         )
         viewController.viewModel?.coordinator = self
-        navigationController.pushViewController(viewController, animated: true)
+        return viewController
+    }()
+    
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+        self.navigationController.navigationBar.prefersLargeTitles = true
     }
+    
+    func start() {
+        navigationController.pushViewController(appointmentListViewController, animated: true)
+    }
+}
+
+extension AppointmentsListCoordinator: CoordinatorFinishDelegate {
+    func coordinatorDidFinish(childCoordinator: Coordinator) {
+        childCoordinators = childCoordinators.filter { $0.type != childCoordinator.type }
+    }
+}
+
+extension AppointmentsListCoordinator: AppointmentsListDelegate {
     
     public func goToAppointmentDetails(appointment: StudioAppointment) {
         let editAppointmentController = NewAppointmentComposer.newAppointmentComposedWith(

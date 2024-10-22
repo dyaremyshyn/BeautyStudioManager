@@ -160,7 +160,7 @@ extension BalanceViewController {
     }
     
     @objc private func addExpensesButtonTapped() {
-        // TODO:
+        viewModel?.addExpense()
     }
 }
 
