@@ -109,6 +109,10 @@ public class BalanceViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         viewModel?.fetchAppointments()
     }
     
