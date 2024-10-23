@@ -11,49 +11,51 @@ public struct NewAppointmentView: View {
     @StateObject var viewModel: NewAppointmentViewModel
 
     public var body: some View {
-        NavigationView {
-            Form {
-                Section {
-                    TextField("Nome", text: $viewModel.clientName)
-                    TextField("Número de telemóvel", text: $viewModel.clientPhoneNumber)
-                        .keyboardType(.numberPad)
-                } header: {
-                    Text("Detalhes da Cliente")
-                }
-                Section {
-                    DatePicker("Data", selection: $viewModel.appointmentDate, displayedComponents: [.date, .hourAndMinute])
-                    
-                    TextField("Preço", text: $viewModel.price)
-                        .keyboardType(.numbersAndPunctuation)
-                    
-                    Picker("Tipo de marcação", selection: $viewModel.type) {
-                        ForEach(AppointmentType.allCases, id: \.self) { type in
-                            Text(type.rawValue)
-                        }
-                    }
-                    .pickerStyle(.menu)
-                    Toggle(isOn: $viewModel.inResidence) {
-                        Text("Ir ao domicílio?")
-                    }
-                    .toggleStyle(.checkmark)
-                } header: {
-                    Text("Detalhes da Marcação")
-                }
-                Button(action: {
-                    viewModel.saveAppointment()
-                }, label: {
-                    Text("Guardar")
-                        .foregroundColor(.blue)
-                })
-                .frame(width: 400, height: 30, alignment: .center)
+        Form {
+            Section {
+                TextField("Nome da Cliente", text: $viewModel.clientName)
+                TextField("Telemóvel da Cliente", text: $viewModel.clientPhoneNumber)
+                    .keyboardType(.numberPad)
+            } header: {
+                Text("Detalhes da Cliente")
             }
-            .navigationBarTitle(viewModel.appointment == nil ? "Nova Marcação" : "Editar Marcação")
+            Section {
+                DatePicker("Data da marcação", selection: $viewModel.appointmentDate, displayedComponents: [.date, .hourAndMinute])
+                
+                TextField("Preço", text: $viewModel.price)
+                    .keyboardType(.numbersAndPunctuation)
+                
+                Picker("Tipo de Marcação", selection: $viewModel.type) {
+                    ForEach(AppointmentType.allCases, id: \.self) { type in
+                        Text(type.rawValue)
+                    }
+                }
+                .pickerStyle(.menu)
+                Toggle(isOn: $viewModel.inResidence) {
+                    Text("Ir ao domicílio?")
+                }
+                .toggleStyle(.checkmark)
+            } header: {
+                Text("Detalhes da Marcação")
+            }
+            Button(action: {
+                viewModel.saveAppointment()
+            }, label: {
+                Text("Guardar")
+                    .foregroundColor(.blue)
+            })
+            .frame(width: 400, height: 30, alignment: .center)
         }
     }
 }
 
 struct NewAppointmentView_Previews: PreviewProvider {
     static var previews: some View {
-        NewAppointmentView(viewModel: NewAppointmentViewModel(appointment: Appointment.example, persistenceService: AppointmentPersistenceService()))
+        NewAppointmentView(
+            viewModel: NewAppointmentViewModel(
+                appointment: Appointment.example,
+                persistenceService: AppointmentPersistenceService()
+            )
+        )
     }
 }
