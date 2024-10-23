@@ -25,17 +25,17 @@ struct FilterCalendarHelper {
             let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: now))!
             let startOfWeekLocal = calendar.startOfDay(for: startOfWeek) // Start of the week at midnight
             let endOfWeek = calendar.date(byAdding: .day, value: 7, to: startOfWeekLocal)! // End of the week
-            return appointments.filter { $0.date > startOfWeekLocal && $0.date <= endOfWeek }
+            return appointments.filter { $0.date > now && $0.date <= endOfWeek }
             
         case .month:
             // Start of the current month
             let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: now))!
             let startOfMonthLocal = calendar.startOfDay(for: startOfMonth)
             let endOfMonth = calendar.date(byAdding: .month, value: 1, to: startOfMonthLocal)!
-            return appointments.filter { $0.date >= startOfMonthLocal && $0.date < endOfMonth }
+            return appointments.filter { $0.date >= now && $0.date < endOfMonth }
             
         case .all:
-            return appointments
+            return appointments.filter { $0.date >= now }
         }
     }
     
