@@ -49,5 +49,6 @@ extension AppointmentsListCoordinator: AppointmentsListDelegate {
             persistenceLoader: AppointmentPersistenceService()
         )
         navigationController.pushViewController(editAppointmentController, animated: true)
+        navigationController.topViewController?.title = "Editar marcação"
     }
 }
