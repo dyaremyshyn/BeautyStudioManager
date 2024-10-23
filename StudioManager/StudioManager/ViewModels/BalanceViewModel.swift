@@ -59,21 +59,11 @@ class BalanceViewModel: ObservableObject {
 extension BalanceViewModel {
     
     private func calculateBalance() {
-        var totalAmount: Double = 0
-        
-        for appointment in appointments {
-            totalAmount += appointment.price
-        }
-        self.expectedBalance = String(format: "%.2f", totalAmount) + "€"
+        self.expectedBalance = CalculateBalanceHelper.calculateBalance(appointments: appointments)
     }
     
     private func calculateExpense() {
-        var totalAmount: Double = 0
-        
-        for item in expenses {
-            totalAmount += item.amount
-        }
-        self.expense = String(format: "%.2f", totalAmount) + "€"
+        self.expense = CalculateBalanceHelper.calculateExpense(expenses: expenses)
     }
     
     private func calculateAppointmentsType() {
