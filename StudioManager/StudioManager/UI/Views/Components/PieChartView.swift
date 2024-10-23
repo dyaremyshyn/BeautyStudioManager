@@ -40,13 +40,7 @@ class PieChartView: UIView {
             path.move(to: centerPoint)
             path.addArc(withCenter: centerPoint, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
             
-            // Generate a random color for each type and save it to colorMap
-            let color = UIColor(
-                red: .random(in: 0...1),
-                green: .random(in: 0...1),
-                blue: .random(in: 0...1),
-                alpha: 1.0
-            )
+            let color = ChartColorHelper.getColor(for: type)
             colorMap[type] = color
             color.setFill()
             path.fill()
@@ -65,7 +59,7 @@ class PieChartView: UIView {
         for (type, color) in colorMap {
             // Create a new UIView to draw the colored rectangle
             let colorView = UIView(frame: CGRect(x: legendX, y: legendY, width: 15, height: 15))
-            colorView.backgroundColor = color
+            colorView.backgroundColor = ChartColorHelper.getColor(for: type)
             addSubview(colorView)
             
             // Add the label next to the color view

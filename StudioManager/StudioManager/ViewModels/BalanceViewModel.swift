@@ -14,14 +14,15 @@ class BalanceViewModel: ObservableObject {
     // Expenses
     private var allExpenses: [Expense] = []
     private var expenses: [Expense] = []
-    // Prop
+    // Properties
     @Published private(set) var appointmentsType: [AppointmentType] = []
     @Published private(set) var expectedBalance: String = ""
     @Published private(set) var expense: String = ""
     @Published private(set) var errorMessage: String? = nil
     private var filterCalendar: FilterCalendar = .today
+    // Coordinator
     weak var coordinator: BalanceCoordinator?
-
+    // Services
     private let appointmentPersistenceService: AppointmentPersistenceLoader
     private let expensePersistenceService: ExpensePersistenceLoader
 
