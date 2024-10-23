@@ -67,8 +67,42 @@ struct FilterCalendarHelper {
         case .all:
             // Start of the current year
             let startOfYear = calendar.date(from: calendar.dateComponents([.year], from: now))!
+            let currentYear = calendar.component(.year, from: now)
+            let lastDayOfYear = calendar.date(from: DateComponents(year: currentYear, month: 12, day: 31)) ?? now
+            return appointments.filter { $0.date > startOfYear && $0.date <= lastDayOfYear }
+        }
+    }
+    
+    public static func filterExpense(by filterCalendar: FilterCalendar, expenses: [Expense]) -> [Expense] {
+        let calendar = createCalendar()
+        let now = Date()
+        
+        switch filterCalendar {
+        case .today:
+            // Start of today (ignores time)
+            let startOfToday = calendar.startOfDay(for: now)
+            let endOfToday = calendar.date(byAdding: .day, value: 1, to: startOfToday)!
+            return expenses.filter { $0.date >= startOfToday && $0.date < endOfToday }
+            
+        case .week:
+            // Start of the current week
+            let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: now))!
+            let startOfWeekLocal = calendar.startOfDay(for: startOfWeek) // Start of the week at midnight
+            let endOfWeek = calendar.date(byAdding: .day, value: 7, to: startOfWeekLocal)! // End of the week
+            return expenses.filter { $0.date > startOfWeekLocal && $0.date <= endOfWeek }
+            
+        case .month:
+            // Start of the current month
+            let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: now))!
+            let startOfMonthLocal = calendar.startOfDay(for: startOfMonth)
+            let endOfMonth = calendar.date(byAdding: .month, value: 1, to: startOfMonthLocal)!
+            return expenses.filter { $0.date >= startOfMonthLocal && $0.date < endOfMonth }
+            
+        case .all:
+            // Start of the current year
+            let startOfYear = calendar.date(from: calendar.dateComponents([.year], from: now))!
             let startOfYearLocal = calendar.startOfDay(for: startOfYear)
-            return appointments.filter { $0.date >= startOfYearLocal && $0.date <= now }
+            return expenses.filter { $0.date >= startOfYearLocal && $0.date <= now }
         }
     }
 }

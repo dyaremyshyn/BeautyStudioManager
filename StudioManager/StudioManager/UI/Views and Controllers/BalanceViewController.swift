@@ -136,9 +136,15 @@ public class BalanceViewController: UIViewController {
     private func bind() {
         viewModel?.$expectedBalance
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] balance in
-                self?.expectedBalanceLabel.text = balance
-                self?.expenseLabel.text = balance
+            .sink { [weak self] amount in
+                self?.expectedBalanceLabel.text = amount
+            }
+            .store(in: &cancellables)
+        
+        viewModel?.$expense
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] amount in
+                self?.expenseLabel.text = amount
             }
             .store(in: &cancellables)
         
@@ -156,7 +162,7 @@ extension BalanceViewController {
     
     @objc private func segmentedControlValueChanged() {
         let filterCalendar = FilterCalendar(rawValue: segmentedControl.selectedSegmentIndex) ?? .today
-        viewModel?.filterAppointments(by: filterCalendar)
+        viewModel?.filterBalance(by: filterCalendar)
     }
     
     @objc private func addExpensesButtonTapped() {

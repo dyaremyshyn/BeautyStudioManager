@@ -17,6 +17,7 @@ class BalanceViewModel: ObservableObject {
     // Prop
     @Published private(set) var appointmentsType: [AppointmentType] = []
     @Published private(set) var expectedBalance: String = ""
+    @Published private(set) var expense: String = ""
     @Published private(set) var errorMessage: String? = nil
     private var filterCalendar: FilterCalendar = .today
     weak var coordinator: BalanceCoordinator?
@@ -37,29 +38,42 @@ class BalanceViewModel: ObservableObject {
 #if DEBUG
         allAppointments = allAppointments.count == 0 ? Appointment.allCustomers : allAppointments
 #endif
-        filterAppointments(by: filterCalendar)
+        filterBalance(by: filterCalendar)
     }
     
-    public func filterAppointments(by filterCalendar: FilterCalendar) {
+    public func filterBalance(by filterCalendar: FilterCalendar) {
         self.filterCalendar = filterCalendar
-        appointments = FilterCalendarHelper.filter(by: filterCalendar, appointments: allAppointments)
+        appointments = FilterCalendarHelper.filterBalance(by: filterCalendar, appointments: allAppointments)
+        expenses = FilterCalendarHelper.filterExpense(by: filterCalendar, expenses: allExpenses)
         
         calculateBalance()
+        calculateExpense()
         calculateAppointmentsType()
     }
     
     public func addExpense() {
         coordinator?.addExpense()
     }
+}
+
+extension BalanceViewModel {
     
     private func calculateBalance() {
-        var expectedBalance: Double = 0
+        var totalAmount: Double = 0
         
         for appointment in appointments {
-            expectedBalance += appointment.price
+            totalAmount += appointment.price
         }
+        self.expectedBalance = String(format: "%.2f", totalAmount) + "€"
+    }
+    
+    private func calculateExpense() {
+        var totalAmount: Double = 0
         
-        self.expectedBalance = String(format: "%.2f", expectedBalance) + "€"
+        for item in expenses {
+            totalAmount += item.amount
+        }
+        self.expense = String(format: "%.2f", totalAmount) + "€"
     }
     
     private func calculateAppointmentsType() {
