@@ -59,22 +59,22 @@ class PieChartView: UIView {
     }
 
     private func drawLegend() {
-        let legendX = bounds.minX
-        var legendY = bounds.maxY + 15
+        let legendX = bounds.minX + 50
+        var legendY = bounds.maxY + 5
         
         for (type, color) in colorMap {
             // Create a new UIView to draw the colored rectangle
-            let colorView = UIView(frame: CGRect(x: legendX, y: legendY, width: 30, height: 30))
+            let colorView = UIView(frame: CGRect(x: legendX, y: legendY, width: 15, height: 15))
             colorView.backgroundColor = color
             addSubview(colorView)
             
             // Add the label next to the color view
-            let label = UILabel(frame: CGRect(x: legendX + 40, y: legendY, width: 200, height: 25))
+            let label = UILabel(frame: CGRect(x: legendX + 20, y: legendY, width: 200, height: 15))
             label.text = type.rawValue
-            label.font = .systemFont(ofSize: 14)
+            label.font = .systemFont(ofSize: 12)
             addSubview(label)
 
-            legendY += 40
+            legendY += 20
         }
     }
 
