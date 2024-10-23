@@ -152,10 +152,10 @@ public class BalanceViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        viewModel?.$appointmentsType
+        viewModel?.$pieChartData
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] appointmentTypes in
-                self?.createPieChart(for: appointmentTypes)
+            .sink { [weak self] data in
+                self?.createPieChart(for: data)
             }
             .store(in: &cancellables)
     }
@@ -176,9 +176,9 @@ extension BalanceViewController {
 
 extension BalanceViewController {
     
-    private func createPieChart(for appointmentTypes: [AppointmentType]) {
+    private func createPieChart(for data: [AppointmentType: Double]) {
         
-        guard appointmentTypes.count > 0 else {
+        guard !data.isEmpty else {
             pieChartView?.removeFromSuperview()
             return
         }
@@ -187,7 +187,7 @@ extension BalanceViewController {
             pieChartView.removeFromSuperview()
         }
         
-        pieChartView = PieChartView(appointmentTypes: appointmentTypes)
+        pieChartView = PieChartView(appointmentAmounts: data)
         pieChartView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(pieChartView)

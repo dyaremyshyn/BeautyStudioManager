@@ -9,39 +9,39 @@ import UIKit
 
 class PieChartView: UIView {
     
-    var appointmentTypes: [AppointmentType]
+    var appointmentAmounts: [AppointmentType: Double]  // Amount for each appointment type
     
-    public init(appointmentTypes: [AppointmentType]) {
-        self.appointmentTypes = appointmentTypes
+    public init(appointmentAmounts: [AppointmentType: Double]) {
+        self.appointmentAmounts = appointmentAmounts
         super.init(frame: .zero)
         self.backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
-        self.appointmentTypes = []
-        super.init(coder: coder)        
+        self.appointmentAmounts = [:]
+        super.init(coder: coder)
     }
     
-    private var colorMap: [AppointmentType: UIColor] = [:]
-        
+    private var colorMap: [AppointmentType: (UIColor,Double)] = [:]
+    
     override func draw(_ rect: CGRect) {
-        guard appointmentTypes.count > 0 else { return }
-        
-        let countedTypes = appointmentTypes.countOccurrences() // Counts each type
+        guard !appointmentAmounts.isEmpty else { return }
 
-        let totalAppointments = appointmentTypes.count
+        let totalAmount = appointmentAmounts.values.reduce(0, +) // Sum all amounts
+        
         var startAngle: CGFloat = -.pi / 2
         let centerPoint = CGPoint(x: bounds.midX, y: bounds.midY)
         let radius = min(bounds.width, bounds.height) / 2.5
         
-        for (type, count) in countedTypes {
-            let endAngle = startAngle + (CGFloat(count) / CGFloat(totalAppointments)) * 2 * .pi
+        for (type, amount) in appointmentAmounts {
+            let percentage = amount / totalAmount
+            let endAngle = startAngle + CGFloat(percentage * 2 * .pi)
             let path = UIBezierPath()
             path.move(to: centerPoint)
             path.addArc(withCenter: centerPoint, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
             
-            let color = ChartColorHelper.getColor(for: type)
-            colorMap[type] = color
+            let color = ChartColorHelper.getColor(for: type)  // Assuming ChartColorHelper exists
+            colorMap[type] = (color, amount)
             color.setFill()
             path.fill()
             
@@ -56,7 +56,7 @@ class PieChartView: UIView {
         let legendX = bounds.minX + 50
         var legendY = bounds.maxY + 5
         
-        for (type, color) in colorMap {
+        for (type, (color, amount)) in colorMap {
             // Create a new UIView to draw the colored rectangle
             let colorView = UIView(frame: CGRect(x: legendX, y: legendY, width: 15, height: 15))
             colorView.backgroundColor = color
@@ -64,12 +64,11 @@ class PieChartView: UIView {
             
             // Add the label next to the color view
             let label = UILabel(frame: CGRect(x: legendX + 20, y: legendY, width: 200, height: 15))
-            label.text = type.rawValue
+            label.text = type.rawValue + " \(amount)€"
             label.font = .systemFont(ofSize: 12)
             addSubview(label)
 
             legendY += 20
         }
     }
-
 }

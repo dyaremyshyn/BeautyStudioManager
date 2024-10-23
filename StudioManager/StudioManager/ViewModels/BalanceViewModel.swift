@@ -15,10 +15,10 @@ class BalanceViewModel: ObservableObject {
     private var allExpenses: [Expense] = []
     private var expenses: [Expense] = []
     // Properties
-    @Published private(set) var appointmentsType: [AppointmentType] = []
     @Published private(set) var expectedBalance: String = ""
     @Published private(set) var expense: String = ""
     @Published private(set) var errorMessage: String? = nil
+    @Published private(set) var pieChartData: [AppointmentType: Double] = [:]
     private var filterCalendar: FilterCalendar = .today
     // Coordinator
     weak var coordinator: BalanceCoordinator?
@@ -49,7 +49,7 @@ class BalanceViewModel: ObservableObject {
         
         calculateBalance()
         calculateExpense()
-        calculateAppointmentsType()
+        mapAppointmentsToTypeAmount()
     }
     
     public func addExpense() {
@@ -67,7 +67,10 @@ extension BalanceViewModel {
         self.expense = CalculateBalanceHelper.calculateExpense(expenses: expenses)
     }
     
-    private func calculateAppointmentsType() {
-        appointmentsType = appointments.map(\.type)
+    private func mapAppointmentsToTypeAmount() {
+        pieChartData.removeAll()
+        for appointment in appointments {
+            pieChartData[appointment.type, default: 0] += appointment.price
+        }
     }
 }
