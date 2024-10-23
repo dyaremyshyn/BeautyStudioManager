@@ -59,7 +59,7 @@ class PieChartView: UIView {
         for (type, color) in colorMap {
             // Create a new UIView to draw the colored rectangle
             let colorView = UIView(frame: CGRect(x: legendX, y: legendY, width: 15, height: 15))
-            colorView.backgroundColor = ChartColorHelper.getColor(for: type)
+            colorView.backgroundColor = color
             addSubview(colorView)
             
             // Add the label next to the color view
