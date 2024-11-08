@@ -11,14 +11,14 @@ public struct AppointmentTypeModel: Hashable {
     let id: UUID
     let appointmentTypeName: String
     let price: Double
-    let duration: TimeInterval
+    let duration: Double
     
     public static func map(type: AppointmentTypeEntity) -> AppointmentTypeModel {
         AppointmentTypeModel(
             id: type.id ?? UUID(),
             appointmentTypeName: type.name ?? "",
             price: type.price,
-            duration: type.duration?.timeIntervalSince1970 ?? 0
+            duration: type.duration
         )
     }
     

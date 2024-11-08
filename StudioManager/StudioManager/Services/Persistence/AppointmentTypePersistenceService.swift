@@ -54,7 +54,7 @@ struct AppointmentTypePersistenceService: AppointmentTypePersistenceLoader {
                 newEntry.id = type.id
                 newEntry.name = type.appointmentTypeName
                 newEntry.price = type.price
-                newEntry.duration = Date(timeIntervalSince1970: type.duration)
+                newEntry.duration = type.duration
                 
                 saveData()
                 
@@ -64,7 +64,7 @@ struct AppointmentTypePersistenceService: AppointmentTypePersistenceLoader {
             // Modify the properties of the fetched appointment
             editClient.name = type.appointmentTypeName
             editClient.price = type.price
-            editClient.duration = Date(timeIntervalSince1970: type.duration)
+            editClient.duration = type.duration
             
             saveData()
             

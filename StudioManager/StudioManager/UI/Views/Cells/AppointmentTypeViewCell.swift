@@ -83,6 +83,23 @@ class AppointmentTypeViewCell: UITableViewCell {
     public func configure(model: AppointmentTypeModel) {
         appointmentTypeNameLabel.text = model.appointmentTypeName
         appointmentPriceLabel.text = "\(model.price)€"
-        appointmentDurationLabel.text = model.duration.formatted()
+        appointmentDurationLabel.text = formattedDuration(from: TimeInterval(floatLiteral: model.duration))
+    }
+}
+
+extension AppointmentTypeViewCell {
+    private func formattedDuration(from timeInterval: TimeInterval) -> String {
+        let minutes = Int(timeInterval) / 60 % 60
+        let hours = Int(timeInterval) / 3600
+
+        if hours > 0 {
+            if minutes > 0 {
+                return "\(hours) hora\(hours > 1 ? "s" : "") e \(minutes) minuto\(minutes > 1 ? "s" : "")"
+            } else {
+                return "\(hours) hora\(hours > 1 ? "s" : "")"
+            }
+        } else {
+            return "\(minutes) minuto\(minutes > 1 ? "s" : "")"
+        }
     }
 }
