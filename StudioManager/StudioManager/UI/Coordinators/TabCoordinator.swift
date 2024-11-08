@@ -25,7 +25,7 @@ class TabCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
     }
     
     func start() {
-        let pages: [TabBarPage] = [.appointments, .newAppointment, .balance]
+        let pages: [TabBarPage] = [.appointments, .newAppointment, .balance, .pricingTable]
 
         // Initialization of ViewControllers from pages
         let controllers: [UINavigationController] = pages.map { getTabController($0) }
@@ -52,6 +52,10 @@ class TabCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
             childCoordinators.append(coordinator)
         case .balance:
             let coordinator = BalanceCoordinator(navigationController: navController)
+            coordinator.start()
+            childCoordinators.append(coordinator)
+        case .pricingTable:
+            let coordinator = PricingTableCoordinator(navigationController: navController)
             coordinator.start()
             childCoordinators.append(coordinator)
             

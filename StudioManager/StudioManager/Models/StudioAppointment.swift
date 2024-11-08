@@ -33,10 +33,16 @@ public struct StudioAppointment: Equatable, Identifiable, Hashable {
     }
     
     public static func == (lhs: StudioAppointment, rhs: StudioAppointment) -> Bool {
-        lhs.id == rhs.id
+        return lhs.id == rhs.id && lhs.date == rhs.date && lhs.price == rhs.price &&
+        lhs.type == rhs.type && lhs.inResidence == rhs.inResidence && lhs.name == rhs.name && lhs.phoneNumber == rhs.phoneNumber
     }
     
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+        hasher.combine(date)
+        hasher.combine(type)
+        hasher.combine(inResidence)
+        hasher.combine(name)
+        hasher.combine(phoneNumber)
     }
 }
