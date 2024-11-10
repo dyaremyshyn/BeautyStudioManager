@@ -1,5 +1,5 @@
 //
-//  AppointmentTypeModel.swift
+//  Service.swift
 //  StudioManager
 //
 //  Created by Dmytro Yaremyshyn on 06/11/2024.
@@ -7,22 +7,22 @@
 
 import Foundation
 
-public struct AppointmentTypeModel: Hashable {
+public struct Service: Hashable {
     let id: UUID
-    let appointmentTypeName: String
+    let type: String
     let price: Double
     let duration: Double
     
-    public static func map(type: AppointmentTypeEntity) -> AppointmentTypeModel {
-        AppointmentTypeModel(
+    public static func map(type: ServiceEntity) -> Service {
+        Service(
             id: type.id ?? UUID(),
-            appointmentTypeName: type.name ?? "",
+            type: type.name ?? "",
             price: type.price,
             duration: type.duration
         )
     }
     
-    public static func == (lhs: AppointmentTypeModel, rhs: AppointmentTypeModel) -> Bool {
+    public static func == (lhs: Service, rhs: Service) -> Bool {
         return lhs.id == rhs.id
     }
     
@@ -31,15 +31,15 @@ public struct AppointmentTypeModel: Hashable {
     }
     
     static let allPrices = [
-        AppointmentTypeModel(
+        Service(
             id: UUID(),
-            appointmentTypeName: "Noiva",
+            type: "Noiva",
             price: 150,
             duration: 90 * 60 // 90 minutes in seconds
         ),
-        AppointmentTypeModel(
+        Service(
             id: UUID(),
-            appointmentTypeName: "Limpeza de pele",
+            type: "Limpeza de pele",
             price: 30,
             duration: 45 * 60 // 45 minutes in seconds
         ),
