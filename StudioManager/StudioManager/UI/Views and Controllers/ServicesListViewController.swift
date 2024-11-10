@@ -1,5 +1,5 @@
 //
-//  PricingTableViewController.swift
+//  ServicesListViewController.swift
 //  StudioManager
 //
 //  Created by Dmytro Yaremyshyn on 06/11/2024.
@@ -8,18 +8,19 @@
 import UIKit
 import Combine
 
-public class PricingTableViewController: UIViewController {
+public class ServicesListViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
-    var viewModel: PricingTableViewModel? {
+    var viewModel: ServicesListViewModel? {
         didSet { bind() }
     }
-    private var dataSource: UITableViewDiffableDataSource<StudioSection, AppointmentTypeModel>?
+    private var dataSource: AppointmentServiceDiffableDataSource?
     
     // MARK: - UI
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(AppointmentTypeViewCell.self, forCellReuseIdentifier: AppointmentTypeViewCell.reuseIdentifier)
+        tableView.register(ServiceViewCell.self, forCellReuseIdentifier: ServiceViewCell.reuseIdentifier)
+        tableView.delegate = self
         return tableView
     }()
     
@@ -36,8 +37,11 @@ public class PricingTableViewController: UIViewController {
     }
     
     private func setupDataSource() {
-        dataSource = UITableViewDiffableDataSource<StudioSection, AppointmentTypeModel>(tableView: tableView, cellProvider: { tableView, indexPath, model in
-                let cell = tableView.dequeueReusableCell(withIdentifier: AppointmentTypeViewCell.reuseIdentifier, for: indexPath) as! AppointmentTypeViewCell
+        dataSource = AppointmentServiceDiffableDataSource(
+            tableView: tableView,
+            viewModel: viewModel,
+            cellProvider: { tableView, indexPath, model in
+                let cell = tableView.dequeueReusableCell(withIdentifier: ServiceViewCell.reuseIdentifier, for: indexPath) as! ServiceViewCell
                 cell.configure(model: model)
                 return cell
             }
@@ -60,7 +64,7 @@ public class PricingTableViewController: UIViewController {
     }
     
     private func bind() {
-        viewModel?.$pricingTableList
+        viewModel?.$services
             .receive(on: DispatchQueue.main)
             .sink { [weak self] prices in
                 guard let self else { return }
@@ -69,8 +73,8 @@ public class PricingTableViewController: UIViewController {
             .store(in: &cancellables)
     }
     
-    private func applySnapshot(prices: [AppointmentTypeModel]) {
-        var snapshot = NSDiffableDataSourceSnapshot<StudioSection, AppointmentTypeModel>()
+    private func applySnapshot(prices: [Service]) {
+        var snapshot = NSDiffableDataSourceSnapshot<StudioSection, Service>()
         
         snapshot.appendSections([.main])
         snapshot.appendItems(prices, toSection: .main)
@@ -80,9 +84,19 @@ public class PricingTableViewController: UIViewController {
 }
 
 // MARK: - Add new Appointment Type
-extension PricingTableViewController {
+extension ServicesListViewController {
     
     @objc func addTapped() {
-        print("Add new price")
+        viewModel?.addService()
+    }
+}
+
+// MARK: - UITableViewDelegate - didSelectRowAt
+extension ServicesListViewController: UITableViewDelegate {
+
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let selectedService = dataSource?.itemIdentifier(for: indexPath) {
+            viewModel?.serviceTapped(selectedService)
+        }
     }
 }

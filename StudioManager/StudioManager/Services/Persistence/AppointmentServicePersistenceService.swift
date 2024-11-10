@@ -1,5 +1,5 @@
 //
-//  AppointmentTypePersistenceService.swift
+//  AppointmentServicePersistenceService.swift
 //  StudioManager
 //
 //  Created by Dmytro Yaremyshyn on 06/11/2024.
@@ -7,14 +7,14 @@
 
 import CoreData
 
-struct AppointmentTypePersistenceService: AppointmentTypePersistenceLoader {
+struct AppointmentServicePersistenceService: AppointmentServicePersistenceLoader {
     private static let modelName = "StudioManager"
-    private static let typeEntity = "AppointmentTypeEntity"
+    private static let typeEntity = "ServiceEntity"
 
     let container: NSPersistentContainer
 
     public init() {
-        container = NSPersistentContainer(name: AppointmentTypePersistenceService.modelName)
+        container = NSPersistentContainer(name: AppointmentServicePersistenceService.modelName)
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 print(error.localizedDescription)
@@ -23,14 +23,14 @@ struct AppointmentTypePersistenceService: AppointmentTypePersistenceLoader {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
-    func getAppointmentTypes() -> [AppointmentTypeModel] {
-        var types: [AppointmentTypeModel] = []
+    func getServices() -> [Service] {
+        var types: [Service] = []
         
-        let request = NSFetchRequest<AppointmentTypeEntity>(entityName: AppointmentTypePersistenceService.typeEntity)
+        let request = NSFetchRequest<ServiceEntity>(entityName: AppointmentServicePersistenceService.typeEntity)
         
         do {
             let result = try container.viewContext.fetch(request)
-            types = result.map { AppointmentTypeModel.map(type: $0) }
+            types = result.map { Service.map(type: $0) }
         } catch {
             print(error.localizedDescription)
         }
@@ -38,23 +38,23 @@ struct AppointmentTypePersistenceService: AppointmentTypePersistenceLoader {
         return types
     }
     
-    func saveAppointmentType(type: AppointmentTypeModel) {
+    func save(service: Service) {
         // Check if the type exists
 
-        let request = NSFetchRequest<AppointmentTypeEntity>(entityName: AppointmentTypePersistenceService.typeEntity)
-        request.predicate = NSPredicate(format: "id == %@", type.id as CVarArg)
+        let request = NSFetchRequest<ServiceEntity>(entityName: AppointmentServicePersistenceService.typeEntity)
+        request.predicate = NSPredicate(format: "id == %@", service.id as CVarArg)
         
         do {
             let result = try container.viewContext.fetch(request)
             
             guard let editClient = result.first else {
-                print("Type entity not found with id: \(type.id)")
+                print("Type entity not found with id: \(service.id)")
                 
-                let newEntry = AppointmentTypeEntity(context: container.viewContext)
-                newEntry.id = type.id
-                newEntry.name = type.appointmentTypeName
-                newEntry.price = type.price
-                newEntry.duration = type.duration
+                let newEntry = ServiceEntity(context: container.viewContext)
+                newEntry.id = service.id
+                newEntry.name = service.type
+                newEntry.price = service.price
+                newEntry.duration = service.duration
                 
                 saveData()
                 
@@ -62,22 +62,22 @@ struct AppointmentTypePersistenceService: AppointmentTypePersistenceLoader {
             }
             
             // Modify the properties of the fetched appointment
-            editClient.name = type.appointmentTypeName
-            editClient.price = type.price
-            editClient.duration = type.duration
+            editClient.name = service.type
+            editClient.price = service.price
+            editClient.duration = service.duration
             
             saveData()
             
-            print("Type entity with id \(type.id) edited successfully")
+            print("Type entity with id \(service.id) edited successfully")
             
         } catch {
             print("Error editing appointment entity: \(error)")
         }
     }
     
-    func deleteAppointmentType(type: AppointmentTypeModel) -> Bool {
-        let request = NSFetchRequest<AppointmentTypeEntity>(entityName: AppointmentTypePersistenceService.typeEntity)
-        request.predicate = NSPredicate(format: "id == %@", type.id as CVarArg)
+    func delete(service: Service) -> Bool {
+        let request = NSFetchRequest<ServiceEntity>(entityName: AppointmentServicePersistenceService.typeEntity)
+        request.predicate = NSPredicate(format: "id == %@", service.id as CVarArg)
         
         do {
             let result = try container.viewContext.fetch(request)

@@ -55,7 +55,7 @@ class TabCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
             coordinator.start()
             childCoordinators.append(coordinator)
         case .pricingTable:
-            let coordinator = PricingTableCoordinator(navigationController: navController)
+            let coordinator = ServicesListCoordinator(navigationController: navController)
             coordinator.start()
             childCoordinators.append(coordinator)
             

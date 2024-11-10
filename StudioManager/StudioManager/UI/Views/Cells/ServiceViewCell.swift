@@ -1,5 +1,5 @@
 //
-//  AppointmentTypeViewCell.swift
+//  ServiceViewCell.swift
 //  StudioManager
 //
 //  Created by Dmytro Yaremyshyn on 07/11/2024.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class AppointmentTypeViewCell: UITableViewCell {
-    static let reuseIdentifier = String(describing: AppointmentTypeViewCell.self)
+class ServiceViewCell: UITableViewCell {
+    static let reuseIdentifier = String(describing: ServiceViewCell.self)
     
     private lazy var containerView: UIView = {
         let view = UIView()
@@ -80,14 +80,14 @@ class AppointmentTypeViewCell: UITableViewCell {
         appointmentDurationLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8).isActive = true
     }
     
-    public func configure(model: AppointmentTypeModel) {
-        appointmentTypeNameLabel.text = model.appointmentTypeName
+    public func configure(model: Service) {
+        appointmentTypeNameLabel.text = model.type
         appointmentPriceLabel.text = "\(model.price)€"
         appointmentDurationLabel.text = formattedDuration(from: TimeInterval(floatLiteral: model.duration))
     }
 }
 
-extension AppointmentTypeViewCell {
+extension ServiceViewCell {
     private func formattedDuration(from timeInterval: TimeInterval) -> String {
         let minutes = Int(timeInterval) / 60 % 60
         let hours = Int(timeInterval) / 3600

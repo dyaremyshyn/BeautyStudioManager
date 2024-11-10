@@ -8,7 +8,7 @@
 import Foundation
 
 class NewAppointmentViewModel: ObservableObject {
-    @Published var appointment: StudioAppointment?
+    @Published private(set) var appointment: StudioAppointment?
 
     @Published var clientName: String!
     @Published var clientPhoneNumber: String!
@@ -22,21 +22,8 @@ class NewAppointmentViewModel: ObservableObject {
     init(appointment: StudioAppointment?, persistenceService: AppointmentPersistenceLoader) {
         self.appointment = appointment
         self.persistenceService = persistenceService
-        clientName = ""
-        clientPhoneNumber = ""
-        appointmentDate = Date()
-        price = ""
-        type = .makeup
-        inResidence = false
-        
-        if let item = self.appointment {
-            self.clientName = item.name
-            self.clientPhoneNumber = item.phoneNumber ?? ""
-            self.appointmentDate = item.date
-            self.price = item.price.formatted()
-            self.type = AppointmentType(rawValue: item.type.rawValue) ?? .makeup
-            self.inResidence = item.inResidence 
-        }
+        resetFields()
+        setFields(from: appointment)
     }
     
     func saveAppointment() {
@@ -65,5 +52,15 @@ class NewAppointmentViewModel: ObservableObject {
         price = ""
         type = .makeup
         inResidence = false
+    }
+    
+    private func setFields(from appointment: StudioAppointment?) {
+        guard let appointment else { return }
+        self.clientName = appointment.name
+        self.clientPhoneNumber = appointment.phoneNumber ?? ""
+        self.appointmentDate = appointment.date
+        self.price = appointment.price.formatted()
+        self.type = AppointmentType(rawValue: appointment.type.rawValue) ?? .makeup
+        self.inResidence = appointment.inResidence
     }
 }
