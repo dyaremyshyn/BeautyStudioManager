@@ -23,11 +23,18 @@ class NewServiceViewModel: ObservableObject {
     }
     
     public func saveService() {
+        let calendar = Calendar.current
+        let hours = calendar.component(.hour, from: duration)
+        let minutes = calendar.component(.minute, from: duration)
+
+        // Convert hours and minutes to TimeInterval
+        let timeInterval = TimeInterval(hours * 3600 + minutes * 60)
+        
         let service = Service(
             id: UUID(),
             type: name,
             price: Double(price) ?? 0,
-            duration: duration.timeIntervalSince1970
+            duration: timeInterval
         )
         
         // Save created service to core data
