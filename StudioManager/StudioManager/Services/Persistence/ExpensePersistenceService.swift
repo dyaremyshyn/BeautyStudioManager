@@ -8,19 +8,11 @@
 import CoreData
 
 struct ExpensePersistenceService: ExpensePersistenceLoader {
-    private static let modelName = "StudioManager"
     private static let expenseEntity = "ExpenseEntity"
-
-    let container: NSPersistentContainer
+    private let context: NSManagedObjectContext
 
     public init() {
-        container = NSPersistentContainer(name: ExpensePersistenceService.modelName)
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                print(error.localizedDescription)
-            }
-        })
-        container.viewContext.automaticallyMergesChangesFromParent = true
+        self.context = CoreDataStack.shared.context
     }
     
     func getExpenses() -> [Expense] {
@@ -29,7 +21,7 @@ struct ExpensePersistenceService: ExpensePersistenceLoader {
         let request = NSFetchRequest<ExpenseEntity>(entityName: ExpensePersistenceService.expenseEntity)
         
         do {
-            let result = try container.viewContext.fetch(request)
+            let result = try context.fetch(request)
             expenses = result.map { Expense.map(expense: $0) }
             expenses.sort(by: { $0.date < $1.date })
         } catch {
@@ -43,12 +35,12 @@ struct ExpensePersistenceService: ExpensePersistenceLoader {
         request.predicate = NSPredicate(format: "id == %@", expense.id as CVarArg)
         
         do {
-            let result = try container.viewContext.fetch(request)
+            let result = try context.fetch(request)
             
             guard let editExpense = result.first else {
                 print("Expense entity not found with id: \(expense.id)")
                 
-                let newEntry = ExpenseEntity(context: container.viewContext)
+                let newEntry = ExpenseEntity(context: context)
                 newEntry.id = expense.id
                 newEntry.name = expense.name
                 newEntry.date = expense.date
@@ -74,7 +66,7 @@ struct ExpensePersistenceService: ExpensePersistenceLoader {
     
     private func saveData() {
         do {
-            try container.viewContext.save()
+            try context.save()
         } catch {
             print(error.localizedDescription)
         }

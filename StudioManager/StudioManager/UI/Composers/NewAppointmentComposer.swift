@@ -14,9 +14,14 @@ public final class NewAppointmentComposer {
     
     public static func newAppointmentComposedWith(
         appointment: StudioAppointment?,
-        persistenceLoader: AppointmentPersistenceLoader
+        appointmentsPersistenceService: AppointmentPersistenceLoader,
+        servicePersistenceService: AppointmentServicePersistenceLoader
     ) -> UIHostingController<NewAppointmentView> {
-        let viewModel = NewAppointmentViewModel(appointment: appointment, persistenceService: persistenceLoader)
+        let viewModel = NewAppointmentViewModel(
+            appointment: appointment,
+            appointmentsPersistenceService: appointmentsPersistenceService,
+            servicesPersistenceService: servicePersistenceService
+        )
         let newAppointmentView = NewAppointmentView(viewModel: viewModel)
         // Wrap the SwiftUI view in a UIHostingController
         let hostingController = UIHostingController(rootView: newAppointmentView)

@@ -9,9 +9,9 @@ import UIKit
 
 class PieChartView: UIView {
     
-    var appointmentAmounts: [AppointmentType: Double]  // Amount for each appointment type
+    var appointmentAmounts: [String: Double]  // Amount for each appointment type
     
-    public init(appointmentAmounts: [AppointmentType: Double]) {
+    public init(appointmentAmounts: [String: Double]) {
         self.appointmentAmounts = appointmentAmounts
         super.init(frame: .zero)
         self.backgroundColor = .clear
@@ -22,7 +22,7 @@ class PieChartView: UIView {
         super.init(coder: coder)
     }
     
-    private var colorMap: [AppointmentType: (UIColor,Double)] = [:]
+    private var colorMap: [String: (UIColor,Double)] = [:]
     
     override func draw(_ rect: CGRect) {
         guard !appointmentAmounts.isEmpty else { return }
@@ -64,7 +64,7 @@ class PieChartView: UIView {
             
             // Add the label next to the color view
             let label = UILabel(frame: CGRect(x: legendX + 20, y: legendY, width: 200, height: 15))
-            label.text = type.rawValue + " \(amount)€"
+            label.text = type + " \(amount)€"
             label.font = .systemFont(ofSize: 12)
             addSubview(label)
 

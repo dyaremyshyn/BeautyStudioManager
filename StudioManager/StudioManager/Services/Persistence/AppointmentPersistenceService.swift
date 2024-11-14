@@ -8,19 +8,11 @@
 import CoreData
 
 struct AppointmentPersistenceService: AppointmentPersistenceLoader {
-    private static let modelName = "StudioManager"
     private static let studioEntity = "StudioEntity"
-
-    let container: NSPersistentContainer
+    private let context: NSManagedObjectContext
 
     public init() {
-        container = NSPersistentContainer(name: AppointmentPersistenceService.modelName)
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                print(error.localizedDescription)
-            }
-        })
-        container.viewContext.automaticallyMergesChangesFromParent = true
+        self.context = CoreDataStack.shared.context
     }
     
     func getStudioAppointments() -> [StudioAppointment] {
@@ -29,7 +21,7 @@ struct AppointmentPersistenceService: AppointmentPersistenceLoader {
         let request = NSFetchRequest<StudioEntity>(entityName: AppointmentPersistenceService.studioEntity)
         
         do {
-            let result = try container.viewContext.fetch(request)
+            let result = try context.fetch(request)
             appointments = result.map { StudioAppointment.map(appointment: $0) }
             appointments.sort(by: { $0.date < $1.date })
         } catch {
@@ -46,19 +38,19 @@ struct AppointmentPersistenceService: AppointmentPersistenceLoader {
         request.predicate = NSPredicate(format: "id == %@", appointment.id as CVarArg)
         
         do {
-            let result = try container.viewContext.fetch(request)
+            let result = try context.fetch(request)
             
             guard let editClient = result.first else {
                 print("Client entity not found with id: \(appointment.id)")
                 
-                let newEntry = StudioEntity(context: container.viewContext)
+                let newEntry = StudioEntity(context: context)
                 newEntry.id = appointment.id
                 newEntry.name = appointment.name
                 newEntry.phoneNumber = appointment.phoneNumber
                 newEntry.date = appointment.date
                 newEntry.inResidence = appointment.inResidence
                 newEntry.price = appointment.price
-                newEntry.type = appointment.type.rawValue
+                newEntry.type = appointment.type
                 
                 saveData()
                 
@@ -70,7 +62,7 @@ struct AppointmentPersistenceService: AppointmentPersistenceLoader {
             editClient.phoneNumber = appointment.phoneNumber
             editClient.date = appointment.date
             editClient.price = appointment.price
-            editClient.type = appointment.type.rawValue
+            editClient.type = appointment.type
             editClient.inResidence = appointment.inResidence
             
             saveData()
@@ -87,11 +79,11 @@ struct AppointmentPersistenceService: AppointmentPersistenceLoader {
         request.predicate = NSPredicate(format: "id == %@", appointment.id as CVarArg)
         
         do {
-            let result = try container.viewContext.fetch(request)
+            let result = try context.fetch(request)
             
             guard let entry = result.first else { return false }
             
-            container.viewContext.delete(entry)
+            context.delete(entry)
             saveData()
             
             return true
@@ -103,7 +95,7 @@ struct AppointmentPersistenceService: AppointmentPersistenceLoader {
     
     private func saveData() {
         do {
-            try container.viewContext.save()
+            try context.save()
         } catch {
             print(error.localizedDescription)
         }

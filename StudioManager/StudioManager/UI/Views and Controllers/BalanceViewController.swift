@@ -176,7 +176,7 @@ extension BalanceViewController {
 
 extension BalanceViewController {
     
-    private func createPieChart(for data: [AppointmentType: Double]) {
+    private func createPieChart(for data: [String: Double]) {
         
         guard !data.isEmpty else {
             pieChartView?.removeFromSuperview()

@@ -18,7 +18,8 @@ class NewAppointmentCoordinator: Coordinator {
     private lazy var newAppointmentViewController: UIHostingController<NewAppointmentView> = {
         let viewController = NewAppointmentComposer.newAppointmentComposedWith(
             appointment: nil,
-            persistenceLoader: AppointmentPersistenceService()
+            appointmentsPersistenceService: AppointmentPersistenceService(),
+            servicePersistenceService: AppointmentServicePersistenceService()
         )
         return viewController
     }()

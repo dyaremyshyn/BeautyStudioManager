@@ -31,7 +31,7 @@ public struct Appointment {
         id: UUID(),
         date: Calendar.current.date(byAdding: .day, value: 0, to: .now)!,
         price: 12.5,
-        type: AppointmentType.nailsType1,
+        type: "Unhas Verniz Gel",
         inResidence: false,
         name: "Vera Nunes",
         phoneNumber: "912325234"
@@ -42,7 +42,7 @@ public struct Appointment {
             id: UUID(),
             date: Calendar.current.date(byAdding: .day, value: 0, to: .now)!,
             price: 12.5,
-            type: AppointmentType.nailsType1,
+            type: "Unhas Gel",
             inResidence: false,
             name: "Vera Nunes",
             phoneNumber: "912325234"
@@ -51,7 +51,7 @@ public struct Appointment {
             id: UUID(),
             date: Calendar.current.date(byAdding: .day, value: 2, to: .now)!,
             price: 30,
-            type: AppointmentType.skinCleansing,
+            type: "Limpeza de pele",
             inResidence: false,
             name: "Anabela Nunes",
             phoneNumber: "912325234"
@@ -60,7 +60,7 @@ public struct Appointment {
             id: UUID(),
             date: Calendar.current.date(byAdding: .day, value: 4, to: .now)!,
             price: 25,
-            type: AppointmentType.lashes,
+            type: "Sobrancelhas",
             inResidence: false,
             name: "Patricia Nunes",
             phoneNumber: "912325234"
@@ -69,7 +69,7 @@ public struct Appointment {
             id: UUID(),
             date: Calendar.current.date(byAdding: .weekday, value: 4, to: .now)!,
             price: 35,
-            type: AppointmentType.makeup,
+            type: "Maquilhagem",
             inResidence: false,
             name: "Clara Cruz",
             phoneNumber: "912325234"
@@ -78,7 +78,7 @@ public struct Appointment {
             id: UUID(),
             date: Calendar.current.date(byAdding: .month, value: 2, to: .now)!,
             price: 150,
-            type: AppointmentType.bride,
+            type: "Noiva",
             inResidence: false,
             name: "Marilia Prima",
             phoneNumber: "912325234"

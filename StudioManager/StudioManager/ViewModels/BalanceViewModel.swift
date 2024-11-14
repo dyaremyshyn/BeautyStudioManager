@@ -18,7 +18,7 @@ class BalanceViewModel: ObservableObject {
     @Published private(set) var expectedBalance: String = ""
     @Published private(set) var expense: String = ""
     @Published private(set) var errorMessage: String? = nil
-    @Published private(set) var pieChartData: [AppointmentType: Double] = [:]
+    @Published private(set) var pieChartData: [String: Double] = [:]
     private var filterCalendar: FilterCalendar = .today
     // Coordinator
     weak var coordinator: BalanceCoordinator?

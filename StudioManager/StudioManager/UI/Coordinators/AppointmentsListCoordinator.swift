@@ -46,7 +46,8 @@ extension AppointmentsListCoordinator: AppointmentsListDelegate {
     public func goToAppointmentDetails(appointment: StudioAppointment) {
         let editAppointmentController = NewAppointmentComposer.newAppointmentComposedWith(
             appointment: appointment,
-            persistenceLoader: AppointmentPersistenceService()
+            appointmentsPersistenceService: AppointmentPersistenceService(),
+            servicePersistenceService: AppointmentServicePersistenceService()
         )
         navigationController.pushViewController(editAppointmentController, animated: true)
         navigationController.topViewController?.title = "Editar marcação"

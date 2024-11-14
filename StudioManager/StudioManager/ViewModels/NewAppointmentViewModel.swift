@@ -8,25 +8,43 @@
 import Foundation
 
 class NewAppointmentViewModel: ObservableObject {
+    private var allServices: [Service] = []
+    public private(set) var servicesTypes: [String] = []
     @Published private(set) var appointment: StudioAppointment?
-
     @Published var clientName: String!
     @Published var clientPhoneNumber: String!
     @Published var appointmentDate: Date!
     @Published var price: String!
-    @Published var type: AppointmentType = .makeup
     @Published var inResidence: Bool!
+    @Published var type: String = "Maquilhagem" {
+        didSet {
+            price = allServices.first(where: { $0.type == type })?.price.formatted() ?? ""
+        }
+    }
     
-    private let persistenceService: AppointmentPersistenceLoader
+    private let appointmentsPersistenceService: AppointmentPersistenceLoader
+    private let servicesPersistenceService: AppointmentServicePersistenceLoader
     
-    init(appointment: StudioAppointment?, persistenceService: AppointmentPersistenceLoader) {
+    init(
+        appointment: StudioAppointment?,
+        appointmentsPersistenceService: AppointmentPersistenceLoader,
+        servicesPersistenceService: AppointmentServicePersistenceLoader
+    ) {
         self.appointment = appointment
-        self.persistenceService = persistenceService
+        self.appointmentsPersistenceService = appointmentsPersistenceService
+        self.servicesPersistenceService = servicesPersistenceService
+        fetchData()
         resetFields()
         setFields(from: appointment)
     }
     
-    func saveAppointment() {
+    public func fetchData() {
+        allServices = servicesPersistenceService.getServices()
+        servicesTypes = allServices.map { $0.type }.filter { !$0.isEmpty }
+        type = servicesTypes.first ?? ""
+    }
+    
+    public func saveAppointment() {
         let appointment = StudioAppointment(
             id: appointment?.id ?? UUID(),
             date: appointmentDate,
@@ -38,7 +56,7 @@ class NewAppointmentViewModel: ObservableObject {
         )
         
         // Save created appointment to core data
-        persistenceService.saveStudioAppointment(appointment: appointment)
+        appointmentsPersistenceService.saveStudioAppointment(appointment: appointment)
         
         // Reset fields after saving if needed
         resetFields()
@@ -50,7 +68,7 @@ class NewAppointmentViewModel: ObservableObject {
         clientPhoneNumber = ""
         appointmentDate = Date()
         price = ""
-        type = .makeup
+        type = servicesTypes.first ?? ""
         inResidence = false
     }
     
@@ -60,7 +78,7 @@ class NewAppointmentViewModel: ObservableObject {
         self.clientPhoneNumber = appointment.phoneNumber ?? ""
         self.appointmentDate = appointment.date
         self.price = appointment.price.formatted()
-        self.type = AppointmentType(rawValue: appointment.type.rawValue) ?? .makeup
+        self.type = appointment.type 
         self.inResidence = appointment.inResidence
     }
 }

@@ -8,19 +8,11 @@
 import CoreData
 
 struct AppointmentServicePersistenceService: AppointmentServicePersistenceLoader {
-    private static let modelName = "StudioManager"
     private static let typeEntity = "ServiceEntity"
-
-    let container: NSPersistentContainer
+    private let context: NSManagedObjectContext
 
     public init() {
-        container = NSPersistentContainer(name: AppointmentServicePersistenceService.modelName)
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                print(error.localizedDescription)
-            }
-        })
-        container.viewContext.automaticallyMergesChangesFromParent = true
+        self.context = CoreDataStack.shared.context
     }
     
     func getServices() -> [Service] {
@@ -29,7 +21,7 @@ struct AppointmentServicePersistenceService: AppointmentServicePersistenceLoader
         let request = NSFetchRequest<ServiceEntity>(entityName: AppointmentServicePersistenceService.typeEntity)
         
         do {
-            let result = try container.viewContext.fetch(request)
+            let result = try context.fetch(request)
             types = result.map { Service.map(type: $0) }
         } catch {
             print(error.localizedDescription)
@@ -45,12 +37,12 @@ struct AppointmentServicePersistenceService: AppointmentServicePersistenceLoader
         request.predicate = NSPredicate(format: "id == %@", service.id as CVarArg)
         
         do {
-            let result = try container.viewContext.fetch(request)
+            let result = try context.fetch(request)
             
             guard let editClient = result.first else {
                 print("Type entity not found with id: \(service.id)")
                 
-                let newEntry = ServiceEntity(context: container.viewContext)
+                let newEntry = ServiceEntity(context: context)
                 newEntry.id = service.id
                 newEntry.name = service.type
                 newEntry.price = service.price
@@ -80,11 +72,11 @@ struct AppointmentServicePersistenceService: AppointmentServicePersistenceLoader
         request.predicate = NSPredicate(format: "id == %@", service.id as CVarArg)
         
         do {
-            let result = try container.viewContext.fetch(request)
+            let result = try context.fetch(request)
             
             guard let entry = result.first else { return false }
             
-            container.viewContext.delete(entry)
+            context.delete(entry)
             saveData()
             
             return true
@@ -96,7 +88,7 @@ struct AppointmentServicePersistenceService: AppointmentServicePersistenceLoader
     
     private func saveData() {
         do {
-            try container.viewContext.save()
+            try context.save()
         } catch {
             print(error.localizedDescription)
         }

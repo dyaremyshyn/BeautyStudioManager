@@ -106,7 +106,7 @@ class AppointmentsViewCell: UITableViewCell {
     
     public func configure(model: StudioAppointment) {
         clientNameLabel.text = model.name
-        appointmentTypeLabel.text = model.type.rawValue
+        appointmentTypeLabel.text = model.type
         appointmentDateLabel.text = model.date.appointmentDate
         appointmentDurationLabel.text = model.date.appointmentDateTime + " - " + model.date.addingTimeInterval(3600).appointmentDateTime
         inResidenceLabel.text = model.inResidence ? "Ao domicílio" : .none

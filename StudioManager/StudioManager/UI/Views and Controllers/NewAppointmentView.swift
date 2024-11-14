@@ -26,8 +26,8 @@ public struct NewAppointmentView: View {
                     .keyboardType(.numbersAndPunctuation)
                 
                 Picker("Tipo de Marcação", selection: $viewModel.type) {
-                    ForEach(AppointmentType.allCases, id: \.self) { type in
-                        Text(type.rawValue)
+                    ForEach(viewModel.servicesTypes, id: \.self) { type in
+                        Text(type)
                     }
                 }
                 .pickerStyle(.menu)
@@ -46,6 +46,9 @@ public struct NewAppointmentView: View {
             })
             .frame(width: 400, height: 30, alignment: .center)
         }
+        .onAppear {
+            viewModel.fetchData()
+        }
     }
 }
 
@@ -54,7 +57,8 @@ struct NewAppointmentView_Previews: PreviewProvider {
         NewAppointmentView(
             viewModel: NewAppointmentViewModel(
                 appointment: Appointment.example,
-                persistenceService: AppointmentPersistenceService()
+                appointmentsPersistenceService: AppointmentPersistenceService(),
+                servicesPersistenceService: AppointmentServicePersistenceService()
             )
         )
     }
