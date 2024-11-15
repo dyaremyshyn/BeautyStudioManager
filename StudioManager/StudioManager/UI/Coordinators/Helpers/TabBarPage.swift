@@ -26,7 +26,7 @@ enum TabBarPage {
             case .appointments: return "Marcações"
             case .newAppointment: return "Nova Marcação"
             case .balance: return "Balanço"
-            case .pricingTable: return "Tabela de Preços"
+            case .pricingTable: return "Serviços"
         }
     }
     
@@ -35,7 +35,7 @@ enum TabBarPage {
             case .appointments: return "list.bullet.clipboard"
             case .newAppointment: return "plus.circle"
             case .balance: return "chart.xyaxis.line"
-            case .pricingTable: return "dollarsign.bank.building"
+            case .pricingTable: return "list.bullet.rectangle"
         }
     }
 }
