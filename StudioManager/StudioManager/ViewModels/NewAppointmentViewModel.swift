@@ -16,9 +16,11 @@ class NewAppointmentViewModel: ObservableObject {
     @Published var appointmentDate: Date!
     @Published var price: String!
     @Published var inResidence: Bool!
+    private var duration: Double = 0
     @Published var type: String = "Maquilhagem" {
         didSet {
             price = allServices.first(where: { $0.type == type })?.price.formatted() ?? ""
+            duration = allServices.first(where: { $0.type == type })?.duration ?? 0
         }
     }
     
@@ -52,7 +54,9 @@ class NewAppointmentViewModel: ObservableObject {
             type: type,
             inResidence: inResidence,
             name: clientName,
-            phoneNumber: clientPhoneNumber
+            phoneNumber: clientPhoneNumber,
+            duration: duration,
+            addedToCalendar: false
         )
         
         // Save created appointment to core data
@@ -68,6 +72,7 @@ class NewAppointmentViewModel: ObservableObject {
         clientPhoneNumber = ""
         appointmentDate = Date()
         price = ""
+        duration = 0
         type = servicesTypes.first ?? ""
         inResidence = false
     }

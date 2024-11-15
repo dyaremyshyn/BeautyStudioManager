@@ -34,7 +34,9 @@ public struct Appointment {
         type: "Unhas Verniz Gel",
         inResidence: false,
         name: "Vera Nunes",
-        phoneNumber: "912325234"
+        phoneNumber: "912325234",
+        duration: 3600,
+        addedToCalendar: false
     )
     
     static let allCustomers = [
@@ -45,7 +47,9 @@ public struct Appointment {
             type: "Unhas Gel",
             inResidence: false,
             name: "Vera Nunes",
-            phoneNumber: "912325234"
+            phoneNumber: "912325234",
+            duration: 3600,
+            addedToCalendar: false
         ),
         StudioAppointment(
             id: UUID(),
@@ -54,7 +58,9 @@ public struct Appointment {
             type: "Limpeza de pele",
             inResidence: false,
             name: "Anabela Nunes",
-            phoneNumber: "912325234"
+            phoneNumber: "912325234",
+            duration: 3600,
+            addedToCalendar: false
         ),
         StudioAppointment(
             id: UUID(),
@@ -63,16 +69,20 @@ public struct Appointment {
             type: "Sobrancelhas",
             inResidence: false,
             name: "Patricia Nunes",
-            phoneNumber: "912325234"
+            phoneNumber: "912325234",
+            duration: 3600,
+            addedToCalendar: false
         ),
         StudioAppointment(
             id: UUID(),
-            date: Calendar.current.date(byAdding: .weekday, value: 4, to: .now)!,
+            date: Calendar.current.date(byAdding: .weekday, value: 5, to: .now)!,
             price: 35,
             type: "Maquilhagem",
             inResidence: false,
             name: "Clara Cruz",
-            phoneNumber: "912325234"
+            phoneNumber: "912325234",
+            duration: 3600,
+            addedToCalendar: false
         ),
         StudioAppointment(
             id: UUID(),
@@ -81,7 +91,9 @@ public struct Appointment {
             type: "Noiva",
             inResidence: false,
             name: "Marilia Prima",
-            phoneNumber: "912325234"
-        )        
+            phoneNumber: "912325234",
+            duration: 3600,
+            addedToCalendar: false
+        )
     ]
 }

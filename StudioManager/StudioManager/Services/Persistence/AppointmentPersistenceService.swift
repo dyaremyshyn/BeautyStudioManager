@@ -51,6 +51,7 @@ struct AppointmentPersistenceService: AppointmentPersistenceLoader {
                 newEntry.inResidence = appointment.inResidence
                 newEntry.price = appointment.price
                 newEntry.type = appointment.type
+                newEntry.addedToCalendar = appointment.addedToCalendar
                 
                 saveData()
                 
@@ -64,6 +65,7 @@ struct AppointmentPersistenceService: AppointmentPersistenceLoader {
             editClient.price = appointment.price
             editClient.type = appointment.type
             editClient.inResidence = appointment.inResidence
+            editClient.addedToCalendar = appointment.addedToCalendar
             
             saveData()
             
