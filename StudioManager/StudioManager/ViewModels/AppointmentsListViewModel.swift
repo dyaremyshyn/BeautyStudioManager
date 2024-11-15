@@ -53,4 +53,29 @@ class AppointmentsListViewModel: ObservableObject {
             allAppointments.remove(at: allAppointmentsIndex)
         }
     }
+    
+    public func addAppointmentsToCalendar() {
+        let addCalendarAppointments = allAppointments.filter { !$0.addedToCalendar }
+        addCalendarAppointments.forEach { appointment in
+            CalendarEventHelper.createEvent(to: appointment)
+            appointmentsAddedToCalendar(appointment: appointment, index: allAppointments.firstIndex(where: { $0.id == appointment.id }))
+        }
+    }
+    
+    private func appointmentsAddedToCalendar(appointment: StudioAppointment, index: Int?) {
+        guard let index else { return }
+        let updatedAppointment = StudioAppointment(
+            id: appointment.id,
+            date: appointment.date,
+            price: appointment.price,
+            type: appointment.type,
+            inResidence: appointment.inResidence,
+            name: appointment.name,
+            phoneNumber: appointment.phoneNumber,
+            duration: appointment.duration,
+            addedToCalendar: true
+        )
+        self.allAppointments[index] = updatedAppointment
+        persistenceService.saveStudioAppointment(appointment: updatedAppointment)
+    }
 }

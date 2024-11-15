@@ -70,6 +70,8 @@ public class AppointmentsListViewController: UIViewController {
         view.addSubview(segmentedControl)
         view.addSubview(tableView)
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveToCalendarTapped))
+        
         segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
@@ -114,6 +116,14 @@ extension AppointmentsListViewController {
     @objc private func segmentedControlValueChanged() {
         let filterCalendar = FilterCalendar(rawValue: segmentedControl.selectedSegmentIndex) ?? .today
         viewModel?.filterAppointments(by: filterCalendar)
+    }
+}
+
+// MARK: - Add to calendar
+extension AppointmentsListViewController {
+    
+    @objc private func saveToCalendarTapped() {
+        viewModel?.addAppointmentsToCalendar()
     }
 }
 
