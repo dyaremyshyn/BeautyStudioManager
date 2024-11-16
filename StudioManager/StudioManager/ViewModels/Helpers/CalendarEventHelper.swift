@@ -10,14 +10,15 @@ import EventKit
 
 struct CalendarEventHelper {
     
-    public static func createEvent(to appointment: StudioAppointment) {
+    public static func createEvent(to appointment: StudioAppointment, completion: @escaping (Bool) -> Void) {
         let eventStore = EKEventStore()
             
         // Request calendar access
         eventStore.requestWriteOnlyAccessToEvents(completion: { granted, error in
             guard granted else {
                 DispatchQueue.main.async {
-                   print("Access to calendar denied")
+                    print("Access to calendar denied")
+                    completion(false)
                 }
                 return
             }
@@ -26,16 +27,18 @@ struct CalendarEventHelper {
             let event = EKEvent(eventStore: eventStore)
             event.title = appointment.name + " - " +  appointment.type
             event.startDate = appointment.date
-            event.endDate = appointment.date.addingTimeInterval(TimeInterval(floatLiteral: appointment.duration)) //Calendar.current.date(byAdding: .hour, value: 1, to: appointment.date) ?? appointment.date
+            event.endDate = appointment.date.addingTimeInterval(TimeInterval(floatLiteral: appointment.duration))
             event.notes = "Appointment Price: €\(appointment.price)"
             event.calendar = eventStore.defaultCalendarForNewEvents
             
             do {
                 try eventStore.save(event, span: .thisEvent)
+                completion(true)
             } catch {
                 print("Failed to save event to calendar")
-                return
+                completion(false)
             }
         })
+        completion(true)
     }
 }

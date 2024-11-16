@@ -11,6 +11,7 @@ class AppointmentsListViewModel: ObservableObject {
     private var allAppointments: [StudioAppointment] = []
     @Published private(set) var appointments: [StudioAppointment] = []
     @Published private(set) var errorMessage: String? = nil
+    @Published private(set) var successMessage: String? = nil
     weak var coordinator: AppointmentsListCoordinator?
     private var filterCalendar: FilterCalendar = .today
     
@@ -56,8 +57,12 @@ class AppointmentsListViewModel: ObservableObject {
     
     public func addAppointmentsToCalendar() {
         let addCalendarAppointments = allAppointments.filter { !$0.addedToCalendar }
+        self.successMessage = addCalendarAppointments.isEmpty ? "Nenhuma marcação para adicionar ao calendário." : nil
         addCalendarAppointments.forEach { appointment in
-            CalendarEventHelper.createEvent(to: appointment)
+            CalendarEventHelper.createEvent(to: appointment) { [weak self] result in
+                self?.errorMessage = result == false ? "An error occurred saving the appointment to your calendar." : nil
+                self?.successMessage = result ? "Todas as marcações foram adicionadas ao calendário com sucesso." : nil
+            }
             appointmentsAddedToCalendar(appointment: appointment, index: allAppointments.firstIndex(where: { $0.id == appointment.id }))
         }
     }

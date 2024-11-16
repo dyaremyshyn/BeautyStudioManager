@@ -70,7 +70,7 @@ public class AppointmentsListViewController: UIViewController {
         view.addSubview(segmentedControl)
         view.addSubview(tableView)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveToCalendarTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "calendar.badge.plus"), style: .done, target: self, action: #selector(saveToCalendarTapped)) 
         
         segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
@@ -96,6 +96,14 @@ public class AppointmentsListViewController: UIViewController {
             .sink { [weak self] errorMessage in
                 guard let self, let message = errorMessage else { return }
                 showErrorDialog(title: "Erro", message: message, cancelTitle: "Cancelar")
+            }
+            .store(in: &cancellables)
+        
+        viewModel?.$successMessage
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] successMessage in
+                guard let self, let message = successMessage else { return }
+                showSuccessDialog(title: "Sucesso", message: message)
             }
             .store(in: &cancellables)
     }
