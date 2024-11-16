@@ -28,7 +28,8 @@ struct CalendarEventHelper {
             event.title = appointment.name + " - " +  appointment.type
             event.startDate = appointment.date
             event.endDate = appointment.date.addingTimeInterval(TimeInterval(floatLiteral: appointment.duration))
-            event.notes = "Appointment Price: €\(appointment.price)"
+            event.notes = "Preço da marcação: €\(appointment.price)"
+            event.alarms = [EKAlarm(relativeOffset: -86400), EKAlarm(relativeOffset: -7200)]
             event.calendar = eventStore.defaultCalendarForNewEvents
             
             do {
