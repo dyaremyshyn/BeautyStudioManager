@@ -10,14 +10,14 @@ enum TabBarPage {
     case appointments
     case newAppointment
     case balance
-    case pricingTable
+    case services
 
     func getIndex() -> Int {
         switch self {
             case .appointments: return 0
             case .newAppointment: return 1
             case .balance: return 2
-            case .pricingTable: return 3
+            case .services: return 3
         }
     }
     
@@ -26,7 +26,7 @@ enum TabBarPage {
             case .appointments: return "Marcações"
             case .newAppointment: return "Nova Marcação"
             case .balance: return "Balanço"
-            case .pricingTable: return "Serviços"
+            case .services: return "Serviços"
         }
     }
     
@@ -35,7 +35,7 @@ enum TabBarPage {
             case .appointments: return "list.bullet.clipboard"
             case .newAppointment: return "plus.circle"
             case .balance: return "chart.xyaxis.line"
-            case .pricingTable: return "list.bullet.rectangle"
+            case .services: return "list.bullet.rectangle"
         }
     }
 }
