@@ -18,14 +18,17 @@ class ServicesListCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType = .tabItem
     
+    private let servicePersistenceService: AppointmentServicePersistenceLoader
+    
     private lazy var balanceViewController: ServicesListViewController = {
-        let viewController = ServicesListComposer.servicesComposedWith(persistenceService: AppointmentServicePersistenceService())
+        let viewController = ServicesListComposer.servicesComposedWith(persistenceService: servicePersistenceService)
         viewController.viewModel?.coordinator = self
         return viewController
     }()
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, servicePersistenceService: AppointmentServicePersistenceLoader) {
         self.navigationController = navigationController
+        self.servicePersistenceService = servicePersistenceService
     }
     
     func start() {
@@ -44,7 +47,7 @@ extension ServicesListCoordinator: ServicesListDelegate {
     func goToService(service: Service?) {
         let editServiceController = NewServiceComposer.newServiceComposedWith(
             service: service,
-            persistenceLoader: AppointmentServicePersistenceService()
+            persistenceLoader: servicePersistenceService
         )
         navigationController.pushViewController(editServiceController, animated: true)
         navigationController.topViewController?.title = service == nil ? "Novo serviço" : "Editar serviço"

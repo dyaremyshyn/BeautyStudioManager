@@ -32,8 +32,8 @@ class BalanceViewModel: ObservableObject {
     }
     
     public func fetchAppointments() {
-        allAppointments = appointmentPersistenceService.getStudioAppointments()
-        allExpenses = expensePersistenceService.getExpenses()
+        allAppointments = appointmentPersistenceService.fetchAll()
+        allExpenses = expensePersistenceService.fetchAll()
         errorMessage = nil
         
 #if DEBUG

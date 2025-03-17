@@ -14,18 +14,20 @@ class NewAppointmentCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType = .tabItem
-    
+    private let servicePersistenceService: AppointmentServicePersistenceLoader
+
     private lazy var newAppointmentViewController: UIHostingController<NewAppointmentView> = {
         let viewController = NewAppointmentComposer.newAppointmentComposedWith(
             appointment: nil,
             appointmentsPersistenceService: AppointmentPersistenceService(),
-            servicePersistenceService: AppointmentServicePersistenceService()
+            servicePersistenceService: servicePersistenceService
         )
         return viewController
     }()
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, servicePersistenceService: AppointmentServicePersistenceLoader) {
         self.navigationController = navigationController
+        self.servicePersistenceService = servicePersistenceService
     }
     
     func start() {

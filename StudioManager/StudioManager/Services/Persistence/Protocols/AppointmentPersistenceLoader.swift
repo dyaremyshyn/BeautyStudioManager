@@ -7,7 +7,7 @@
 
 
 public protocol AppointmentPersistenceLoader {
-    func getStudioAppointments() -> [StudioAppointment]
-    func saveStudioAppointment(appointment: StudioAppointment)
-    func deleteStudioAppointment(appointment: StudioAppointment) -> Bool
+    func fetchAll() -> [StudioAppointment]
+    func add(appointment: StudioAppointment)
+    func delete(appointment: StudioAppointment) -> Bool
 }

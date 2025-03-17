@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import Combine
 
 class NewAppointmentViewModel: ObservableObject {
     private var allServices: [Service] = []
     public private(set) var servicesTypes: [String] = []
-    @Published private(set) var appointment: StudioAppointment?
+    @Published private(set) var appointment: StudioAppointment?{
+        didSet { setFields(from: appointment) }
+    }
     @Published var clientName: String!
     @Published var clientPhoneNumber: String!
     @Published var appointmentDate: Date!
@@ -26,6 +29,7 @@ class NewAppointmentViewModel: ObservableObject {
     
     private let appointmentsPersistenceService: AppointmentPersistenceLoader
     private let servicesPersistenceService: AppointmentServicePersistenceLoader
+    private var subscriptions: [AnyCancellable] = []
     
     init(
         appointment: StudioAppointment?,
@@ -35,13 +39,18 @@ class NewAppointmentViewModel: ObservableObject {
         self.appointment = appointment
         self.appointmentsPersistenceService = appointmentsPersistenceService
         self.servicesPersistenceService = servicesPersistenceService
+        
+        self.servicesPersistenceService.appointmentServiceUpdatedPublisher
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: appointmentServiceUpdated)
+            .store(in: &subscriptions)
+        
         fetchData()
         resetFields()
-        setFields(from: appointment)
     }
     
     public func fetchData() {
-        allServices = servicesPersistenceService.getServices()
+        allServices = servicesPersistenceService.fetchAll()
         servicesTypes = allServices.map { $0.type }.filter { !$0.isEmpty }
         type = servicesTypes.first ?? ""
     }
@@ -60,13 +69,15 @@ class NewAppointmentViewModel: ObservableObject {
         )
         
         // Save created appointment to core data
-        appointmentsPersistenceService.saveStudioAppointment(appointment: appointment)
+        appointmentsPersistenceService.add(appointment: appointment)
         
         // Reset fields after saving if needed
         resetFields()
     }
-    
-    private func resetFields() {
+}
+
+private extension NewAppointmentViewModel {
+    func resetFields() {
         self.appointment = nil
         clientName = ""
         clientPhoneNumber = ""
@@ -77,13 +88,17 @@ class NewAppointmentViewModel: ObservableObject {
         inResidence = false
     }
     
-    private func setFields(from appointment: StudioAppointment?) {
+    func setFields(from appointment: StudioAppointment?) {
         guard let appointment else { return }
         self.clientName = appointment.name
         self.clientPhoneNumber = appointment.phoneNumber ?? ""
         self.appointmentDate = appointment.date
         self.price = appointment.price.formatted()
-        self.type = appointment.type 
+        self.type = appointment.type
         self.inResidence = appointment.inResidence
+    }
+    
+    func appointmentServiceUpdated() {
+        fetchData()
     }
 }

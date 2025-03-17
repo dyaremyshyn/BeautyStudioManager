@@ -22,7 +22,7 @@ class AppointmentsListViewModel: ObservableObject {
     }
     
     public func fetchAppointments() {
-        allAppointments = persistenceService.getStudioAppointments()
+        allAppointments = persistenceService.fetchAll()
         errorMessage = nil
         
 #if DEBUG
@@ -43,7 +43,7 @@ class AppointmentsListViewModel: ObservableObject {
     public func removeAppointment(index: Int) {
         let appointment = appointments[index]
         // First remove the appointment from persistence
-        let success = persistenceService.deleteStudioAppointment(appointment: appointment)
+        let success = persistenceService.delete(appointment: appointment)
         guard success else {
             errorMessage = "Erro ao apagar marcação"
             return
@@ -81,6 +81,6 @@ class AppointmentsListViewModel: ObservableObject {
             addedToCalendar: true
         )
         self.allAppointments[index] = updatedAppointment
-        persistenceService.saveStudioAppointment(appointment: updatedAppointment)
+        persistenceService.add(appointment: updatedAppointment)
     }
 }

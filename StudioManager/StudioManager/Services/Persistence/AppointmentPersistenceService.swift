@@ -7,7 +7,7 @@
 
 import CoreData
 
-struct AppointmentPersistenceService: AppointmentPersistenceLoader {
+class AppointmentPersistenceService: AppointmentPersistenceLoader {
     private static let studioEntity = "StudioEntity"
     private let context: NSManagedObjectContext
 
@@ -15,34 +15,46 @@ struct AppointmentPersistenceService: AppointmentPersistenceLoader {
         self.context = CoreDataStack.shared.context
     }
     
-    func getStudioAppointments() -> [StudioAppointment] {
+    func fetchAll() -> [StudioAppointment] {
         var appointments: [StudioAppointment] = []
-        
-        let request = NSFetchRequest<StudioEntity>(entityName: AppointmentPersistenceService.studioEntity)
-        
-        do {
-            let result = try context.fetch(request)
-            appointments = result.map { StudioAppointment.map(appointment: $0) }
-            appointments.sort(by: { $0.date < $1.date })
-        } catch {
-            print(error.localizedDescription)
+        context.performAndWait {
+            let request = NSFetchRequest<StudioEntity>(entityName: AppointmentPersistenceService.studioEntity)
+            do {
+                let result = try context.fetch(request)
+                appointments = result.map { StudioAppointment.map(appointment: $0) }
+                appointments.sort(by: { $0.date < $1.date })
+            } catch {
+                print("Error fetching appointments: \(error.localizedDescription)")
+            }
         }
-        
         return appointments
     }
     
-    func saveStudioAppointment(appointment: StudioAppointment) {
-        // Check if the appointment exists
-
+    private func fetchStudioEntity(for appointment: StudioAppointment) -> StudioEntity? {
         let request = NSFetchRequest<StudioEntity>(entityName: AppointmentPersistenceService.studioEntity)
         request.predicate = NSPredicate(format: "id == %@", appointment.id as CVarArg)
-        
         do {
             let result = try context.fetch(request)
-            
-            guard let editClient = result.first else {
-                print("Client entity not found with id: \(appointment.id)")
+            return result.first
+        } catch {
+            print("Error fetching StudioEntity: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
+    func add(appointment: StudioAppointment) {
+        context.performAndWait {
+            if let existingEntity = fetchStudioEntity(for: appointment) {
+                existingEntity.name = appointment.name
+                existingEntity.phoneNumber = appointment.phoneNumber
+                existingEntity.date = appointment.date
+                existingEntity.price = appointment.price
+                existingEntity.type = appointment.type
+                existingEntity.inResidence = appointment.inResidence
+                existingEntity.addedToCalendar = appointment.addedToCalendar
                 
+                print("Client entity with id \(appointment.id) edited successfully")
+            } else {
                 let newEntry = StudioEntity(context: context)
                 newEntry.id = appointment.id
                 newEntry.name = appointment.name
@@ -52,54 +64,32 @@ struct AppointmentPersistenceService: AppointmentPersistenceLoader {
                 newEntry.price = appointment.price
                 newEntry.type = appointment.type
                 newEntry.addedToCalendar = appointment.addedToCalendar
-                
-                saveData()
-                
-                return
             }
             
-            // Modify the properties of the fetched appointment
-            editClient.name = appointment.name
-            editClient.phoneNumber = appointment.phoneNumber
-            editClient.date = appointment.date
-            editClient.price = appointment.price
-            editClient.type = appointment.type
-            editClient.inResidence = appointment.inResidence
-            editClient.addedToCalendar = appointment.addedToCalendar
-            
-            saveData()
-            
-            print("Client entity with id \(appointment.id) edited successfully")
-            
-        } catch {
-            print("Error editing appointment entity: \(error)")
+            do {
+                try context.save()
+            } catch {
+                print("Error saving appointment: \(error.localizedDescription)")
+            }
         }
     }
     
-    func deleteStudioAppointment(appointment: StudioAppointment) -> Bool {
-        let request = NSFetchRequest<StudioEntity>(entityName: AppointmentPersistenceService.studioEntity)
-        request.predicate = NSPredicate(format: "id == %@", appointment.id as CVarArg)
-        
-        do {
-            let result = try context.fetch(request)
-            
-            guard let entry = result.first else { return false }
-            
-            context.delete(entry)
-            saveData()
-            
-            return true
-        } catch {
-            print(error.localizedDescription)
-            return false
+    func delete(appointment: StudioAppointment) -> Bool {
+        var success = false
+        context.performAndWait {
+            if let entityToDelete = fetchStudioEntity(for: appointment) {
+                context.delete(entityToDelete)
+                do {
+                    try context.save()
+                    success = true
+                } catch {
+                    print("Error deleting appointment: \(error.localizedDescription)")
+                    success = false
+                }
+            } else {
+                success = false
+            }
         }
-    }
-    
-    private func saveData() {
-        do {
-            try context.save()
-        } catch {
-            print(error.localizedDescription)
-        }
+        return success
     }
 }

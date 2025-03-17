@@ -10,13 +10,12 @@ import UIKit
 
 class AppCoordinator: AppCoordinatorProtocol {
     weak var finishDelegate: CoordinatorFinishDelegate?
-
     var navigationController: UINavigationController
-
     var childCoordinators = [Coordinator]()
-
     var type: CoordinatorType { .app }
 
+    let sharedServicePersistence = AppointmentServicePersistenceService()
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
@@ -26,7 +25,10 @@ class AppCoordinator: AppCoordinatorProtocol {
     }
 
     func showMainFlow() {
-        let tabCoordinator = TabCoordinator(navigationController: navigationController)
+        let tabCoordinator = TabCoordinator(
+            navigationController: navigationController,
+            servicePersistenceService: sharedServicePersistence
+        )
         tabCoordinator.finishDelegate = self
         tabCoordinator.start()
         childCoordinators.append(tabCoordinator)

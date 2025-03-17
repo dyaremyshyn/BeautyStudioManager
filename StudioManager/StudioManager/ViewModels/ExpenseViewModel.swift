@@ -28,7 +28,7 @@ class ExpenseViewModel: ObservableObject {
         )
         
         // Save created expense to core data
-        persistenceService.saveExpense(expense: expense)
+        persistenceService.add(expense: expense)
         
         // Reset all fields
         resetAllFields()

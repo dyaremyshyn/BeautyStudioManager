@@ -6,6 +6,6 @@
 //
 
 public protocol ExpensePersistenceLoader {
-    func getExpenses() -> [Expense]
-    func saveExpense(expense: Expense)
+    func fetchAll() -> [Expense]
+    func add(expense: Expense)
 }

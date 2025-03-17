@@ -7,7 +7,7 @@
 
 import CoreData
 
-struct ExpensePersistenceService: ExpensePersistenceLoader {
+class ExpensePersistenceService: ExpensePersistenceLoader {
     private static let expenseEntity = "ExpenseEntity"
     private let context: NSManagedObjectContext
 
@@ -15,60 +15,56 @@ struct ExpensePersistenceService: ExpensePersistenceLoader {
         self.context = CoreDataStack.shared.context
     }
     
-    func getExpenses() -> [Expense] {
+    func fetchAll() -> [Expense] {
         var expenses: [Expense] = []
-        
-        let request = NSFetchRequest<ExpenseEntity>(entityName: ExpensePersistenceService.expenseEntity)
-        
-        do {
-            let result = try context.fetch(request)
-            expenses = result.map { Expense.map(expense: $0) }
-            expenses.sort(by: { $0.date < $1.date })
-        } catch {
-            print(error.localizedDescription)
+        context.performAndWait {
+            let request = NSFetchRequest<ExpenseEntity>(entityName: ExpensePersistenceService.expenseEntity)
+            do {
+                let result = try context.fetch(request)
+                expenses = result.map { Expense.map(expense: $0) }
+                expenses.sort { $0.date < $1.date }
+            } catch {
+                print("Error fetching expenses: \(error.localizedDescription)")
+            }
         }
         return expenses
     }
     
-    func saveExpense(expense: Expense) {
+    private func fetchExpenseEntity(for expense: Expense) -> ExpenseEntity? {
         let request = NSFetchRequest<ExpenseEntity>(entityName: ExpensePersistenceService.expenseEntity)
         request.predicate = NSPredicate(format: "id == %@", expense.id as CVarArg)
-        
         do {
             let result = try context.fetch(request)
-            
-            guard let editExpense = result.first else {
-                print("Expense entity not found with id: \(expense.id)")
-                
-                let newEntry = ExpenseEntity(context: context)
-                newEntry.id = expense.id
-                newEntry.name = expense.name
-                newEntry.date = expense.date
-                newEntry.amount = expense.amount
-                
-                saveData()
-                
-                return
-            }
-            
-            // Modify the properties of the fetched expense
-            editExpense.name = expense.name
-            editExpense.date = expense.date
-            editExpense.amount = expense.amount
-            
-            saveData()
-            
-            print("Expense entity with id \(expense.id) edited successfully")
+            return result.first
         } catch {
-            print("Error editing expense entity: \(error)")
+            print("Error fetching ExpenseEntity: \(error.localizedDescription)")
+            return nil
         }
     }
     
-    private func saveData() {
-        do {
-            try context.save()
-        } catch {
-            print(error.localizedDescription)
+    func add(expense: Expense) {
+        context.performAndWait {
+            if let existingExpense = fetchExpenseEntity(for: expense) {
+                // Atualiza o expense existente
+                existingExpense.name = expense.name
+                existingExpense.date = expense.date
+                existingExpense.amount = expense.amount
+                print("Expense entity with id \(expense.id) updated successfully")
+            } else {
+                // Cria um novo expense
+                let newExpense = ExpenseEntity(context: context)
+                newExpense.id = expense.id
+                newExpense.name = expense.name
+                newExpense.date = expense.date
+                newExpense.amount = expense.amount
+                print("Expense entity created with id \(expense.id)")
+            }
+            
+            do {
+                try context.save()
+            } catch {
+                print("Error saving expense: \(error.localizedDescription)")
+            }
         }
     }
 }

@@ -18,6 +18,7 @@ class NewServiceViewModel: ObservableObject {
     init(service: Service?, persistenceService: AppointmentServicePersistenceLoader) {
         self.service = service
         self.persistenceService = persistenceService
+        
         resetAllFields()
         setFields(from: service)
     }
@@ -38,7 +39,7 @@ class NewServiceViewModel: ObservableObject {
         )
         
         // Save created service to core data
-        persistenceService.save(service: service)
+        persistenceService.add(service: service)
         
         // Reset all fields
         resetAllFields()

@@ -17,14 +17,12 @@ public struct NewAppointmentView: View {
             }
         } else {
             Form {
-                Section {
+                Section("Detalhes da Cliente") {
                     TextField("Nome da Cliente", text: $viewModel.clientName)
                     TextField("Telemóvel da Cliente", text: $viewModel.clientPhoneNumber)
                         .keyboardType(.numberPad)
-                } header: {
-                    Text("Detalhes da Cliente")
                 }
-                Section {
+                Section("Detalhes da Marcação") {
                     DatePicker("Data da marcação", selection: $viewModel.appointmentDate, displayedComponents: [.date, .hourAndMinute])
                     
                     TextField("Preço", text: $viewModel.price)
@@ -40,19 +38,12 @@ public struct NewAppointmentView: View {
                         Text("Ir ao domicílio?")
                     }
                     .toggleStyle(.checkmark)
-                } header: {
-                    Text("Detalhes da Marcação")
                 }
-                Button(action: {
-                    viewModel.saveAppointment()
-                }, label: {
+                Button(action: viewModel.saveAppointment) {
                     Text("Guardar")
                         .foregroundColor(.blue)
-                })
+                }
                 .frame(width: 400, height: 30, alignment: .center)
-            }
-            .onAppear {
-                viewModel.fetchData()
             }
         }
     }

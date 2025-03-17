@@ -10,17 +10,16 @@ import UIKit
 
 class TabCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
     weak var finishDelegate: CoordinatorFinishDelegate?
-
     var childCoordinators: [Coordinator] = []
-
     var navigationController: UINavigationController
-
     var tabBarController: UITabBarController
-
     var type: CoordinatorType { .mainTab }
+    
+    let servicePersistenceService: AppointmentServicePersistenceLoader
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, servicePersistenceService: AppointmentServicePersistenceLoader) {
         self.navigationController = navigationController
+        self.servicePersistenceService = servicePersistenceService
         tabBarController = UITabBarController()
     }
     
@@ -47,7 +46,7 @@ class TabCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
             coordinator.start()
             childCoordinators.append(coordinator)
         case .newAppointment:
-            let coordinator = NewAppointmentCoordinator(navigationController: navController)
+            let coordinator = NewAppointmentCoordinator(navigationController: navController, servicePersistenceService: servicePersistenceService)
             coordinator.start()
             childCoordinators.append(coordinator)
         case .balance:
@@ -55,7 +54,7 @@ class TabCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
             coordinator.start()
             childCoordinators.append(coordinator)
         case .services:
-            let coordinator = ServicesListCoordinator(navigationController: navController)
+            let coordinator = ServicesListCoordinator(navigationController: navController, servicePersistenceService: servicePersistenceService)
             coordinator.start()
             childCoordinators.append(coordinator)
             
