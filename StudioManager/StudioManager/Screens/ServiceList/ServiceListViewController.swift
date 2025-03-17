@@ -1,5 +1,5 @@
 //
-//  ServicesListViewController.swift
+//  ServiceListViewController.swift
 //  StudioManager
 //
 //  Created by Dmytro Yaremyshyn on 06/11/2024.
@@ -8,9 +8,9 @@
 import UIKit
 import Combine
 
-public class ServicesListViewController: UIViewController {
+public class ServiceListViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
-    var viewModel: ServicesListViewModel? {
+    var viewModel: ServiceListViewModel? {
         didSet { bind() }
     }
     private var dataSource: AppointmentServiceDiffableDataSource?
@@ -84,7 +84,7 @@ public class ServicesListViewController: UIViewController {
 }
 
 // MARK: - Add new Appointment Type
-extension ServicesListViewController {
+extension ServiceListViewController {
     
     @objc func addTapped() {
         viewModel?.addService()
@@ -92,7 +92,7 @@ extension ServicesListViewController {
 }
 
 // MARK: - UITableViewDelegate - didSelectRowAt
-extension ServicesListViewController: UITableViewDelegate {
+extension ServiceListViewController: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let selectedService = dataSource?.itemIdentifier(for: indexPath) {

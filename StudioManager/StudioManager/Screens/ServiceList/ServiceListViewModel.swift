@@ -1,5 +1,5 @@
 //
-//  ServicesListViewModel.swift
+//  ServiceListViewModel.swift
 //  StudioManager
 //
 //  Created by Dmytro Yaremyshyn on 06/11/2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ServicesListViewModel: ObservableObject {
+class ServiceListViewModel: ObservableObject {
     @Published private(set) var services: [Service] = []
     @Published private(set) var errorMessage: String? = nil
     // Coordinator
