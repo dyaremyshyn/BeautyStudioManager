@@ -51,7 +51,7 @@ public class ServiceListViewController: UIViewController {
     }
 
     private func setupView() {
-        title = "Serviços"
+        title = tr.services
         view.backgroundColor = .systemBackground
         view.addSubview(tableView)
         

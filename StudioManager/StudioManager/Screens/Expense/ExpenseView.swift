@@ -13,17 +13,17 @@ public struct ExpenseView: View {
     public var body: some View {
         Form {
             Section {
-                TextField("Nome", text: $viewModel.expenseName)
-                TextField("Valor", text: $viewModel.expenseAmount)
+                TextField(tr.expenseName, text: $viewModel.expenseName)
+                TextField(tr.expensePrice, text: $viewModel.expenseAmount)
                     .keyboardType(.numbersAndPunctuation)
-                DatePicker("Data", selection: $viewModel.expenseDate, displayedComponents: [.date, .hourAndMinute])
+                DatePicker(tr.date, selection: $viewModel.expenseDate, displayedComponents: [.date, .hourAndMinute])
             } header: {
-                Text("Detalhes da despesa")
+                Text(tr.expenseDetails)
             }
             Button(action: {
                 viewModel.saveExpense()
             }, label: {
-                Text("Guardar")
+                Text(tr.save)
                     .foregroundColor(.blue)
             })
             .frame(width: 400, height: 30, alignment: .center)

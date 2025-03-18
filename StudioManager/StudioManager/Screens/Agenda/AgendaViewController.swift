@@ -27,10 +27,10 @@ public class AgendaViewController: UIViewController {
     
     private lazy var segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: [
-            "Hoje",
-            "Semana",
-            "Mês",
-            "Todas"])
+            tr.filterToday,
+            tr.filterWeek,
+            tr.filterMonth,
+            tr.filterAll])
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self, action: #selector (segmentedControlValueChanged), for: .valueChanged)
@@ -65,7 +65,7 @@ public class AgendaViewController: UIViewController {
     }
 
     private func setupView() {
-        title = "Agenda"
+        title = tr.agenda
         view.backgroundColor = .systemBackground
         view.addSubview(segmentedControl)
         view.addSubview(tableView)
@@ -95,7 +95,7 @@ public class AgendaViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] errorMessage in
                 guard let self, let message = errorMessage else { return }
-                showErrorDialog(title: "Erro", message: message, cancelTitle: "Cancelar")
+                showErrorDialog(title: tr.errorTitle, message: message, cancelTitle: tr.cancel)
             }
             .store(in: &cancellables)
         
@@ -103,7 +103,7 @@ public class AgendaViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] successMessage in
                 guard let self, let message = successMessage else { return }
-                showSuccessDialog(title: "Sucesso", message: message)
+                showSuccessDialog(title: tr.successTitle, message: message)
             }
             .store(in: &cancellables)
     }

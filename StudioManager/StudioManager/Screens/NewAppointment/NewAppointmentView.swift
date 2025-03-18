@@ -13,22 +13,22 @@ public struct NewAppointmentView: View {
     public var body: some View {
         if viewModel.servicesTypes.isEmpty {
             EmptyView(imageName: "text.page.slash") {
-                Text("Não há nenhum serviço introduzido! \nAdicione um serviço para começar a introduzir as marcações")
+                Text(tr.appointmentEmptyDescription)
             }
         } else {
             Form {
-                Section("Detalhes da Cliente") {
-                    TextField("Nome da Cliente", text: $viewModel.clientName)
-                    TextField("Telemóvel da Cliente", text: $viewModel.clientPhoneNumber)
+                Section(tr.clientDetails) {
+                    TextField(tr.clientName, text: $viewModel.clientName)
+                    TextField(tr.clientPhoneNumber, text: $viewModel.clientPhoneNumber)
                         .keyboardType(.numberPad)
                 }
-                Section("Detalhes da Marcação") {
-                    DatePicker("Data da marcação", selection: $viewModel.appointmentDate, displayedComponents: [.date, .hourAndMinute])
+                Section(tr.appointmentDetails) {
+                    DatePicker(tr.appointmentDate, selection: $viewModel.appointmentDate, displayedComponents: [.date, .hourAndMinute])
                     
-                    TextField("Preço", text: $viewModel.price)
+                    TextField(tr.appointmentPrice, text: $viewModel.price)
                         .keyboardType(.numbersAndPunctuation)
                     
-                    Picker("Tipo de Marcação", selection: $viewModel.type) {
+                    Picker(tr.appointmentType, selection: $viewModel.type) {
                         ForEach(viewModel.servicesTypes, id: \.self) { type in
                             Text(type)
                         }
@@ -36,12 +36,12 @@ public struct NewAppointmentView: View {
                     .pickerStyle(.menu)
                     HStack {
                         CheckView(isChecked: $viewModel.inResidence)
-                        Text("Ir ao domicílio?")
+                        Text(tr.appointmentInResidence)
                             .font(.body)
                     }
                 }
                 Button(action: viewModel.saveAppointment) {
-                    Text("Guardar")
+                    Text(tr.save)
                         .foregroundColor(.blue)
                 }
                 .frame(width: 400, height: 30, alignment: .center)

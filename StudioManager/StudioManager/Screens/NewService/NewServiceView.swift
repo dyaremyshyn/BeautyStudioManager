@@ -12,18 +12,16 @@ public struct NewServiceView: View {
 
     public var body: some View {
         Form {
-            Section {
-                TextField("Nome", text: $viewModel.name)
-                TextField("Valor", text: $viewModel.price)
+            Section(tr.serviceDetails) {
+                TextField(tr.serviceName, text: $viewModel.name)
+                TextField(tr.servicePrice, text: $viewModel.price)
                     .keyboardType(.numbersAndPunctuation)
-                DatePicker("Duração", selection: $viewModel.duration, displayedComponents: [.hourAndMinute])
-            } header: {
-                Text("Detalhes do Serviço")
+                DatePicker(tr.serviceDuration, selection: $viewModel.duration, displayedComponents: [.hourAndMinute])
             }
             Button(action: {
                 viewModel.saveService()
             }, label: {
-                Text("Guardar")
+                Text(tr.save)
                     .foregroundColor(.blue)
             })
             .frame(width: 400, height: 30, alignment: .center)

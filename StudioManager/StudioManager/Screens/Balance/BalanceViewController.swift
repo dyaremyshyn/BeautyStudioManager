@@ -15,10 +15,10 @@ public class BalanceViewController: UIViewController {
     }
     private lazy var segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: [
-            "Hoje",
-            "Semana",
-            "Mês",
-            "Ano"])
+            tr.filterToday,
+            tr.filterWeek,
+            tr.filterMonth,
+            tr.filterYear])
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self, action: #selector (segmentedControlValueChanged), for: .valueChanged)
@@ -31,7 +31,7 @@ public class BalanceViewController: UIViewController {
         label.font = .preferredFont(forTextStyle: .title1)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.text = "Receitas"
+        label.text = tr.incomeTitle
         label.textColor = .systemGreen
         return label
     }()
@@ -60,7 +60,7 @@ public class BalanceViewController: UIViewController {
         label.font = .preferredFont(forTextStyle: .title1)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.text = "Despesas"
+        label.text = tr.expensesTitle
         label.textColor = .systemRed
         return label
     }()
@@ -94,7 +94,7 @@ public class BalanceViewController: UIViewController {
     
     private lazy var addExpensesButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Adicionar despesa", for: .normal)
+        button.setTitle(tr.addExpense, for: .normal)
         button.addTarget(self, action: #selector (addExpensesButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
@@ -117,7 +117,7 @@ public class BalanceViewController: UIViewController {
     }
     
     private func setupView() {
-        title = "Balanço"
+        title = tr.balance
         view.backgroundColor = .systemBackground
         view.addSubview(segmentedControl)
         view.addSubview(horizontalStackView)
