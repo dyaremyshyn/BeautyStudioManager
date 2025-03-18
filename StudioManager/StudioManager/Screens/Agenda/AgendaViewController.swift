@@ -29,6 +29,7 @@ public class AgendaViewController: UIViewController {
         let segmentedControl = UISegmentedControl(items: [tr.filterToday, tr.filterWeek, tr.filterMonth, tr.filterAll])
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.selectedSegmentTintColor = .Text.button
         segmentedControl.addTarget(self, action: #selector (segmentedControlValueChanged), for: .valueChanged)
         return segmentedControl
     }()
@@ -66,7 +67,9 @@ public class AgendaViewController: UIViewController {
         view.addSubview(segmentedControl)
         view.addSubview(tableView)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "calendar.badge.plus"), style: .done, target: self, action: #selector(saveToCalendarTapped)) 
+        let addToCalendar = UIBarButtonItem(image: UIImage(systemName: "calendar.badge.plus"), style: .done, target: self, action: #selector(saveToCalendarTapped))
+        addToCalendar.tintColor = .Text.button
+        navigationItem.rightBarButtonItem = addToCalendar
         
         segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true

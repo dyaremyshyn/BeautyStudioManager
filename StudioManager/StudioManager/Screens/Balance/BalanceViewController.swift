@@ -17,6 +17,7 @@ public class BalanceViewController: UIViewController {
         let segmentedControl = UISegmentedControl(items: [tr.filterToday, tr.filterWeek, tr.filterMonth, tr.filterYear])
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.selectedSegmentTintColor = .Text.button
         segmentedControl.addTarget(self, action: #selector (segmentedControlValueChanged), for: .valueChanged)
         return segmentedControl
     }()
