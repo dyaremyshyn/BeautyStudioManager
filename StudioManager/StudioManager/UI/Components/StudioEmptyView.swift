@@ -1,5 +1,5 @@
 //
-//  EmptyView.swift
+//  StudioEmptyView.swift
 //  StudioManager
 //
 //  Created by Dmytro Yaremyshyn on 20/12/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EmptyView<Content: View>: View {
+struct StudioEmptyView<Content: View>: View {
     var imageName: String
     @ViewBuilder var content: () -> Content
     
@@ -28,7 +28,7 @@ struct EmptyView<Content: View>: View {
 }
 
 #Preview {
-    EmptyView(imageName: "text.page.slash") {
+    StudioEmptyView(imageName: "text.page.slash") {
         Text("Não há nenhum serviço introduzido! \nAdicione um serviço para começar a introduzir as marcações")
     }
 }

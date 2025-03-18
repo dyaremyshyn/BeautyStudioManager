@@ -26,11 +26,7 @@ public class AgendaViewController: UIViewController {
     }()
     
     private lazy var segmentedControl: UISegmentedControl = {
-        let segmentedControl = UISegmentedControl(items: [
-            tr.filterToday,
-            tr.filterWeek,
-            tr.filterMonth,
-            tr.filterAll])
+        let segmentedControl = UISegmentedControl(items: [tr.filterToday, tr.filterWeek, tr.filterMonth, tr.filterAll])
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self, action: #selector (segmentedControlValueChanged), for: .valueChanged)

@@ -12,7 +12,7 @@ public struct NewAppointmentView: View {
 
     public var body: some View {
         if viewModel.servicesTypes.isEmpty {
-            EmptyView(imageName: "text.page.slash") {
+            StudioEmptyView(imageName: "text.page.slash") {
                 Text(tr.appointmentEmptyDescription)
             }
         } else {

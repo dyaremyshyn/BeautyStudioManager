@@ -14,11 +14,7 @@ public class BalanceViewController: UIViewController {
         didSet { bind() }
     }
     private lazy var segmentedControl: UISegmentedControl = {
-        let segmentedControl = UISegmentedControl(items: [
-            tr.filterToday,
-            tr.filterWeek,
-            tr.filterMonth,
-            tr.filterYear])
+        let segmentedControl = UISegmentedControl(items: [tr.filterToday, tr.filterWeek, tr.filterMonth, tr.filterYear])
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self, action: #selector (segmentedControlValueChanged), for: .valueChanged)
