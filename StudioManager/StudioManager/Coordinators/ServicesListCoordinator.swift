@@ -20,8 +20,8 @@ class ServicesListCoordinator: Coordinator {
     
     private let servicePersistenceService: AppointmentServicePersistenceLoader
     
-    private lazy var balanceViewController: ServicesListViewController = {
-        let viewController = ServicesListComposer.servicesComposedWith(persistenceService: servicePersistenceService)
+    private lazy var balanceViewController: ServiceListViewController = {
+        let viewController = ServiceListComposer.servicesComposedWith(persistenceService: servicePersistenceService)
         viewController.viewModel?.coordinator = self
         return viewController
     }()

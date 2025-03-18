@@ -9,10 +9,10 @@ import UIKit
 
 class AppointmentsDiffableDataSource: UITableViewDiffableDataSource<StudioSection, StudioAppointment> {
     // Reference to the view model
-    weak var viewModel: AppointmentsListViewModel?
+    weak var viewModel: AgendaViewModel?
     
     // Custom initializer that accepts the view model
-    init(tableView: UITableView, viewModel: AppointmentsListViewModel?, cellProvider: @escaping UITableViewDiffableDataSource<StudioSection, StudioAppointment>.CellProvider) {
+    init(tableView: UITableView, viewModel: AgendaViewModel?, cellProvider: @escaping UITableViewDiffableDataSource<StudioSection, StudioAppointment>.CellProvider) {
         self.viewModel = viewModel
         super.init(tableView: tableView, cellProvider: cellProvider)
     }

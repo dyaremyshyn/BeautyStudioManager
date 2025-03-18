@@ -1,5 +1,5 @@
 //
-//  AppointmentsListCoordinator.swift
+//  AgendaCoordinator.swift
 //  StudioManager
 //
 //  Created by Dmytro Yaremyshyn on 12/10/2024.
@@ -12,13 +12,13 @@ protocol AppointmentsListDelegate {
     func goToAppointmentDetails(appointment: StudioAppointment)
 }
 
-class AppointmentsListCoordinator: Coordinator {
+class AgendaCoordinator: Coordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType = .tabItem
     
-    private lazy var appointmentListViewController: AppointmentsListViewController = {
+    private lazy var appointmentListViewController: AgendaViewController = {
         let viewController = AppointmentsComposer.appointmentsComposedWith(
             persistenceService: AppointmentPersistenceService()
         )
@@ -35,13 +35,13 @@ class AppointmentsListCoordinator: Coordinator {
     }
 }
 
-extension AppointmentsListCoordinator: CoordinatorFinishDelegate {
+extension AgendaCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
         childCoordinators = childCoordinators.filter { $0.type != childCoordinator.type }
     }
 }
 
-extension AppointmentsListCoordinator: AppointmentsListDelegate {
+extension AgendaCoordinator: AppointmentsListDelegate {
     
     public func goToAppointmentDetails(appointment: StudioAppointment) {
         let editAppointmentController = NewAppointmentComposer.newAppointmentComposedWith(

@@ -34,10 +34,11 @@ public struct NewAppointmentView: View {
                         }
                     }
                     .pickerStyle(.menu)
-                    Toggle(isOn: $viewModel.inResidence) {
+                    HStack {
+                        CheckView(isChecked: $viewModel.inResidence)
                         Text("Ir ao domicílio?")
+                            .font(.body)
                     }
-                    .toggleStyle(.checkmark)
                 }
                 Button(action: viewModel.saveAppointment) {
                     Text("Guardar")

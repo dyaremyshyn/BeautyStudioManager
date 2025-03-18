@@ -7,20 +7,20 @@
 
 import Foundation
 
-public final class ServicesListComposer {
+public final class ServiceListComposer {
     
     private init() {}
     
-    public static func servicesComposedWith(persistenceService: AppointmentServicePersistenceLoader) -> ServicesListViewController {
-        let viewModel = ServicesListViewModel(persistenceService: persistenceService)
-        let viewController = ServicesListViewController.makeWith(viewModel: viewModel)
+    public static func servicesComposedWith(persistenceService: AppointmentServicePersistenceLoader) -> ServiceListViewController {
+        let viewModel = ServiceListViewModel(persistenceService: persistenceService)
+        let viewController = ServiceListViewController.makeWith(viewModel: viewModel)
         return viewController
     }
 }
 
-extension ServicesListViewController {
-    static func makeWith(viewModel: ServicesListViewModel) -> ServicesListViewController {
-        let viewController = ServicesListViewController()
+extension ServiceListViewController {
+    static func makeWith(viewModel: ServiceListViewModel) -> ServiceListViewController {
+        let viewController = ServiceListViewController()
         viewController.viewModel = viewModel
         return viewController
     }

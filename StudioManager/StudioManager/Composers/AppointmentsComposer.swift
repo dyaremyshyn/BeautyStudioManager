@@ -11,16 +11,16 @@ public final class AppointmentsComposer {
     
     private init() {}
     
-    public static func appointmentsComposedWith(persistenceService: AppointmentPersistenceLoader) -> AppointmentsListViewController {
-        let viewModel = AppointmentsListViewModel(persistenceService: persistenceService)
-        let viewController = AppointmentsListViewController.makeWith(viewModel: viewModel)
+    public static func appointmentsComposedWith(persistenceService: AppointmentPersistenceLoader) -> AgendaViewController {
+        let viewModel = AgendaViewModel(persistenceService: persistenceService)
+        let viewController = AgendaViewController.makeWith(viewModel: viewModel)
         return viewController
     }
 }
 
-extension AppointmentsListViewController {
-    static func makeWith(viewModel: AppointmentsListViewModel) -> AppointmentsListViewController {
-        let viewController = AppointmentsListViewController()
+extension AgendaViewController {
+    static func makeWith(viewModel: AgendaViewModel) -> AgendaViewController {
+        let viewController = AgendaViewController()
         viewController.viewModel = viewModel
         return viewController
     }

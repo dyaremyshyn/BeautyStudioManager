@@ -7,14 +7,14 @@
 
 
 enum TabBarPage {
-    case appointments
+    case agenda
     case newAppointment
     case balance
     case services
 
     func getIndex() -> Int {
         switch self {
-            case .appointments: return 0
+            case .agenda: return 0
             case .newAppointment: return 1
             case .balance: return 2
             case .services: return 3
@@ -23,7 +23,7 @@ enum TabBarPage {
     
     func getTitleName() -> String {
         switch self {
-            case .appointments: return "Marcações"
+            case .agenda: return "Agenda"
             case .newAppointment: return "Nova Marcação"
             case .balance: return "Balanço"
             case .services: return "Serviços"
@@ -32,7 +32,7 @@ enum TabBarPage {
     
     func getIconName() -> String {
         switch self {
-            case .appointments: return "list.bullet.clipboard"
+            case .agenda: return "list.bullet.clipboard"
             case .newAppointment: return "plus.circle"
             case .balance: return "chart.xyaxis.line"
             case .services: return "list.bullet.rectangle"

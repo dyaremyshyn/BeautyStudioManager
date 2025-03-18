@@ -24,7 +24,7 @@ class TabCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
     }
     
     func start() {
-        let pages: [TabBarPage] = [.appointments, .newAppointment, .balance, .services]
+        let pages: [TabBarPage] = [.agenda, .newAppointment, .balance, .services]
 
         // Initialization of ViewControllers from pages
         let controllers: [UINavigationController] = pages.map { getTabController($0) }
@@ -41,8 +41,8 @@ class TabCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
             tag: page.getIndex()
         )
         switch page {
-        case .appointments:
-            let coordinator = AppointmentsListCoordinator(navigationController: navController)
+        case .agenda:
+            let coordinator = AgendaCoordinator(navigationController: navController)
             coordinator.start()
             childCoordinators.append(coordinator)
         case .newAppointment:
@@ -64,7 +64,7 @@ class TabCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
     private func prepareTabBarController(withTabControllers tabControllers: [UIViewController]) {
         tabBarController.delegate = self
         tabBarController.setViewControllers(tabControllers, animated: true)
-        tabBarController.selectedIndex = TabBarPage.appointments.getIndex()
+        tabBarController.selectedIndex = TabBarPage.agenda.getIndex()
         tabBarController.tabBar.isTranslucent = false
 
         /// In this step, we attach tabBarController to navigation controller associated with this coordanator

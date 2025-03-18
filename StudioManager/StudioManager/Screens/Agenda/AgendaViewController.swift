@@ -1,5 +1,5 @@
 //
-//  AppointmentsListViewController.swift
+//  AgendaViewController.swift
 //  StudioManager
 //
 //  Created by Dmytro Yaremyshyn on 22/09/2024.
@@ -8,10 +8,10 @@
 import UIKit
 import Combine
 
-public class AppointmentsListViewController: UIViewController {
+public class AgendaViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
-    var viewModel: AppointmentsListViewModel? {
+    var viewModel: AgendaViewModel? {
         didSet { bind() }
     }
     private var dataSource: AppointmentsDiffableDataSource?
@@ -65,7 +65,7 @@ public class AppointmentsListViewController: UIViewController {
     }
 
     private func setupView() {
-        title = "Marcações"
+        title = "Agenda"
         view.backgroundColor = .systemBackground
         view.addSubview(segmentedControl)
         view.addSubview(tableView)
@@ -119,7 +119,7 @@ public class AppointmentsListViewController: UIViewController {
 }
 
 // MARK: - Filter calendar
-extension AppointmentsListViewController {
+extension AgendaViewController {
     
     @objc private func segmentedControlValueChanged() {
         let filterCalendar = FilterCalendar(rawValue: segmentedControl.selectedSegmentIndex) ?? .today
@@ -128,7 +128,7 @@ extension AppointmentsListViewController {
 }
 
 // MARK: - Add to calendar
-extension AppointmentsListViewController {
+extension AgendaViewController {
     
     @objc private func saveToCalendarTapped() {
         viewModel?.addAppointmentsToCalendar()
@@ -136,7 +136,7 @@ extension AppointmentsListViewController {
 }
 
 // MARK: - UITableViewDelegate - didSelectRowAt
-extension AppointmentsListViewController: UITableViewDelegate {
+extension AgendaViewController: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let selectedAppointment = dataSource?.itemIdentifier(for: indexPath) {

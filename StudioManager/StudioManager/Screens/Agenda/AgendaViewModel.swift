@@ -1,5 +1,5 @@
 //
-//  AppointmentsListViewModel.swift
+//  AgendaViewModel.swift
 //  StudioManager
 //
 //  Created by Dmytro Yaremyshyn on 22/09/2024.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-class AppointmentsListViewModel: ObservableObject {
+class AgendaViewModel: ObservableObject {
     private var allAppointments: [StudioAppointment] = []
     @Published private(set) var appointments: [StudioAppointment] = []
     @Published private(set) var errorMessage: String? = nil
     @Published private(set) var successMessage: String? = nil
-    weak var coordinator: AppointmentsListCoordinator?
+    weak var coordinator: AgendaCoordinator?
     private var filterCalendar: FilterCalendar = .today
     
     private let persistenceService: AppointmentPersistenceLoader
