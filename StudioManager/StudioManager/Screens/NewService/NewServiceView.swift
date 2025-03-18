@@ -22,6 +22,7 @@ public struct NewServiceView: View {
             }
             StudioButton(title: tr.save, action: viewModel.saveService)
                 .padding(.horizontal)
+                .padding(.bottom, 20)
         }
     }
 }

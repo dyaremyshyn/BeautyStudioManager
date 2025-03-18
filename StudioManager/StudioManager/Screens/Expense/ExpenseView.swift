@@ -22,6 +22,7 @@ public struct ExpenseView: View {
             }
             StudioButton(title: tr.save, action: viewModel.saveExpense)
                 .padding(.horizontal)
+                .padding(.bottom, 20)
         }
     }
 }

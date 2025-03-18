@@ -44,7 +44,7 @@ public struct NewAppointmentView: View {
                 }
                 StudioButton(title: tr.save, action: viewModel.saveAppointment)
                     .padding(.horizontal)
-                Spacer()
+                    .padding(.bottom, 20)
             }
         }
     }
