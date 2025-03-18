@@ -61,7 +61,7 @@ public class AgendaViewController: UIViewController {
     }
 
     private func setupView() {
-        title = tr.agenda
+        title = tr.agendaTitle
         view.backgroundColor = .systemBackground
         view.addSubview(segmentedControl)
         view.addSubview(tableView)

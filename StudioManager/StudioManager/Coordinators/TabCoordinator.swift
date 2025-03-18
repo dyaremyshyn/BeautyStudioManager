@@ -67,6 +67,9 @@ class TabCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
         tabBarController.selectedIndex = TabBarPage.agenda.getIndex()
         tabBarController.tabBar.isTranslucent = false
 
+        tabBarController.tabBar.tintColor = .Text.button
+        tabBarController.tabBar.unselectedItemTintColor = .gray
+
         /// In this step, we attach tabBarController to navigation controller associated with this coordanator
         navigationController.viewControllers = [tabBarController]
         navigationController.setNavigationBarHidden(true, animated: true)
