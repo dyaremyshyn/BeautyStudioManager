@@ -17,7 +17,7 @@ enum tr {
 extension tr {
     static let save = t("save")
     static let date = t("date")
-    static let services = t("services")
+    static let servicesTitle = t("servicesTitle")
     static let filterToday = t("filterToday")
     static let filterWeek = t("filterWeek")
     static let filterMonth = t("filterMonth")
@@ -30,12 +30,14 @@ extension tr {
 
 // MARK:
 extension tr {
-    static let agenda = t("agenda")
-    static let balance = t("agenda")
+    static let agendaTitle = t("agendaTitle")
+    static let balanceTitle = t("balanceTitle")
 }
 
 // MARK: NewAppointment view
 extension tr {
+    static let editAppointmentTitle = t("editAppointmentTitle")
+    static let newAppointmentTitle = t("newAppointmentTitle")
     static let clientName = t("clientName")
     static let clientDetails = t("clientDetails")
     static let clientPhoneNumber = t("clientPhoneNumber")
@@ -49,6 +51,7 @@ extension tr {
 
 // MARK: Expense view
 extension tr {
+    static let expenseTitle = t("expenseTitle")
     static let expenseName = t("expenseName")
     static let expensePrice = t("expensePrice")
     static let expenseDetails = t("expenseDetails")
@@ -67,5 +70,9 @@ extension tr {
     static let addExpense = t("addExpense")
     static let expensesTitle = t("expensesTitle")
     static let incomeTitle = t("incomeTitle")
-    
+}
+
+extension tr {
+    static let editServiceTitle = t("editServiceTitle")
+    static let newServiceTitle = t("newServiceTitle")
 }

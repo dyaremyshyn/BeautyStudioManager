@@ -50,6 +50,6 @@ extension ServicesListCoordinator: ServicesListDelegate {
             persistenceLoader: servicePersistenceService
         )
         navigationController.pushViewController(editServiceController, animated: true)
-        navigationController.topViewController?.title = service == nil ? "Novo serviço" : "Editar serviço"
+        navigationController.topViewController?.title = service == nil ? tr.newServiceTitle : tr.editServiceTitle
     }
 }

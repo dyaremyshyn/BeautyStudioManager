@@ -32,7 +32,7 @@ class NewAppointmentCoordinator: Coordinator {
     
     func start() {
         navigationController.pushViewController(newAppointmentViewController, animated: true)
-        navigationController.topViewController?.title = "Nova marcação"        
+        navigationController.topViewController?.title = tr.newAppointmentTitle
     }
 }
 

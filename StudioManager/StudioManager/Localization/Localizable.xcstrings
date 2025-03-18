@@ -18,7 +18,7 @@
         }
       }
     },
-    "agenda" : {
+    "agendaTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -137,7 +137,7 @@
         }
       }
     },
-    "balance" : {
+    "balanceTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -239,6 +239,40 @@
         }
       }
     },
+    "editAppointmentTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Appointment"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar Marcação"
+          }
+        }
+      }
+    },
+    "editServiceTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Service"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar Serviço"
+          }
+        }
+      }
+    },
     "errorTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -320,6 +354,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Despesas"
+          }
+        }
+      }
+    },
+    "expenseTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expense"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Despesa"
           }
         }
       }
@@ -426,6 +477,40 @@
         }
       }
     },
+    "newAppointmentTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Appointment"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nova Marcação"
+          }
+        }
+      }
+    },
+    "newServiceTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Service"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Novo Serviço"
+          }
+        }
+      }
+    },
     "save" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -511,7 +596,7 @@
         }
       }
     },
-    "services" : {
+    "servicesTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

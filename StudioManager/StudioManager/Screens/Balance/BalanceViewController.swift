@@ -113,7 +113,7 @@ public class BalanceViewController: UIViewController {
     }
     
     private func setupView() {
-        title = tr.balance
+        title = tr.balanceTitle
         view.backgroundColor = .systemBackground
         view.addSubview(segmentedControl)
         view.addSubview(horizontalStackView)

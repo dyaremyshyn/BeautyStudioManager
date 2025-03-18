@@ -23,19 +23,19 @@ enum TabBarPage {
     
     func getTitleName() -> String {
         switch self {
-            case .agenda: return "Agenda"
-            case .newAppointment: return "Nova Marcação"
-            case .balance: return "Balanço"
-            case .services: return "Serviços"
+        case .agenda: return tr.agendaTitle
+        case .newAppointment: return tr.newAppointmentTitle
+        case .balance: return tr.balanceTitle
+        case .services: return tr.servicesTitle
         }
     }
     
     func getIconName() -> String {
         switch self {
-            case .agenda: return "list.bullet.clipboard"
-            case .newAppointment: return "plus.circle"
-            case .balance: return "chart.xyaxis.line"
-            case .services: return "list.bullet.rectangle"
+        case .agenda: return "list.bullet.clipboard"
+        case .newAppointment: return "plus.circle"
+        case .balance: return "chart.xyaxis.line"
+        case .services: return "list.bullet.rectangle"
         }
     }
 }

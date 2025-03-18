@@ -50,6 +50,6 @@ extension BalanceCoordinator: BalanceDelegate {
             persistenceLoader: ExpensePersistenceService()
         )
         navigationController.pushViewController(expenseViewController, animated: true)
-        navigationController.topViewController?.title = "Despesa"
+        navigationController.topViewController?.title = tr.expenseTitle
     }
 }
