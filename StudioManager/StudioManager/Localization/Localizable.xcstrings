@@ -75,13 +75,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "There are no services entered!\\nAdd a service to start entering tags"
+            "value" : "There are no services entered! Add a service to start entering appointments."
           }
         },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Não há nenhum serviço introduzido! \\nAdicione um serviço para começar a introduzir as marcações"
+            "value" : "Não há nenhum serviço introduzido! \\nAdicione um serviço para começar a introduzir as marcações."
           }
         }
       }

@@ -11,22 +11,17 @@ public struct ExpenseView: View {
     @StateObject var viewModel: ExpenseViewModel
 
     public var body: some View {
-        Form {
-            Section {
-                TextField(tr.expenseName, text: $viewModel.expenseName)
-                TextField(tr.expensePrice, text: $viewModel.expenseAmount)
-                    .keyboardType(.numbersAndPunctuation)
-                DatePicker(tr.date, selection: $viewModel.expenseDate, displayedComponents: [.date, .hourAndMinute])
-            } header: {
-                Text(tr.expenseDetails)
+        ZStack(alignment: .bottom){
+            Form {
+                Section(tr.expenseDetails) {
+                    TextField(tr.expenseName, text: $viewModel.expenseName)
+                    TextField(tr.expensePrice, text: $viewModel.expenseAmount)
+                        .keyboardType(.numbersAndPunctuation)
+                    DatePicker(tr.date, selection: $viewModel.expenseDate, displayedComponents: [.date, .hourAndMinute])
+                }
             }
-            Button(action: {
-                viewModel.saveExpense()
-            }, label: {
-                Text(tr.save)
-                    .foregroundColor(.blue)
-            })
-            .frame(width: 400, height: 30, alignment: .center)
+            StudioButton(title: tr.save, action: viewModel.saveExpense)
+                .padding(.horizontal)
         }
     }
 }

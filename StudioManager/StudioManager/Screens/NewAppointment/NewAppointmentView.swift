@@ -16,35 +16,35 @@ public struct NewAppointmentView: View {
                 Text(tr.appointmentEmptyDescription)
             }
         } else {
-            Form {
-                Section(tr.clientDetails) {
-                    TextField(tr.clientName, text: $viewModel.clientName)
-                    TextField(tr.clientPhoneNumber, text: $viewModel.clientPhoneNumber)
-                        .keyboardType(.numberPad)
-                }
-                Section(tr.appointmentDetails) {
-                    DatePicker(tr.appointmentDate, selection: $viewModel.appointmentDate, displayedComponents: [.date, .hourAndMinute])
-                    
-                    TextField(tr.appointmentPrice, text: $viewModel.price)
-                        .keyboardType(.numbersAndPunctuation)
-                    
-                    Picker(tr.appointmentType, selection: $viewModel.type) {
-                        ForEach(viewModel.servicesTypes, id: \.self) { type in
-                            Text(type)
+            ZStack(alignment: .bottom){
+                Form {
+                    Section(tr.clientDetails) {
+                        TextField(tr.clientName, text: $viewModel.clientName)
+                        TextField(tr.clientPhoneNumber, text: $viewModel.clientPhoneNumber)
+                            .keyboardType(.numberPad)
+                    }
+                    Section(tr.appointmentDetails) {
+                        DatePicker(tr.appointmentDate, selection: $viewModel.appointmentDate, displayedComponents: [.date, .hourAndMinute])
+                        
+                        TextField(tr.appointmentPrice, text: $viewModel.price)
+                            .keyboardType(.numbersAndPunctuation)
+                        
+                        Picker(tr.appointmentType, selection: $viewModel.type) {
+                            ForEach(viewModel.servicesTypes, id: \.self) { type in
+                                Text(type)
+                            }
+                        }
+                        .pickerStyle(.menu)
+                        HStack {
+                            CheckView(isChecked: $viewModel.inResidence)
+                            Text(tr.appointmentInResidence)
+                                .font(.body)
                         }
                     }
-                    .pickerStyle(.menu)
-                    HStack {
-                        CheckView(isChecked: $viewModel.inResidence)
-                        Text(tr.appointmentInResidence)
-                            .font(.body)
-                    }
                 }
-                Button(action: viewModel.saveAppointment) {
-                    Text(tr.save)
-                        .foregroundColor(.blue)
-                }
-                .frame(width: 400, height: 30, alignment: .center)
+                StudioButton(title: tr.save, action: viewModel.saveAppointment)
+                    .padding(.horizontal)
+                Spacer()
             }
         }
     }

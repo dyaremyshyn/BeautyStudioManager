@@ -11,20 +11,17 @@ public struct NewServiceView: View {
     @StateObject var viewModel: NewServiceViewModel
 
     public var body: some View {
-        Form {
-            Section(tr.serviceDetails) {
-                TextField(tr.serviceName, text: $viewModel.name)
-                TextField(tr.servicePrice, text: $viewModel.price)
-                    .keyboardType(.numbersAndPunctuation)
-                DatePicker(tr.serviceDuration, selection: $viewModel.duration, displayedComponents: [.hourAndMinute])
+        ZStack(alignment: .bottom){
+            Form {
+                Section(tr.serviceDetails) {
+                    TextField(tr.serviceName, text: $viewModel.name)
+                    TextField(tr.servicePrice, text: $viewModel.price)
+                        .keyboardType(.numbersAndPunctuation)
+                    DatePicker(tr.serviceDuration, selection: $viewModel.duration, displayedComponents: [.hourAndMinute])
+                }
             }
-            Button(action: {
-                viewModel.saveService()
-            }, label: {
-                Text(tr.save)
-                    .foregroundColor(.blue)
-            })
-            .frame(width: 400, height: 30, alignment: .center)
+            StudioButton(title: tr.save, action: viewModel.saveService)
+                .padding(.horizontal)
         }
     }
 }
