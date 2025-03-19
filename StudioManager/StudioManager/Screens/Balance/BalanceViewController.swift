@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import SwiftUI
 
 public class BalanceViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
@@ -88,16 +89,13 @@ public class BalanceViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
-    private lazy var addExpensesButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle(tr.addExpense, for: .normal)
-        button.addTarget(self, action: #selector (addExpensesButtonTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.systemBlue.cgColor
-        return button
+        
+    private lazy var addExpenseButton: UIView = {
+        let studioButton = StudioButton(title: tr.addExpense, buttonType: .secondary, action: addExpensesButtonTapped)
+        let hostingController = UIHostingController(rootView: studioButton)
+        addChild(hostingController)
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        return hostingController.view
     }()
     
     private var pieChartView: PieChartView!
@@ -118,7 +116,7 @@ public class BalanceViewController: UIViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(segmentedControl)
         view.addSubview(horizontalStackView)
-        view.addSubview(addExpensesButton)
+        view.addSubview(addExpenseButton)
         
         segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
@@ -128,10 +126,10 @@ public class BalanceViewController: UIViewController {
         horizontalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         horizontalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
         
-        addExpensesButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15).isActive = true
-        addExpensesButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        addExpensesButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        addExpensesButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        addExpenseButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15).isActive = true
+        addExpenseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        addExpenseButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        addExpenseButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
     }
     
     private func bind() {
@@ -171,9 +169,9 @@ extension BalanceViewController {
     }
 }
 
-extension BalanceViewController {
+private extension BalanceViewController {
     
-    private func createPieChart(for data: [String: Double]) {
+    func createPieChart(for data: [String: Double]) {
         
         guard !data.isEmpty else {
             pieChartView?.removeFromSuperview()
