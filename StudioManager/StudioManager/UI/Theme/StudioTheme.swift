@@ -36,6 +36,7 @@ enum StudioTheme {
     
     /// Opacity
     static let opacity06: CGFloat = 0.6
+    static let opacity05: CGFloat = 0.5
     
     /// Line Width
     static let lineWidth1: CGFloat = 1

@@ -36,7 +36,7 @@ struct StudioButton: View {
         .frame(maxWidth: buttonType.width)
         .background(RoundedRectangle(cornerRadius: StudioTheme.cr8).fill(backgroundShapeStyle()))
         .overlay(overlayShape())
-        .opacity(enabled ? 1 : StudioTheme.opacity06)
+        .opacity(enabled ? 1 : StudioTheme.opacity05)
     }
 }
 
