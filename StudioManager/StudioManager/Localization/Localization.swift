@@ -50,6 +50,7 @@ extension tr {
     static let emptyClientName = t("emptyClientName")
     static let emptyPrice = t("emptyPrice")
     static let invalidDate = t("invalidDate")
+    static let appointmentAddedSuccessfully = t("appointmentAddedSuccessfully")
 }
 
 // MARK: Expense view

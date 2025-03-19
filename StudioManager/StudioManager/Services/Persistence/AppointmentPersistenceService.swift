@@ -30,18 +30,6 @@ class AppointmentPersistenceService: AppointmentPersistenceLoader {
         return appointments
     }
     
-    private func fetchStudioEntity(for appointment: StudioAppointment) -> StudioEntity? {
-        let request = NSFetchRequest<StudioEntity>(entityName: AppointmentPersistenceService.studioEntity)
-        request.predicate = NSPredicate(format: "id == %@", appointment.id as CVarArg)
-        do {
-            let result = try context.fetch(request)
-            return result.first
-        } catch {
-            print("Error fetching StudioEntity: \(error.localizedDescription)")
-            return nil
-        }
-    }
-    
     func add(appointment: StudioAppointment) {
         context.performAndWait {
             if let existingEntity = fetchStudioEntity(for: appointment) {
@@ -91,5 +79,19 @@ class AppointmentPersistenceService: AppointmentPersistenceLoader {
             }
         }
         return success
+    }
+}
+
+private extension AppointmentPersistenceService {
+    private func fetchStudioEntity(for appointment: StudioAppointment) -> StudioEntity? {
+        let request = NSFetchRequest<StudioEntity>(entityName: AppointmentPersistenceService.studioEntity)
+        request.predicate = NSPredicate(format: "id == %@", appointment.id as CVarArg)
+        do {
+            let result = try context.fetch(request)
+            return result.first
+        } catch {
+            print("Error fetching StudioEntity: \(error.localizedDescription)")
+            return nil
+        }
     }
 }

@@ -35,6 +35,23 @@
         }
       }
     },
+    "appointmentAddedSuccessfully" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appointment added successfully!"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcação criada com sucesso!"
+          }
+        }
+      }
+    },
     "appointmentDate" : {
       "extractionState" : "manual",
       "localizations" : {

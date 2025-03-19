@@ -46,6 +46,7 @@ public struct NewAppointmentView: View {
                     .padding(.horizontal)
                     .padding(.bottom, 20)
             }
+            .toast(isVisible: $viewModel.showToast, text: tr.appointmentAddedSuccessfully, image: "checkmark.circle")
         }
     }
 }

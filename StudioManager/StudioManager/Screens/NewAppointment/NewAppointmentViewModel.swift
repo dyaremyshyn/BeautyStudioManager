@@ -29,6 +29,7 @@ class NewAppointmentViewModel: ObservableObject {
     private let servicesPersistenceService: AppointmentServicePersistenceLoader
     private var subscriptions: [AnyCancellable] = []
     @Published var validationErrors: [AppointmentValidationError] = []
+    @Published var showToast: Bool = false
 
     init(
         appointment: StudioAppointment?,
@@ -63,7 +64,7 @@ class NewAppointmentViewModel: ObservableObject {
     
     public func saveAppointment() {
         let appointment = StudioAppointment(
-            id: appointment?.id ?? UUID(),
+            id: self.appointment?.id ?? UUID(),
             date: appointmentDate,
             price: StringConverter.convertStringToDouble(price),
             type: type,
@@ -76,7 +77,8 @@ class NewAppointmentViewModel: ObservableObject {
         
         // Save created appointment to core data
         appointmentsPersistenceService.add(appointment: appointment)
-        
+        showToast = true
+
         // Reset fields after saving if needed
         resetFields()
     }
@@ -84,7 +86,6 @@ class NewAppointmentViewModel: ObservableObject {
 
 private extension NewAppointmentViewModel {
     func resetFields() {
-        self.appointment = nil
         clientName = ""
         clientPhoneNumber = ""
         appointmentDate = Date()
