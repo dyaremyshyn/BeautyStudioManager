@@ -55,7 +55,9 @@ public class ServiceListViewController: UIViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(tableView)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+        let addServiceButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+        addServiceButton.tintColor = .Text.button
+        navigationItem.rightBarButtonItem = addServiceButton
         
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
