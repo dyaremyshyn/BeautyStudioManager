@@ -11,9 +11,7 @@ import Combine
 class NewAppointmentViewModel: ObservableObject {
     private var allServices: [Service] = []
     public private(set) var servicesTypes: [String] = []
-    @Published private(set) var appointment: StudioAppointment?{
-        didSet { setFields(from: appointment) }
-    }
+    @Published private(set) var appointment: StudioAppointment?
     @Published var clientName: String!
     @Published var clientPhoneNumber: String!
     @Published var appointmentDate: Date!
@@ -47,6 +45,7 @@ class NewAppointmentViewModel: ObservableObject {
         
         fetchData()
         resetFields()
+        setFields(from: appointment)
     }
     
     public func fetchData() {
