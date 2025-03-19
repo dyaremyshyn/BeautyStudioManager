@@ -273,6 +273,40 @@
         }
       }
     },
+    "emptyClientName" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empty Client Name"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome da Cliente Vazio"
+          }
+        }
+      }
+    },
+    "emptyPrice" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empty Price"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preço Vazio "
+          }
+        }
+      }
+    },
     "errorTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -473,6 +507,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Receitas"
+          }
+        }
+      }
+    },
+    "invalidDate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid Selected Date"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data Seleccionada Inválida"
           }
         }
       }

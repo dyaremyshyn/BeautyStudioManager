@@ -19,14 +19,14 @@ public struct NewAppointmentView: View {
             ZStack(alignment: .bottom){
                 Form {
                     Section(tr.clientDetails) {
-                        TextField(tr.clientName, text: $viewModel.clientName)
-                        TextField(tr.clientPhoneNumber, text: $viewModel.clientPhoneNumber)
+                        textField(tr.clientName, text: $viewModel.clientName, errors: [.emptyClientName])
+                        textField(tr.clientPhoneNumber, text: $viewModel.clientPhoneNumber, errors: [])
                             .keyboardType(.numberPad)
                     }
                     Section(tr.appointmentDetails) {
-                        DatePicker(tr.appointmentDate, selection: $viewModel.appointmentDate, displayedComponents: [.date, .hourAndMinute])
+                        datePicker(tr.appointmentDate, selection: $viewModel.appointmentDate, errors: [.invalidDate])
                         
-                        TextField(tr.appointmentPrice, text: $viewModel.price)
+                        textField(tr.appointmentPrice, text: $viewModel.price, errors: [.emptyPrice])
                             .keyboardType(.numbersAndPunctuation)
                         
                         Picker(tr.appointmentType, selection: $viewModel.type) {
@@ -42,10 +42,48 @@ public struct NewAppointmentView: View {
                         }
                     }
                 }
-                StudioButton(title: tr.save, action: viewModel.saveAppointment)
+                StudioButton(title: tr.save, enabled: viewModel.validationErrors.isEmpty, action: viewModel.saveAppointment)
                     .padding(.horizontal)
                     .padding(.bottom, 20)
             }
+        }
+    }
+}
+
+private extension NewAppointmentView {
+    @ViewBuilder
+    private func textField(_ title: String, text: Binding<String>, errors: [AppointmentValidationError] = []) -> some View {
+        VStack(alignment: .leading) {
+            TextField(title, text: text)
+            if let firstError = errors.first(where: { viewModel.validationErrors.contains($0) }) {
+                Text(firstError.translatedError)
+                    .font(.caption)
+                    .foregroundStyle(Color.Studio.warning)
+                    .transition(.opacity)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func datePicker(_ title: String, selection: Binding<Date>, errors: [AppointmentValidationError] = []) -> some View {
+        VStack(alignment: .leading) {
+            DatePicker(title, selection: selection, displayedComponents: [.date, .hourAndMinute])
+            if let firstError = errors.first(where: { viewModel.validationErrors.contains($0) }) {
+                Text(firstError.translatedError)
+                    .font(.caption)
+                    .foregroundStyle(Color.Studio.warning)
+                    .transition(.opacity)
+            }
+        }
+    }
+}
+
+private extension AppointmentValidationError {
+    var translatedError: String {
+        switch self {
+        case .emptyClientName: return tr.emptyClientName
+        case .emptyPrice: return tr.emptyPrice
+        case .invalidDate: return tr.invalidDate
         }
     }
 }

@@ -47,6 +47,9 @@ extension tr {
     static let appointmentDate = t("appointmentDate")
     static let appointmentType = t("appointmentType")
     static let appointmentInResidence = t("appointmentInResidence")
+    static let emptyClientName = t("emptyClientName")
+    static let emptyPrice = t("emptyPrice")
+    static let invalidDate = t("invalidDate")
 }
 
 // MARK: Expense view

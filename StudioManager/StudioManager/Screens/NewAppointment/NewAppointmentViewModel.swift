@@ -18,7 +18,7 @@ class NewAppointmentViewModel: ObservableObject {
     @Published var price: String!
     @Published var inResidence: Bool!
     private var duration: Double = 0
-    @Published var type: String = "Maquilhagem" {
+    @Published var type: String = "Studio" {
         didSet {
             price = allServices.first(where: { $0.type == type })?.price.formatted() ?? ""
             duration = allServices.first(where: { $0.type == type })?.duration ?? 0
@@ -28,7 +28,8 @@ class NewAppointmentViewModel: ObservableObject {
     private let appointmentsPersistenceService: AppointmentPersistenceLoader
     private let servicesPersistenceService: AppointmentServicePersistenceLoader
     private var subscriptions: [AnyCancellable] = []
-    
+    @Published var validationErrors: [AppointmentValidationError] = []
+
     init(
         appointment: StudioAppointment?,
         appointmentsPersistenceService: AppointmentPersistenceLoader,
@@ -41,6 +42,12 @@ class NewAppointmentViewModel: ObservableObject {
         self.servicesPersistenceService.appointmentServiceUpdatedPublisher
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: appointmentServiceUpdated)
+            .store(in: &subscriptions)
+        
+        Publishers.CombineLatest3($clientName, $price, $appointmentDate)
+            .sink { [weak self] name, price, date in
+                self?.validationErrors = AppointmentValidator.validate(name: name, price: price, date: date)
+            }
             .store(in: &subscriptions)
         
         fetchData()
@@ -58,7 +65,7 @@ class NewAppointmentViewModel: ObservableObject {
         let appointment = StudioAppointment(
             id: appointment?.id ?? UUID(),
             date: appointmentDate,
-            price: Double(price.replacingOccurrences(of: ",", with: ".")) ?? 0,
+            price: StringConverter.convertStringToDouble(price),
             type: type,
             inResidence: inResidence,
             name: clientName,
@@ -92,7 +99,7 @@ private extension NewAppointmentViewModel {
         self.clientName = appointment.name
         self.clientPhoneNumber = appointment.phoneNumber ?? ""
         self.appointmentDate = appointment.date
-        self.price = appointment.price.formatted()
+        self.price = StringConverter.convertDoubleToString(appointment.price)
         self.type = appointment.type
         self.inResidence = appointment.inResidence
     }
