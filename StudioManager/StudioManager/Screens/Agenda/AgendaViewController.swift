@@ -41,7 +41,6 @@ public class AgendaViewController: UIViewController {
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         return hostingController.view
     }()
-   
     
     // MARK: - Lifecycle
     public override func viewDidLoad() {

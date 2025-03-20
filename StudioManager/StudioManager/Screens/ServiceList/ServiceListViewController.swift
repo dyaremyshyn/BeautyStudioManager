@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 import Combine
 
 public class ServiceListViewController: UIViewController {
@@ -22,6 +23,14 @@ public class ServiceListViewController: UIViewController {
         tableView.register(ServiceViewCell.self, forCellReuseIdentifier: ServiceViewCell.reuseIdentifier)
         tableView.delegate = self
         return tableView
+    }()
+    
+    private lazy var emptyView: UIView = {
+        let emptyView = StudioEmptyView(imageName: StudioTheme.emptyImage) { Text(tr.emptyServicesDescription) }
+        let hostingController = UIHostingController(rootView: emptyView)
+        addChild(hostingController)
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        return hostingController.view
     }()
     
     // MARK: - Lifecycle
@@ -76,12 +85,33 @@ public class ServiceListViewController: UIViewController {
     }
     
     private func applySnapshot(prices: [Service]) {
-        var snapshot = NSDiffableDataSourceSnapshot<StudioSection, Service>()
+        if prices.isEmpty {
+            showEmptyView()
+        } else {
+            removeEmptyView()
+            var snapshot = NSDiffableDataSourceSnapshot<StudioSection, Service>()
+            
+            snapshot.appendSections([.main])
+            snapshot.appendItems(prices, toSection: .main)
+            
+            dataSource?.apply(snapshot, animatingDifferences: true)
+        }
+    }
+    
+    private func showEmptyView() {
+        tableView.isHidden = true
         
-        snapshot.appendSections([.main])
-        snapshot.appendItems(prices, toSection: .main)
+        view.addSubview(emptyView)
+        emptyView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        emptyView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        emptyView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        emptyView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
-        dataSource?.apply(snapshot, animatingDifferences: true)
+    }
+    
+    private func removeEmptyView() {
+        tableView.isHidden = false
+        emptyView.removeFromSuperview()
     }
 }
 

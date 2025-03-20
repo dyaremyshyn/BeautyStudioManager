@@ -37,6 +37,7 @@ extension tr {
     static let balanceTitle = t("balanceTitle")
 }
 
+// MARK: Agenda view
 extension tr {
     static let emptyAppointmentsDescription = t("emptyAppointmentsDescription")
 }
@@ -89,4 +90,5 @@ extension tr {
     static let newServiceTitle = t("newServiceTitle")
     static let serviceAddedSuccessfully = t("serviceAddedSuccessfully")
     static let invalidDuration = t("invalidDuration")
+    static let emptyServicesDescription = t("emptyServicesDescription")
 }
