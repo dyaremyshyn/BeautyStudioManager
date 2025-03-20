@@ -20,7 +20,6 @@ struct StudioEmptyView<Content: View>: View {
                 .padding()
             content()
                 .font(.headline)
-                .foregroundStyle(.black)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
         })
