@@ -41,4 +41,8 @@ enum StudioTheme {
     /// Line Width
     static let lineWidth1: CGFloat = 1
     static let lineWidth2: CGFloat = 2
+    
+    /// Images
+    static let emptyImage = "text.page.slash"
+    static let successImage = "checkmark.circle"
 }

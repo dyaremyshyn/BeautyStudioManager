@@ -12,7 +12,7 @@ public struct NewAppointmentView: View {
 
     public var body: some View {
         if viewModel.servicesTypes.isEmpty {
-            StudioEmptyView(imageName: "text.page.slash") {
+            StudioEmptyView(imageName: StudioTheme.emptyImage) {
                 Text(tr.appointmentEmptyDescription)
             }
         } else {
@@ -46,7 +46,7 @@ public struct NewAppointmentView: View {
                     .padding(.horizontal)
                     .padding(.bottom, 20)
             }
-            .toast(isVisible: $viewModel.showToast, text: tr.appointmentAddedSuccessfully, image: "checkmark.circle")
+            .toast(isVisible: $viewModel.showToast, text: tr.appointmentAddedSuccessfully, image: StudioTheme.successImage)
         }
     }
 }
