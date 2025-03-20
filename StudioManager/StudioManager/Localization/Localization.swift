@@ -31,10 +31,14 @@ extension tr {
     static let invalidDate = t("invalidDate")
 }
 
-// MARK:
+// MARK: Tab
 extension tr {
     static let agendaTitle = t("agendaTitle")
     static let balanceTitle = t("balanceTitle")
+}
+
+extension tr {
+    static let emptyAppointmentsDescription = t("emptyAppointmentsDescription")
 }
 
 // MARK: NewAppointment view

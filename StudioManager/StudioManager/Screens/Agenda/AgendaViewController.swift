@@ -6,10 +6,10 @@
 //
 
 import UIKit
+import SwiftUI
 import Combine
 
 public class AgendaViewController: UIViewController {
-    
     private var cancellables = Set<AnyCancellable>()
     var viewModel: AgendaViewModel? {
         didSet { bind() }
@@ -32,6 +32,14 @@ public class AgendaViewController: UIViewController {
         segmentedControl.selectedSegmentTintColor = .Text.button
         segmentedControl.addTarget(self, action: #selector (segmentedControlValueChanged), for: .valueChanged)
         return segmentedControl
+    }()
+    
+    private lazy var emptyView: UIView = {
+        let emptyView = StudioEmptyView(imageName: StudioTheme.emptyImage) { Text(tr.emptyAppointmentsDescription) }
+        let hostingController = UIHostingController(rootView: emptyView)
+        addChild(hostingController)
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        return hostingController.view
     }()
    
     
@@ -108,12 +116,33 @@ public class AgendaViewController: UIViewController {
     }
     
     private func applySnapshot(appointments: [StudioAppointment]) {
-        var snapshot = NSDiffableDataSourceSnapshot<StudioSection, StudioAppointment>()
+        if appointments.isEmpty {
+            showEmptyView()
+        } else {
+            removeEmptyView()
+            var snapshot = NSDiffableDataSourceSnapshot<StudioSection, StudioAppointment>()
+            
+            snapshot.appendSections([.main])
+            snapshot.appendItems(appointments, toSection: .main)
+            
+            dataSource?.apply(snapshot, animatingDifferences: true)
+        }
+    }
+    
+    private func showEmptyView() {
+        tableView.isHidden = true
         
-        snapshot.appendSections([.main])
-        snapshot.appendItems(appointments, toSection: .main)
+        view.addSubview(emptyView)
+        emptyView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        emptyView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        emptyView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        emptyView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
-        dataSource?.apply(snapshot, animatingDifferences: true)
+    }
+    
+    private func removeEmptyView() {
+        tableView.isHidden = false
+        emptyView.removeFromSuperview()
     }
 }
 

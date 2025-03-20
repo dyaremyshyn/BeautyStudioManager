@@ -290,6 +290,23 @@
         }
       }
     },
+    "emptyAppointmentsDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No appointments"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sem marcações"
+          }
+        }
+      }
+    },
     "emptyClientName" : {
       "extractionState" : "manual",
       "localizations" : {
