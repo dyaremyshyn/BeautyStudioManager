@@ -74,6 +74,7 @@ extension tr {
     static let addExpense = t("addExpense")
     static let expensesTitle = t("expensesTitle")
     static let incomeTitle = t("incomeTitle")
+    static let noDataDescription = t("noDataDescription")
 }
 
 extension tr {

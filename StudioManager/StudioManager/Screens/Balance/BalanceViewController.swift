@@ -98,6 +98,16 @@ public class BalanceViewController: UIViewController {
         return hostingController.view
     }()
     
+    private lazy var noDataLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 17, weight: .medium)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .systemGray
+        label.textAlignment = .center
+        label.text = tr.noDataDescription
+        return label
+    }()
+    
     private var pieChartView: PieChartView!
     
     // MARK: - Lifecycle
@@ -172,9 +182,11 @@ extension BalanceViewController {
 private extension BalanceViewController {
     
     func createPieChart(for data: [String: Double]) {
+        noDataLabel.removeFromSuperview()
         
         guard !data.isEmpty else {
             pieChartView?.removeFromSuperview()
+            displayEmptyDataView()
             return
         }
                 
@@ -190,5 +202,11 @@ private extension BalanceViewController {
         pieChartView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         pieChartView.widthAnchor.constraint(equalToConstant: 250).isActive = true
         pieChartView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+    }
+    
+    func displayEmptyDataView() {
+        view.addSubview(noDataLabel)
+        noDataLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        noDataLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 }
