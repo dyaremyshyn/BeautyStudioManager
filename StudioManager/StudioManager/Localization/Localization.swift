@@ -26,6 +26,9 @@ extension tr {
     static let errorTitle = t("errorTitle")
     static let cancel = t("cancel")
     static let successTitle = t("successTitle")
+    static let emptyName = t("emptyName")
+    static let emptyPrice = t("emptyPrice")
+    static let invalidDate = t("invalidDate")
 }
 
 // MARK:
@@ -48,8 +51,6 @@ extension tr {
     static let appointmentType = t("appointmentType")
     static let appointmentInResidence = t("appointmentInResidence")
     static let emptyClientName = t("emptyClientName")
-    static let emptyPrice = t("emptyPrice")
-    static let invalidDate = t("invalidDate")
     static let appointmentAddedSuccessfully = t("appointmentAddedSuccessfully")
 }
 
@@ -59,6 +60,7 @@ extension tr {
     static let expenseName = t("expenseName")
     static let expensePrice = t("expensePrice")
     static let expenseDetails = t("expenseDetails")
+    static let expenseAddedSuccessfully = t("expenseAddedSuccessfully")
 }
 
 // MARK: AppointmentService view

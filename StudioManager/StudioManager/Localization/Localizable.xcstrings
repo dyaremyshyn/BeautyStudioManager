@@ -47,7 +47,7 @@
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Marcação criada com sucesso!"
+            "value" : "Marcação adicionada com sucesso!"
           }
         }
       }
@@ -307,6 +307,23 @@
         }
       }
     },
+    "emptyName" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empty Name"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome Vazio"
+          }
+        }
+      }
+    },
     "emptyPrice" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -337,6 +354,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erro"
+          }
+        }
+      }
+    },
+    "expenseAddedSuccessfully" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expense added successfully!"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Despesa adicionada com sucesso!"
           }
         }
       }
