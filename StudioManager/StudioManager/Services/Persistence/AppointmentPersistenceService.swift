@@ -40,8 +40,6 @@ class AppointmentPersistenceService: AppointmentPersistenceLoader {
                 existingEntity.type = appointment.type
                 existingEntity.inResidence = appointment.inResidence
                 existingEntity.addedToCalendar = appointment.addedToCalendar
-                
-                print("Client entity with id \(appointment.id) edited successfully")
             } else {
                 let newEntry = StudioEntity(context: context)
                 newEntry.id = appointment.id
