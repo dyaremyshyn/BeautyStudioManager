@@ -6,11 +6,15 @@
 //
 
 import Foundation
+import Combine
 
 class NewServiceViewModel: ObservableObject {
     @Published var name: String!
     @Published var price: String!
     @Published var duration: Date!
+    @Published var validationErrors: [ServiceValidationError] = []
+    @Published var showToast: Bool = false
+    private var subscriptions: [AnyCancellable] = []
     
     @Published private(set) var service: Service?
     private let persistenceService: AppointmentServicePersistenceLoader
@@ -18,6 +22,12 @@ class NewServiceViewModel: ObservableObject {
     init(service: Service?, persistenceService: AppointmentServicePersistenceLoader) {
         self.service = service
         self.persistenceService = persistenceService
+        
+        Publishers.CombineLatest3($name, $price, $duration)
+            .sink { [weak self] name, price, duration in
+                self?.validationErrors = ServiceValidator.validate(name: name, price: price, duration: duration)
+            }
+            .store(in: &subscriptions)
         
         resetAllFields()
         setFields(from: service)
@@ -40,6 +50,7 @@ class NewServiceViewModel: ObservableObject {
         
         // Save created service to core data
         persistenceService.add(service: service)
+        showToast = true
         
         // Reset all fields
         resetAllFields()

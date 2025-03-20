@@ -14,15 +14,53 @@ public struct NewServiceView: View {
         ZStack(alignment: .bottom){
             Form {
                 Section(tr.serviceDetails) {
-                    TextField(tr.serviceName, text: $viewModel.name)
-                    TextField(tr.servicePrice, text: $viewModel.price)
+                    textField(tr.serviceName, text: $viewModel.name, errors: [.emptyName])
+                    textField(tr.servicePrice, text: $viewModel.price, errors: [.emptyPrice])
                         .keyboardType(.numbersAndPunctuation)
-                    DatePicker(tr.serviceDuration, selection: $viewModel.duration, displayedComponents: [.hourAndMinute])
+                    datePicker(tr.serviceDuration, selection: $viewModel.duration, errors: [.invalidDuration])
                 }
             }
-            StudioButton(title: tr.save, action: viewModel.saveService)
-                .padding(.horizontal)
+            StudioButton(title: tr.save, enabled: viewModel.validationErrors.isEmpty, action: viewModel.saveService)
                 .padding(.bottom, 20)
+        }
+        .toast(isVisible: $viewModel.showToast, text: tr.serviceAddedSuccessfully, image: StudioTheme.successImage)
+    }
+}
+
+private extension NewServiceView {
+    @ViewBuilder
+    private func textField(_ title: String, text: Binding<String>, errors: [ServiceValidationError] = []) -> some View {
+        VStack(alignment: .leading) {
+            TextField(title, text: text)
+            if let firstError = errors.first(where: { viewModel.validationErrors.contains($0) }) {
+                Text(firstError.translatedError)
+                    .font(.caption)
+                    .foregroundStyle(Color.Studio.warning)
+                    .transition(.opacity)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func datePicker(_ title: String, selection: Binding<Date>, errors: [ServiceValidationError] = []) -> some View {
+        VStack(alignment: .leading) {
+            DatePicker(title, selection: selection, displayedComponents: [.hourAndMinute])
+            if let firstError = errors.first(where: { viewModel.validationErrors.contains($0) }) {
+                Text(firstError.translatedError)
+                    .font(.caption)
+                    .foregroundStyle(Color.Studio.warning)
+                    .transition(.opacity)
+            }
+        }
+    }
+}
+
+private extension ServiceValidationError {
+    var translatedError: String {
+        switch self {
+        case .emptyName: return tr.emptyName
+        case .emptyPrice: return tr.emptyPrice
+        case .invalidDuration: return tr.invalidDuration
         }
     }
 }

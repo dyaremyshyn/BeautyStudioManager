@@ -43,7 +43,6 @@ public struct NewAppointmentView: View {
                     }
                 }
                 StudioButton(title: tr.save, enabled: viewModel.validationErrors.isEmpty, action: viewModel.saveAppointment)
-                    .padding(.horizontal)
                     .padding(.bottom, 20)
             }
             .toast(isVisible: $viewModel.showToast, text: tr.appointmentAddedSuccessfully, image: StudioTheme.successImage)

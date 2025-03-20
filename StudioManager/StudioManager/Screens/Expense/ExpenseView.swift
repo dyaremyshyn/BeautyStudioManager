@@ -21,7 +21,6 @@ public struct ExpenseView: View {
                 }
             }
             StudioButton(title: tr.save, enabled: viewModel.validationErrors.isEmpty, action: viewModel.saveExpense)
-                .padding(.horizontal)
                 .padding(.bottom, 20)
         }
         .toast(isVisible: $viewModel.showToast, text: tr.expenseAddedSuccessfully, image: StudioTheme.successImage)

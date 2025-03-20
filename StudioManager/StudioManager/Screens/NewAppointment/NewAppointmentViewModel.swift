@@ -88,7 +88,7 @@ private extension NewAppointmentViewModel {
     func resetFields() {
         clientName = ""
         clientPhoneNumber = ""
-        appointmentDate = Date()
+        appointmentDate = Date(timeIntervalSince1970: 0)
         price = ""
         duration = 0
         type = servicesTypes.first ?? ""

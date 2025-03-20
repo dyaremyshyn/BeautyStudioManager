@@ -79,7 +79,10 @@ extension tr {
     static let noDataDescription = t("noDataDescription")
 }
 
+// MARK: Service
 extension tr {
     static let editServiceTitle = t("editServiceTitle")
     static let newServiceTitle = t("newServiceTitle")
+    static let serviceAddedSuccessfully = t("serviceAddedSuccessfully")
+    static let invalidDuration = t("invalidDuration")
 }
