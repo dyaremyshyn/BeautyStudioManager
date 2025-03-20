@@ -14,6 +14,12 @@ class AppointmentsViewCell: UITableViewCell {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 10
+        view.backgroundColor = .systemBackground
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.1
+        view.layer.shadowOffset = CGSize(width: 0, height: 2)
+        view.layer.shadowRadius = 4
+        view.layer.masksToBounds = false
         return view
     }()
     
@@ -21,6 +27,7 @@ class AppointmentsViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 16)
+        label.textColor = .label
         return label
     }()
     
@@ -28,6 +35,7 @@ class AppointmentsViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .boldSystemFont(ofSize: 20)
+        label.textColor = .label
         return label
     }()
     
@@ -36,6 +44,7 @@ class AppointmentsViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .right
         label.font = .systemFont(ofSize: 20)
+        label.textColor = .secondaryLabel
         return label
     }()
     
@@ -44,6 +53,7 @@ class AppointmentsViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .right
         label.font = .systemFont(ofSize: 16)
+        label.textColor = .secondaryLabel
         return label
     }()
     
@@ -51,6 +61,7 @@ class AppointmentsViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 12)
+        label.textColor = .systemBlue
         return label
     }()
     
@@ -109,6 +120,6 @@ class AppointmentsViewCell: UITableViewCell {
         appointmentTypeLabel.text = model.type
         appointmentDateLabel.text = model.date.appointmentDate
         appointmentDurationLabel.text = model.date.appointmentDateTime + " - " + model.date.addingTimeInterval(3600).appointmentDateTime
-        inResidenceLabel.text = model.inResidence ? "Ao domicílio" : .none
+        inResidenceLabel.text = model.inResidence ? tr.appointmentAtHome : .none
     }
 }

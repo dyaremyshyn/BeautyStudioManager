@@ -69,6 +69,23 @@
         }
       }
     },
+    "appointmentAtHome" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "At Home"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ao Domicílio"
+          }
+        }
+      }
+    },
     "appointmentDate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -115,7 +132,7 @@
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Não há nenhum serviço introduzido! \\nAdicione um serviço para começar a introduzir as marcações."
+            "value" : "Não há nenhum serviço introduzido! Adicione um serviço para começar a introduzir as marcações."
           }
         }
       }
@@ -412,6 +429,12 @@
     "errorAddingAppointmentToCalendar" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error occurred while adding appointment to calendar"
+          }
+        },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",

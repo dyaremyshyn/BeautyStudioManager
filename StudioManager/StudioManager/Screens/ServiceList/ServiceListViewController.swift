@@ -22,6 +22,7 @@ public class ServiceListViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(ServiceViewCell.self, forCellReuseIdentifier: ServiceViewCell.reuseIdentifier)
         tableView.delegate = self
+        tableView.separatorStyle = .none
         return tableView
     }()
     

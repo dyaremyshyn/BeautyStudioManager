@@ -44,6 +44,7 @@ extension tr {
     static let noAppointmentsToAddToCalendar = t("noAppointmentsToAddToCalendar")
     static let errorAddingAppointmentToCalendar = t("errorAddingAppointmentToCalendar")
     static let appointmentsAddedToCalendar = t("appointmentsAddedToCalendar")
+    static let appointmentAtHome = t("appointmentAtHome")
 }
 
 // MARK: NewAppointment view

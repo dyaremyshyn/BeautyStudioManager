@@ -26,7 +26,7 @@ class AgendaViewModel: ObservableObject {
         errorMessage = nil
         
 #if DEBUG
-        allAppointments = allAppointments.count == 0 ? Appointment.allCustomers : allAppointments
+//        allAppointments = allAppointments.count == 0 ? Appointment.allCustomers : allAppointments
 #endif
         filterAppointments(by: filterCalendar)
     }

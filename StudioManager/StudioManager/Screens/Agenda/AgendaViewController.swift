@@ -22,6 +22,7 @@ public class AgendaViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(AppointmentsViewCell.self, forCellReuseIdentifier: AppointmentsViewCell.reuseIdentifier)
         tableView.delegate = self
+        tableView.separatorStyle = .none
         return tableView
     }()
     
