@@ -9,11 +9,13 @@ import SwiftUI
 
 public struct NewAppointmentView: View {
     @StateObject var viewModel: NewAppointmentViewModel
-
+    var onNavigateToServiceList: () -> Void
+    
     public var body: some View {
         if viewModel.servicesTypes.isEmpty {
             StudioEmptyView(imageName: StudioTheme.emptyImage) {
                 Text(tr.appointmentEmptyDescription)
+                StudioButton(title: tr.addServices, buttonType: .secondary, action: onNavigateToServiceList)
             }
         } else {
             ZStack(alignment: .bottom){
@@ -94,6 +96,6 @@ private extension AppointmentValidationError {
             appointment: Appointment.example,
             appointmentsPersistenceService: AppointmentPersistenceService(),
             servicesPersistenceService: AppointmentServicePersistenceService()
-        )
+        ), onNavigateToServiceList: {}
     )
 }

@@ -47,7 +47,7 @@ extension AgendaCoordinator: AppointmentsListDelegate {
         let editAppointmentController = NewAppointmentComposer.newAppointmentComposedWith(
             appointment: appointment,
             appointmentsPersistenceService: AppointmentPersistenceService(),
-            servicePersistenceService: AppointmentServicePersistenceService()
+            servicePersistenceService: AppointmentServicePersistenceService(), onNavigateToServiceList: {}
         )
         navigationController.pushViewController(editAppointmentController, animated: true)
         navigationController.topViewController?.title = tr.editAppointmentTitle

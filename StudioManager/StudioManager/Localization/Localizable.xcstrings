@@ -18,6 +18,23 @@
         }
       }
     },
+    "addServices" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Services"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicionar Serviços"
+          }
+        }
+      }
+    },
     "agendaTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -364,13 +381,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty services"
+            "value" : "Empty services list"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sem serviços"
+            "value" : "Lista de serviços vazia"
           }
         }
       }

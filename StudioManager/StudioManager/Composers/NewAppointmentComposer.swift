@@ -15,14 +15,15 @@ public final class NewAppointmentComposer {
     public static func newAppointmentComposedWith(
         appointment: StudioAppointment?,
         appointmentsPersistenceService: AppointmentPersistenceLoader,
-        servicePersistenceService: AppointmentServicePersistenceLoader
+        servicePersistenceService: AppointmentServicePersistenceLoader,
+        onNavigateToServiceList: @escaping () -> Void
     ) -> UIHostingController<NewAppointmentView> {
         let viewModel = NewAppointmentViewModel(
             appointment: appointment,
             appointmentsPersistenceService: appointmentsPersistenceService,
             servicesPersistenceService: servicePersistenceService
         )
-        let newAppointmentView = NewAppointmentView(viewModel: viewModel)
+        let newAppointmentView = NewAppointmentView(viewModel: viewModel, onNavigateToServiceList: onNavigateToServiceList)
         // Wrap the SwiftUI view in a UIHostingController
         let hostingController = UIHostingController(rootView: newAppointmentView)
         return hostingController

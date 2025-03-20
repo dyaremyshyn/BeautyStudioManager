@@ -20,7 +20,12 @@ class NewAppointmentCoordinator: Coordinator {
         let viewController = NewAppointmentComposer.newAppointmentComposedWith(
             appointment: nil,
             appointmentsPersistenceService: AppointmentPersistenceService(),
-            servicePersistenceService: servicePersistenceService
+            servicePersistenceService: servicePersistenceService,
+            onNavigateToServiceList: { [weak self] in
+                if let tabBarController = self?.navigationController.tabBarController {
+                    tabBarController.selectedIndex = TabBarPage.services.getIndex()
+                }
+            }
         )
         return viewController
     }()
