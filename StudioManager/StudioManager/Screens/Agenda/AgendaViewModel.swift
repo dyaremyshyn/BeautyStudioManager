@@ -45,7 +45,7 @@ class AgendaViewModel: ObservableObject {
         // First remove the appointment from persistence
         let success = persistenceService.delete(appointment: appointment)
         guard success else {
-            errorMessage = "Erro ao apagar marcação"
+            errorMessage = tr.errorDeletingAppointment
             return
         }
         // Remove the appointment from both the current appointments array and the allAppointments array
@@ -57,11 +57,11 @@ class AgendaViewModel: ObservableObject {
     
     public func addAppointmentsToCalendar() {
         let addCalendarAppointments = allAppointments.filter { !$0.addedToCalendar }
-        self.successMessage = addCalendarAppointments.isEmpty ? "Nenhuma marcação para adicionar ao calendário." : nil
+        self.successMessage = addCalendarAppointments.isEmpty ? tr.noAppointmentsToAddToCalendar : nil
         addCalendarAppointments.forEach { appointment in
             CalendarEventHelper.createEvent(to: appointment) { [weak self] result in
-                self?.errorMessage = result == false ? "An error occurred saving the appointment to your calendar." : nil
-                self?.successMessage = result ? "Todas as marcações foram adicionadas ao calendário com sucesso." : nil
+                self?.errorMessage = result == false ? tr.errorAddingAppointmentToCalendar : nil
+                self?.successMessage = result ? tr.appointmentsAddedToCalendar : nil
             }
             appointmentsAddedToCalendar(appointment: appointment, index: allAppointments.firstIndex(where: { $0.id == appointment.id }))
         }

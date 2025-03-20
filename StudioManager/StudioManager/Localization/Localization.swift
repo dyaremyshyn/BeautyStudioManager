@@ -40,6 +40,10 @@ extension tr {
 // MARK: Agenda view
 extension tr {
     static let emptyAppointmentsDescription = t("emptyAppointmentsDescription")
+    static let errorDeletingAppointment = t("errorDeletingAppointment")
+    static let noAppointmentsToAddToCalendar = t("noAppointmentsToAddToCalendar")
+    static let errorAddingAppointmentToCalendar = t("errorAddingAppointmentToCalendar")
+    static let appointmentsAddedToCalendar = t("appointmentsAddedToCalendar")
 }
 
 // MARK: NewAppointment view

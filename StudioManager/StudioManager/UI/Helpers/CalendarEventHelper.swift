@@ -17,7 +17,6 @@ struct CalendarEventHelper {
         eventStore.requestWriteOnlyAccessToEvents(completion: { granted, error in
             guard granted else {
                 DispatchQueue.main.async {
-                    print("Access to calendar denied")
                     completion(false)
                 }
                 return
@@ -36,7 +35,6 @@ struct CalendarEventHelper {
                 try eventStore.save(event, span: .thisEvent)
                 completion(true)
             } catch {
-                print("Failed to save event to calendar")
                 completion(false)
             }
         })

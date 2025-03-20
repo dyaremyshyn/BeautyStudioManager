@@ -154,6 +154,23 @@
         }
       }
     },
+    "appointmentsAddedToCalendar" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All appointments have been added to the calendar successfully."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todas as marcações foram adicionadas ao calendário com sucesso."
+          }
+        }
+      }
+    },
     "appointmentType" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -388,6 +405,20 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lista de serviços vazia"
+          }
+        }
+      }
+    },
+    "errorAddingAppointmentToCalendar" : {
+      "extractionState" : "manual"
+    },
+    "errorDeletingAppointment" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error occurred while deleting appoitment"
           }
         }
       }
@@ -677,6 +708,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Novo Serviço"
+          }
+        }
+      }
+    },
+    "noAppointmentsToAddToCalendar" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No appointments to add to calendar."
           }
         }
       }
