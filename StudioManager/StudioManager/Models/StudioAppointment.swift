@@ -36,3 +36,9 @@ public struct StudioAppointment: Equatable, Identifiable, Hashable {
         )
     }
 }
+
+extension StudioAppointment {
+    var endDate: Date {
+        date.addingTimeInterval(duration)
+    }
+}

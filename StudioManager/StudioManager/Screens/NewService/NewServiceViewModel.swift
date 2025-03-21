@@ -44,18 +44,11 @@ class NewServiceViewModel: ObservableObject {
     }
     
     func saveService() {
-        let calendar = Calendar.current
-        let hours = calendar.component(.hour, from: duration)
-        let minutes = calendar.component(.minute, from: duration)
-
-        // Convert hours and minutes to TimeInterval
-        let timeInterval = TimeInterval(hours * 3600 + minutes * 60)
-        
         let service = Service(
             id: UUID(),
             type: name,
-            price: Double(price) ?? 0,
-            duration: timeInterval
+            price: StringConverter.convertStringToDouble(price),
+            duration: DurationConverter.convertDurationToTimeInterval(duration)
         )
         
         // Save created service to core data
@@ -71,14 +64,14 @@ private extension NewServiceViewModel {
     func resetAllFields() {
         name = ""
         price = ""
-        duration = Date(timeIntervalSince1970: 0)
+        duration = Date(timeIntervalSince1970: 3600) // 1h in seconds
     }
     
     func setFields(from service: Service?) {
         guard let service else { return }
         name = service.type
-        price = String(service.price)
-        duration = Date(timeIntervalSince1970: service.duration)
+        price = StringConverter.convertDoubleToString(service.price)
+        duration = DurationConverter.convertDurationToDate(service.duration)
     }
     
     func updateIconBasedOnName(_ name: String?) {
