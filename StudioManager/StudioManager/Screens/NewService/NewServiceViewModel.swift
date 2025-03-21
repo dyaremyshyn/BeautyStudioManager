@@ -48,7 +48,8 @@ class NewServiceViewModel: ObservableObject {
             id: UUID(),
             type: name,
             price: StringConverter.convertStringToDouble(price),
-            duration: DurationConverter.convertDurationToTimeInterval(duration)
+            duration: DurationConverter.convertDurationToTimeInterval(duration),
+            icon: icon
         )
         
         // Save created service to core data
@@ -65,6 +66,7 @@ private extension NewServiceViewModel {
         name = ""
         price = ""
         duration = Date(timeIntervalSince1970: 3600) // 1h in seconds
+        icon = StudioTheme.serviceDefaultImage
     }
     
     func setFields(from service: Service?) {
@@ -72,6 +74,7 @@ private extension NewServiceViewModel {
         name = service.type
         price = StringConverter.convertDoubleToString(service.price)
         duration = DurationConverter.convertDurationToDate(service.duration)
+        icon = service.icon
     }
     
     func updateIconBasedOnName(_ name: String?) {

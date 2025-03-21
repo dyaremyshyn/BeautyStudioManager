@@ -45,12 +45,14 @@ class AppointmentServicePersistenceService: AppointmentServicePersistenceLoader 
                     entity.name = service.type
                     entity.price = service.price
                     entity.duration = service.duration
+                    entity.icon = service.icon
                 } else {
                     let newEntry = ServiceEntity(context: context)
                     newEntry.id = service.id
                     newEntry.name = service.type
                     newEntry.price = service.price
                     newEntry.duration = service.duration
+                    newEntry.icon = service.icon
                 }
                 try context.save()
                 appointmentServiceUpdatedSubject.send(())

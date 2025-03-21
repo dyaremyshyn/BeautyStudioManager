@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ServiceViewCell: UITableViewCell {
     static let reuseIdentifier = String(describing: ServiceViewCell.self)
@@ -48,6 +49,12 @@ class ServiceViewCell: UITableViewCell {
         return label
     }()
     
+    private lazy var iconHostingController: UIHostingController<ServiceImage> = {
+        let hostingController = UIHostingController(rootView: ServiceImage(icon: StudioTheme.serviceDefaultImage))
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        return hostingController
+    }()
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
@@ -67,6 +74,7 @@ class ServiceViewCell: UITableViewCell {
     private func setupView() {
         selectionStyle = .none
         contentView.addSubview(containerView)
+        containerView.addSubview(iconHostingController.view)
         containerView.addSubview(appointmentTypeNameLabel)
         containerView.addSubview(appointmentDurationLabel)
         containerView.addSubview(appointmentPriceLabel)
@@ -76,28 +84,36 @@ class ServiceViewCell: UITableViewCell {
         containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
         containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
         
+        iconHostingController.view.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8).isActive = true
+        iconHostingController.view.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        iconHostingController.view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10).isActive = true
+        iconHostingController.view.widthAnchor.constraint(equalToConstant: 55).isActive = true
+        iconHostingController.view.heightAnchor.constraint(equalToConstant: 55).isActive = true
+        iconHostingController.view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8).isActive = true
+        
         appointmentPriceLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         appointmentPriceLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         appointmentPriceLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
         
         appointmentTypeNameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8).isActive = true
-        appointmentTypeNameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8).isActive = true
+        appointmentTypeNameLabel.leadingAnchor.constraint(equalTo: iconHostingController.view.trailingAnchor, constant: 8).isActive = true
         appointmentTypeNameLabel.trailingAnchor.constraint(equalTo: appointmentPriceLabel.leadingAnchor, constant: -8).isActive = true
         
         appointmentDurationLabel.topAnchor.constraint(equalTo: appointmentTypeNameLabel.bottomAnchor, constant: 5).isActive = true
-        appointmentDurationLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8).isActive = true
+        appointmentDurationLabel.leadingAnchor.constraint(equalTo: iconHostingController.view.trailingAnchor, constant: 8).isActive = true
         appointmentDurationLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8).isActive = true
     }
     
-    public func configure(model: Service) {
+    func configure(model: Service) {
         appointmentTypeNameLabel.text = model.type
         appointmentPriceLabel.text = "\(model.price)€"
         appointmentDurationLabel.text = formattedDuration(from: TimeInterval(floatLiteral: model.duration))
+        iconHostingController.rootView = ServiceImage(icon: model.icon)
     }
 }
 
-extension ServiceViewCell {
-    private func formattedDuration(from timeInterval: TimeInterval) -> String {
+private extension ServiceViewCell {
+    func formattedDuration(from timeInterval: TimeInterval) -> String {
         let minutes = Int(timeInterval) / 60 % 60
         let hours = Int(timeInterval) / 3600
 
