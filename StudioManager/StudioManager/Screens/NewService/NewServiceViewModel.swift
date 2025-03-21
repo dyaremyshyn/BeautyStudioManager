@@ -15,6 +15,9 @@ class NewServiceViewModel: ObservableObject {
     @Published var icon: String = StudioTheme.serviceDefaultImage
     @Published var validationErrors: [ServiceValidationError] = []
     @Published var showToast: Bool = false
+    @Published var showIconPicker: Bool = false
+    @Published var pickerViewModel = IconPickerViewModel()
+
     private var subscriptions: [AnyCancellable] = []
     
     @Published private(set) var service: Service?
@@ -30,11 +33,17 @@ class NewServiceViewModel: ObservableObject {
             }
             .store(in: &subscriptions)
         
+        $name
+            .sink { [weak self] name in
+                self?.updateIconBasedOnName(name)
+            }
+            .store(in: &subscriptions)
+        
         resetAllFields()
         setFields(from: service)
     }
     
-    public func saveService() {
+    func saveService() {
         let calendar = Calendar.current
         let hours = calendar.component(.hour, from: duration)
         let minutes = calendar.component(.minute, from: duration)
@@ -56,17 +65,36 @@ class NewServiceViewModel: ObservableObject {
         // Reset all fields
         resetAllFields()
     }
-    
-    private func resetAllFields() {
+}
+
+private extension NewServiceViewModel {
+    func resetAllFields() {
         name = ""
         price = ""
         duration = Date(timeIntervalSince1970: 0)
     }
     
-    private func setFields(from service: Service?) {
+    func setFields(from service: Service?) {
         guard let service else { return }
         name = service.type
         price = String(service.price)
         duration = Date(timeIntervalSince1970: service.duration)
+    }
+    
+    func updateIconBasedOnName(_ name: String?) {
+        guard let name else {
+            self.icon = StudioTheme.serviceDefaultImage
+            return
+        }
+        
+        pickerViewModel.searchText = name
+        if let matchedIcon = pickerViewModel.iconFilter.first {
+            icon = matchedIcon
+            if !pickerViewModel.inputIcons.contains(matchedIcon) {
+                pickerViewModel.inputIcons.append(matchedIcon)
+            }
+        } else {
+            icon = StudioTheme.serviceDefaultImage
+        }
     }
 }

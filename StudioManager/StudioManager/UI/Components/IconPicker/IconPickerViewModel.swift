@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import Observation
 
 @Observable class IconPickerViewModel {
     var inputIcons: [String] = []
@@ -29,7 +28,7 @@ import Observation
             "lifting": ["lifting", "pestanas", "lifting de pestanas"],
         ],
         "eyebrows": [
-            "eyebrows": ["eyebrows", "sobrancelhas", "sobrancelhas a linha"],
+            "eyebrows": ["eyebrows", "sobrancelhas", "sobrancelha", "sobrancelhas a linha"],
         ],
     ]
     var searchText: String = ""

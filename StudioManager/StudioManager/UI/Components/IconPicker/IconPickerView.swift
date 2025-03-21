@@ -17,56 +17,66 @@ struct IconPickerView: View {
         NavigationStack{
             ScrollView {
                 if !viewModel.inputIcons.isEmpty {
-                    VStack(alignment: .leading, spacing: 24) {
-                        Text(tr.suggestionsSubtitle)
-                            .font(.headline)
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(viewModel.inputIcons, id: \.self) { icon in
-                                    Image(icon)
-                                        .padding(10)
-                                        .font(.system(size: 20))
-                                        .onTapGesture {
-                                            selectedIcon = icon
-                                            dismiss()
-                                        }
-                                }
-                                .frame(width: 60, height: 60)
-                                .background(.ultraThinMaterial, in: Circle())
-                            }
-                        }
-                    }
-                    .safeAreaPadding(.leading)
+                    suggestionsSection()
                 }
                 
-                VStack(alignment: .leading) {
-                    let filteredSections = viewModel.filteredSections(searchText: pickerSearchText)
-                    ForEach(filteredSections.keys.sorted(), id: \.self) { section in
-                        Text(section)
-                            .font(.headline)
-                            .padding(.leading)
-                            .padding(.top)
-                        LazyVGrid(columns: Array(repeating: GridItem(), count: 5)) {
-                            ForEach(filteredSections[section] ?? [], id: \.self) { icon in
-                                Image(icon)
-                                    .padding(10)
-                                    .font(.system(size: 20))
-                                    .onTapGesture {
-                                        selectedIcon = icon
-                                        dismiss()
-                                    }
-                                    .frame(width: 60, height: 60)
-                                    .background(.ultraThinMaterial, in: Circle())
-                            }
-                        }
-                    }
-                }
-                .searchable(text: $pickerSearchText)
-                .safeAreaPadding()
+                filteredSections()
+                    .searchable(text: $pickerSearchText)
+                    .safeAreaPadding()
             }
         }
         .navigationTitle(tr.iconsTitle)
         .padding(.horizontal)
+    }
+}
+
+private extension IconPickerView {
+    @ViewBuilder func filteredSections() -> some View {
+        VStack(alignment: .leading) {
+            let filteredSections = viewModel.filteredSections(searchText: pickerSearchText)
+            ForEach(filteredSections.keys.sorted(), id: \.self) { section in
+                Text(section)
+                    .font(.headline)
+                    .padding(.leading)
+                    .padding(.top)
+                LazyVGrid(columns: Array(repeating: GridItem(), count: 5)) {
+                    ForEach(filteredSections[section] ?? [], id: \.self) { icon in
+                        Image(icon)
+                            .padding(10)
+                            .font(.system(size: 20))
+                            .onTapGesture {
+                                selectedIcon = icon
+                                dismiss()
+                            }
+                            .veryBigSize()
+                            .background(.ultraThinMaterial, in: Circle())
+                    }
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder func suggestionsSection() -> some View {
+        VStack(alignment: .leading, spacing: StudioTheme.spacing24) {
+            Text(tr.suggestionsSubtitle)
+                .font(.headline)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(viewModel.inputIcons, id: \.self) { icon in
+                        Image(icon)
+                            .padding(10)
+                            .font(.system(size: 20))
+                            .onTapGesture {
+                                selectedIcon = icon
+                                dismiss()
+                            }
+                    }
+                    .veryBigSize()
+                    .background(.ultraThinMaterial, in: Circle())
+                }
+            }
+        }
+        .safeAreaPadding(.leading)
     }
 }
 
