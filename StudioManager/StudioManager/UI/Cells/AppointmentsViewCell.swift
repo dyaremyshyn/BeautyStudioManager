@@ -111,7 +111,7 @@ class AppointmentsViewCell: UITableViewCell {
         clientNameLabel.text = model.name
         appointmentTypeLabel.text = model.type
         appointmentDateLabel.text = model.date.appointmentDate
-        appointmentDurationLabel.text = model.date.appointmentDateTime + " - " + model.date.addingTimeInterval(3600).appointmentDateTime
+        appointmentDurationLabel.text = model.date.appointmentDateTime + " - " + model.endDate.appointmentDateTime
         inResidenceLabel.text = model.inResidence ? tr.appointmentAtHome : .none
     }
 }
