@@ -33,10 +33,12 @@ enum StudioTheme {
     static let cr2: CGFloat = 2.0
     static let cr4: CGFloat = 4.0
     static let cr8: CGFloat = 8.0
+    static let cr10: CGFloat = 10.0
     
     /// Opacity
     static let opacity06: CGFloat = 0.6
     static let opacity05: CGFloat = 0.5
+    static let opacity01: CGFloat = 0.1
     
     /// Line Width
     static let lineWidth1: CGFloat = 1

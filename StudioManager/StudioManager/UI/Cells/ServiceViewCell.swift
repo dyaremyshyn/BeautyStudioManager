@@ -12,15 +12,7 @@ class ServiceViewCell: UITableViewCell {
     static let reuseIdentifier = String(describing: ServiceViewCell.self)
     
     private lazy var containerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 10
-        view.backgroundColor = .systemBackground
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.1
-        view.layer.shadowOffset = CGSize(width: 0, height: 2)
-        view.layer.shadowRadius = 4
-        view.layer.masksToBounds = false
+        let view = CardView()
         return view
     }()
     
@@ -69,6 +61,7 @@ class ServiceViewCell: UITableViewCell {
         appointmentTypeNameLabel.text = ""
         appointmentPriceLabel.text = ""
         appointmentDurationLabel.text = ""
+        iconHostingController.rootView = ServiceImage(icon: StudioTheme.serviceDefaultImage)
     }
     
     private func setupView() {
