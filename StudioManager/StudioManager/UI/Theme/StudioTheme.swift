@@ -45,4 +45,5 @@ enum StudioTheme {
     /// Images
     static let emptyImage = "text.page.slash"
     static let successImage = "checkmark.circle"
+    static let serviceDefaultImage = "default"
 }

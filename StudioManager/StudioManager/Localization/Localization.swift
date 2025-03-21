@@ -98,3 +98,9 @@ extension tr {
     static let invalidDuration = t("invalidDuration")
     static let emptyServicesDescription = t("emptyServicesDescription")
 }
+
+// MARK: Icon Picker
+extension tr {
+    static let iconsTitle = t("iconsTitle")
+    static let suggestionsSubtitle = t("suggestionsSubtitle")
+}

@@ -12,6 +12,7 @@ class NewServiceViewModel: ObservableObject {
     @Published var name: String!
     @Published var price: String!
     @Published var duration: Date!
+    @Published var icon: String = StudioTheme.serviceDefaultImage
     @Published var validationErrors: [ServiceValidationError] = []
     @Published var showToast: Bool = false
     private var subscriptions: [AnyCancellable] = []

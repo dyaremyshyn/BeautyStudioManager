@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "hairstyles.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

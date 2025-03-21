@@ -664,6 +664,23 @@
         }
       }
     },
+    "iconsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icons"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icons"
+          }
+        }
+      }
+    },
     "incomeTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -863,7 +880,7 @@
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nome da Despesa"
+            "value" : "Nome do Serviço"
           }
         }
       }
@@ -915,6 +932,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sucesso"
+          }
+        }
+      }
+    },
+    "suggestionsSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suggestions"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sugestões"
           }
         }
       }
