@@ -100,24 +100,7 @@ class ServiceViewCell: UITableViewCell {
     func configure(model: Service) {
         appointmentTypeNameLabel.text = model.type
         appointmentPriceLabel.text = "\(model.price)€"
-        appointmentDurationLabel.text = formattedDuration(from: TimeInterval(floatLiteral: model.duration))
+        appointmentDurationLabel.text = DurationConverter.formattedDuration(model.duration)
         iconHostingController.rootView = ServiceImage(icon: model.icon)
-    }
-}
-
-private extension ServiceViewCell {
-    func formattedDuration(from timeInterval: TimeInterval) -> String {
-        let minutes = Int(timeInterval) / 60 % 60
-        let hours = Int(timeInterval) / 3600
-
-        if hours > 0 {
-            if minutes > 0 {
-                return "\(hours) hora\(hours > 1 ? "s" : "") e \(minutes) minuto\(minutes > 1 ? "s" : "")"
-            } else {
-                return "\(hours) hora\(hours > 1 ? "s" : "")"
-            }
-        } else {
-            return "\(minutes) minuto\(minutes > 1 ? "s" : "")"
-        }
     }
 }

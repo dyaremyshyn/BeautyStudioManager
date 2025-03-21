@@ -23,4 +23,22 @@ struct DurationConverter {
         Date(timeIntervalSince1970: duration)
     }
         
+    static func formattedDuration(_ duration: Double) -> String {
+        let timeInterval = TimeInterval(duration)
+        let totalMinutes = Int(timeInterval) / 60
+        let hours = totalMinutes / 60
+        let minutes = totalMinutes % 60
+        
+        var components: [String] = []
+        
+        if hours > 0 {
+            components.append("\(hours) hora\(hours > 1 ? "s" : "")")
+        }
+        
+        if minutes > 0 || components.isEmpty {
+            components.append("\(minutes) minuto\(minutes > 1 ? "s" : "")")
+        }
+        
+        return components.joined(separator: " e ")
+    }
 }
