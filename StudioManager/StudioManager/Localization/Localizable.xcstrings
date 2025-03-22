@@ -364,13 +364,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty Client Name"
+            "value" : "Empty client name"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nome da Cliente Vazio"
+            "value" : "Nome da cliente vazio"
           }
         }
       }
@@ -381,13 +381,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty Name"
+            "value" : "Empty name"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nome Vazio"
+            "value" : "Nome vazio"
           }
         }
       }
@@ -398,13 +398,30 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty Price"
+            "value" : "Empty price"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Preço Vazio "
+            "value" : "Preço vazio "
+          }
+        }
+      }
+    },
+    "emptyPricePerKm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empty price per Km"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preço por Km vazio"
           }
         }
       }
@@ -422,6 +439,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lista de serviços vazia"
+          }
+        }
+      }
+    },
+    "emptyTotalDistance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empty total distance"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distancia total vazia"
           }
         }
       }
@@ -885,6 +919,23 @@
         }
       }
     },
+    "pricePerKm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Price per Km"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preço por Km"
+          }
+        }
+      }
+    },
     "save" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1051,6 +1102,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sugestões"
+          }
+        }
+      }
+    },
+    "totalDistance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total distance in Kms"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distancia total em Kms"
           }
         }
       }

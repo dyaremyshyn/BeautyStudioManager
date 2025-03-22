@@ -43,6 +43,16 @@ public struct NewAppointmentView: View {
                                 .font(.body)
                         }
                     }
+                    if viewModel.inResidence {
+                        Section(tr.pricePerKm){
+                            textField(tr.pricePerKm, text: $viewModel.pricePerKm, errors: [.emptyPricePerKm])
+                                .keyboardType(.numbersAndPunctuation)
+                        }
+                        Section(tr.totalDistance) {
+                            textField(tr.totalDistance, text: $viewModel.totalDistance, errors: [.emptyTotalDistance])
+                                    .keyboardType(.numbersAndPunctuation)
+                        }
+                    }
                 }
                 StudioButton(title: tr.save, enabled: viewModel.validationErrors.isEmpty, action: viewModel.saveAppointment)
                     .padding(.bottom, 20)
@@ -86,6 +96,8 @@ private extension AppointmentValidationError {
         case .emptyClientName: return tr.emptyClientName
         case .emptyPrice: return tr.emptyPrice
         case .invalidDate: return tr.invalidDate
+        case .emptyPricePerKm: return tr.emptyPricePerKm
+        case .emptyTotalDistance: return tr.emptyTotalDistance
         }
     }
 }

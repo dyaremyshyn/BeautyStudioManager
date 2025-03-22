@@ -63,6 +63,10 @@ extension tr {
     static let emptyClientName = t("emptyClientName")
     static let appointmentAddedSuccessfully = t("appointmentAddedSuccessfully")
     static let addServices = t("addServices")
+    static let pricePerKm = t("pricePerKm")
+    static let totalDistance = t("totalDistance")
+    static let emptyPricePerKm = t("emptyPricePerKm")
+    static let emptyTotalDistance = t("emptyTotalDistance")
 }
 
 // MARK: Expense view

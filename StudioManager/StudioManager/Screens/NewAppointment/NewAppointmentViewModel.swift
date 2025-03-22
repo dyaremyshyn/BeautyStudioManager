@@ -10,18 +10,22 @@ import Combine
 
 class NewAppointmentViewModel: ObservableObject {
     private var allServices: [Service] = []
-    public private(set) var servicesTypes: [String] = []
+    private(set) var servicesTypes: [String] = []
     @Published private(set) var appointment: StudioAppointment?
     @Published var clientName: String!
     @Published var clientPhoneNumber: String!
     @Published var appointmentDate: Date!
     @Published var price: String!
     @Published var inResidence: Bool!
+    @Published var pricePerKm: String!
+    @Published var totalDistance: String!
+    private var servicePrice: Double = 0
     private var duration: Double = 0
     private var icon: String = StudioTheme.serviceDefaultImage
     @Published var type: String = "Studio" {
         didSet {
-            price = allServices.first(where: { $0.type == type })?.price.formatted() ?? ""
+            servicePrice = allServices.first(where: { $0.type == type })?.price ?? 0
+            price = servicePrice.formatted()
             duration = allServices.first(where: { $0.type == type })?.duration ?? 0
             icon = allServices.first(where: { $0.type == type})?.icon ?? StudioTheme.serviceDefaultImage
         }
@@ -42,16 +46,7 @@ class NewAppointmentViewModel: ObservableObject {
         self.appointmentsPersistenceService = appointmentsPersistenceService
         self.servicesPersistenceService = servicesPersistenceService
         
-        self.servicesPersistenceService.appointmentServiceUpdatedPublisher
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: appointmentServiceUpdated)
-            .store(in: &subscriptions)
-        
-        Publishers.CombineLatest3($clientName, $price, $appointmentDate)
-            .sink { [weak self] name, price, date in
-                self?.validationErrors = AppointmentValidator.validate(name: name, price: price, date: date)
-            }
-            .store(in: &subscriptions)
+        bind()
         
         fetchData()
         resetFields()
@@ -96,6 +91,8 @@ private extension NewAppointmentViewModel {
         duration = 0
         type = servicesTypes.first ?? ""
         inResidence = false
+        pricePerKm = StringConverter.convertDoubleToString(StudioTheme.pricePerKm)
+        totalDistance = ""
     }
     
     func setFields(from appointment: StudioAppointment?) {
@@ -110,5 +107,45 @@ private extension NewAppointmentViewModel {
     
     func appointmentServiceUpdated() {
         fetchData()
+    }
+    
+    func bind() {
+        self.servicesPersistenceService.appointmentServiceUpdatedPublisher
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: appointmentServiceUpdated)
+            .store(in: &subscriptions)
+        
+        Publishers.CombineLatest($clientName, $price)
+            .combineLatest($appointmentDate)
+            .combineLatest($pricePerKm)
+            .combineLatest($totalDistance)
+            .sink { [weak self] (arg0, totalDistance) in
+                let (((clientName, price), appointmentDate), pricePerKm) = arg0
+                let form = AppointmentValidator.Form(
+                    name: clientName,
+                    price: price,
+                    date: appointmentDate,
+                    pricePerKm: pricePerKm,
+                    totalDistance: totalDistance
+                )
+                self?.validationErrors = AppointmentValidator.validate(form: form)
+            }
+            .store(in: &subscriptions)
+        
+        Publishers.CombineLatest($pricePerKm, $totalDistance)
+            .sink { [weak self] pricePerKm, totalDistance in
+                guard let self else { return }
+                let pricePerKmValue = pricePerKm ?? ""
+                let totalDistanceValue = totalDistance ?? ""
+                calculateAppointmentTotalCost(pricePerKm: pricePerKmValue, totalDistance: totalDistanceValue)
+            }
+            .store(in: &subscriptions)
+    }
+    
+    func calculateAppointmentTotalCost(pricePerKm: String, totalDistance: String) {
+        let pricePerKm = StringConverter.convertStringToDouble(pricePerKm)
+        let totalDistance = StringConverter.convertStringToDouble(totalDistance)
+        let totalCost = pricePerKm * totalDistance + servicePrice
+        self.price = StringConverter.convertDoubleToString(totalCost)
     }
 }

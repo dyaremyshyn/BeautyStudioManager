@@ -10,15 +10,27 @@ import Foundation
 enum AppointmentValidationError {
     case emptyClientName
     case emptyPrice
+    case emptyPricePerKm
+    case emptyTotalDistance
     case invalidDate
 }
 
 enum AppointmentValidator {
-    static func validate(name: String?, price: String?, date: Date?) -> [AppointmentValidationError] {
+    public struct Form {
+        let name: String?
+        let price: String?
+        let date: Date?
+        let pricePerKm: String?
+        let totalDistance: String?
+    }
+    
+    static func validate(form: Form) -> [AppointmentValidationError] {
         [
-            validate(name: name),
-            validate(price: price),
-            validate(date: date)
+            validate(name: form.name),
+            validate(price: form.price),
+            validate(date: form.date),
+            validate(pricePerKm: form.pricePerKm),
+            validate(totalDistance: form.totalDistance)
         ].compactMap { $0 }
     }
 }
@@ -35,6 +47,14 @@ private extension AppointmentValidator {
     static func validate(date: Date?) -> AppointmentValidationError? {
         guard let date else { return .invalidDate }
         return date <= Date() ? .invalidDate : nil
+    }
+    
+    static func validate(pricePerKm: String?) -> AppointmentValidationError? {
+        return isEmptyField(pricePerKm) ? .emptyPricePerKm : nil
+    }
+    
+    static func validate(totalDistance: String?) -> AppointmentValidationError? {
+        return isEmptyField(totalDistance) ? .emptyTotalDistance : nil
     }
     
     static func isEmptyField(_ field: String?) -> Bool {
