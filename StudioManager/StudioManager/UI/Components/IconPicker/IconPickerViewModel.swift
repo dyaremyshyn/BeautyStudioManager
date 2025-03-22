@@ -10,34 +10,7 @@ import SwiftUI
 
 @Observable class IconPickerViewModel {
     var inputIcons: [String] = []
-    var iconSections: [String: [String: [String]]] = [
-        tr.makeupService: [
-            "makeup": ["make", "makeup", "maquilhagem", "maquiagem", "embelezamento", "cosméticos", "estética"],
-            "bride": ["bride", "casamento", "noiva", "noivo", "união", "noivas"],
-        ],
-        tr.hairstylesService: [
-            "hairstyles": ["hair", "hairstyle", "hairstyles", "cabelo", "penteado", "penteados", "cabelos"],
-        ],
-        tr.nailsService: [
-            "nails": ["nails", "unhas", "unhas verniz", "unhas verniz gel", "unhas de gel", "unhas gel", "gel", "verniz", "unhas acrilico", "unhas de acrilico", "acrilico"],
-        ],
-        tr.skincareService: [
-            "skincare": ["skincare", "pele", "cuidado com a pele", "limpeza da pele", "saúde da pele", "limpeza"],
-        ],
-        tr.liftingService: [
-            "lifting": ["lifting", "pestanas", "lifting de pestanas"],
-        ],
-        tr.eyebrowsService: [
-            "eyebrows": ["eyebrows", "sobrancelhas", "sobrancelha", "sobrancelhas a linha"],
-        ],
-    ]
     var searchText: String = ""
-    var pickerSearchText: String = ""
-    
-    var defaultIcons: [String] {
-        iconSections.values.flatMap { $0.keys }
-    }
-    
     var iconFilter: [String] {
         let lowercaseInput = searchText.lowercased().trimmingCharacters(in: .whitespaces)
         
@@ -86,5 +59,31 @@ import SwiftUI
             }
         }
         return filteredSections
+    }
+}
+
+private extension IconPickerViewModel {
+    var iconSections: [String: [String: [String]]] {
+        [
+            tr.makeupService: [
+                "makeup": ["make", "makeup", "maquilhagem", "maquiagem", "embelezamento", "cosméticos", "estética"],
+                "bride": ["bride", "casamento", "noiva", "noivo", "união", "noivas"],
+            ],
+            tr.hairstylesService: [
+                "hairstyles": ["hair", "hairstyle", "hairstyles", "cabelo", "penteado", "penteados", "cabelos"],
+            ],
+            tr.nailsService: [
+                "nails": ["nails", "unhas", "unhas verniz", "unhas verniz gel", "unhas de gel", "unhas gel", "gel", "verniz", "unhas acrilico", "unhas de acrilico", "acrilico"],
+            ],
+            tr.skincareService: [
+                "skincare": ["skincare", "pele", "cuidado com a pele", "limpeza da pele", "saúde da pele", "limpeza"],
+            ],
+            tr.liftingService: [
+                "lifting": ["lifting", "pestanas", "lifting de pestanas"],
+            ],
+            tr.eyebrowsService: [
+                "eyebrows": ["eyebrows", "sobrancelhas", "sobrancelha", "sobrancelhas a linha"],
+            ],
+        ]
     }
 }
