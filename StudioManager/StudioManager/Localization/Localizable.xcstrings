@@ -579,6 +579,23 @@
         }
       }
     },
+    "eyebrowsService" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eyebrows"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sobrancelhas"
+          }
+        }
+      }
+    },
     "filterAll" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -664,6 +681,23 @@
         }
       }
     },
+    "hairstylesService" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hairstyle"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Penteado"
+          }
+        }
+      }
+    },
     "iconsTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -728,6 +762,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Duração Inválida"
+          }
+        }
+      }
+    },
+    "liftingService" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lifting"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lifting"
+          }
+        }
+      }
+    },
+    "makeupService" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Makeup"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maquilhagem"
+          }
+        }
+      }
+    },
+    "nailsService" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nails"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unhas"
           }
         }
       }
@@ -915,6 +1000,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Serviços"
+          }
+        }
+      }
+    },
+    "skincareService" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skincare"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limpeza de pele"
           }
         }
       }

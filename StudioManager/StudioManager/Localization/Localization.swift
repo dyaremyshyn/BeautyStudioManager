@@ -97,6 +97,12 @@ extension tr {
     static let serviceAddedSuccessfully = t("serviceAddedSuccessfully")
     static let invalidDuration = t("invalidDuration")
     static let emptyServicesDescription = t("emptyServicesDescription")
+    static let makeupService = t("makeupService")
+    static let hairstylesService = t("hairstylesService")
+    static let nailsService = t("nailsService")
+    static let skincareService = t("skincareService")
+    static let liftingService = t("liftingService")
+    static let eyebrowsService = t("eyebrowsService")
 }
 
 // MARK: Icon Picker

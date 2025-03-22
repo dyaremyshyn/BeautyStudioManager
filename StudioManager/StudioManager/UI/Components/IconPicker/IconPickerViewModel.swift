@@ -11,23 +11,23 @@ import SwiftUI
 @Observable class IconPickerViewModel {
     var inputIcons: [String] = []
     var iconSections: [String: [String: [String]]] = [
-        "makeup": [
-            "makeup": ["makeup", "maquilhagem", "maquiagem", "embelezamento", "cosméticos", "estética"],
+        tr.makeupService: [
+            "makeup": ["make", "makeup", "maquilhagem", "maquiagem", "embelezamento", "cosméticos", "estética"],
             "bride": ["bride", "casamento", "noiva", "noivo", "união", "noivas"],
         ],
-        "hair": [
-            "hairstyles": ["hair", "cabelo", "penteado", "penteados", "cabelos"],
+        tr.hairstylesService: [
+            "hairstyles": ["hair", "hairstyle", "hairstyles", "cabelo", "penteado", "penteados", "cabelos"],
         ],
-        "nails": [
+        tr.nailsService: [
             "nails": ["nails", "unhas", "unhas verniz", "unhas verniz gel", "unhas de gel", "unhas gel", "gel", "verniz", "unhas acrilico", "unhas de acrilico", "acrilico"],
         ],
-        "skin care": [
+        tr.skincareService: [
             "skincare": ["skincare", "pele", "cuidado com a pele", "limpeza da pele", "saúde da pele", "limpeza"],
         ],
-        "lifting": [
+        tr.liftingService: [
             "lifting": ["lifting", "pestanas", "lifting de pestanas"],
         ],
-        "eyebrows": [
+        tr.eyebrowsService: [
             "eyebrows": ["eyebrows", "sobrancelhas", "sobrancelha", "sobrancelhas a linha"],
         ],
     ]
