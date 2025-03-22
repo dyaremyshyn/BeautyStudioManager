@@ -18,10 +18,12 @@ class NewAppointmentViewModel: ObservableObject {
     @Published var price: String!
     @Published var inResidence: Bool!
     private var duration: Double = 0
+    private var icon: String = StudioTheme.serviceDefaultImage
     @Published var type: String = "Studio" {
         didSet {
             price = allServices.first(where: { $0.type == type })?.price.formatted() ?? ""
             duration = allServices.first(where: { $0.type == type })?.duration ?? 0
+            icon = allServices.first(where: { $0.type == type})?.icon ?? StudioTheme.serviceDefaultImage
         }
     }
     
@@ -72,7 +74,8 @@ class NewAppointmentViewModel: ObservableObject {
             name: clientName,
             phoneNumber: clientPhoneNumber,
             duration: duration,
-            addedToCalendar: false
+            addedToCalendar: false,
+            icon: icon
         )
         
         // Save created appointment to core data

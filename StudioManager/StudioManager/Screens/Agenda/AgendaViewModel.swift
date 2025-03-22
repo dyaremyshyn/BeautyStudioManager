@@ -24,10 +24,6 @@ class AgendaViewModel: ObservableObject {
     public func fetchAppointments() {
         allAppointments = persistenceService.fetchAll()
         errorMessage = nil
-        
-#if DEBUG
-//        allAppointments = allAppointments.count == 0 ? Appointment.allCustomers : allAppointments
-#endif
         filterAppointments(by: filterCalendar)
     }
     
@@ -78,7 +74,8 @@ class AgendaViewModel: ObservableObject {
             name: appointment.name,
             phoneNumber: appointment.phoneNumber,
             duration: appointment.duration,
-            addedToCalendar: true
+            addedToCalendar: true,
+            icon: appointment.icon
         )
         self.allAppointments[index] = updatedAppointment
         persistenceService.add(appointment: updatedAppointment)

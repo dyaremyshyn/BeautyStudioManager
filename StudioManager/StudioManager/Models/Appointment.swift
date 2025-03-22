@@ -36,7 +36,8 @@ public struct Appointment {
         name: "Vera Nunes",
         phoneNumber: "912325234",
         duration: 3600,
-        addedToCalendar: false
+        addedToCalendar: false,
+        icon: StudioTheme.serviceDefaultImage
     )
     
     static let allCustomers = [
@@ -49,7 +50,8 @@ public struct Appointment {
             name: "Vera Nunes",
             phoneNumber: "912325234",
             duration: 3600,
-            addedToCalendar: false
+            addedToCalendar: false,
+            icon: StudioTheme.serviceDefaultImage
         ),
         StudioAppointment(
             id: UUID(),
@@ -60,7 +62,8 @@ public struct Appointment {
             name: "Anabela Nunes",
             phoneNumber: "912325234",
             duration: 3600,
-            addedToCalendar: false
+            addedToCalendar: false,
+            icon: StudioTheme.serviceDefaultImage
         ),
         StudioAppointment(
             id: UUID(),
@@ -71,7 +74,8 @@ public struct Appointment {
             name: "Patricia Nunes",
             phoneNumber: "912325234",
             duration: 3600,
-            addedToCalendar: false
+            addedToCalendar: false,
+            icon: StudioTheme.serviceDefaultImage
         ),
         StudioAppointment(
             id: UUID(),
@@ -82,7 +86,8 @@ public struct Appointment {
             name: "Clara Cruz",
             phoneNumber: "912325234",
             duration: 3600,
-            addedToCalendar: false
+            addedToCalendar: false,
+            icon: StudioTheme.serviceDefaultImage
         ),
         StudioAppointment(
             id: UUID(),
@@ -93,7 +98,8 @@ public struct Appointment {
             name: "Marilia Prima",
             phoneNumber: "912325234",
             duration: 3600,
-            addedToCalendar: false
+            addedToCalendar: false,
+            icon: StudioTheme.serviceDefaultImage
         )
     ]
 }

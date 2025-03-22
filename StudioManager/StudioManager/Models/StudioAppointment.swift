@@ -21,6 +21,7 @@ public struct StudioAppointment: Equatable, Identifiable, Hashable {
     let phoneNumber: String?
     let duration: Double
     let addedToCalendar: Bool
+    let icon: String
         
     public static func map(appointment: StudioEntity) -> StudioAppointment {
         StudioAppointment(
@@ -32,7 +33,8 @@ public struct StudioAppointment: Equatable, Identifiable, Hashable {
             name: appointment.name ?? "Sem nome",
             phoneNumber: appointment.phoneNumber,
             duration: appointment.duration,
-            addedToCalendar: appointment.addedToCalendar
+            addedToCalendar: appointment.addedToCalendar,
+            icon: appointment.icon ?? StudioTheme.serviceDefaultImage
         )
     }
 }
