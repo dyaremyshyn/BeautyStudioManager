@@ -20,7 +20,9 @@ struct DurationConverter {
     }
     
     static func convertDurationToDate(_ duration: Double) -> Date {
-        Date(timeIntervalSince1970: duration)
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: Date())
+        return startOfDay.addingTimeInterval(duration)
     }
         
     static func formattedDuration(_ duration: Double) -> String {
