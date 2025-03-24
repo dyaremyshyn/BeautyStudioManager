@@ -33,6 +33,9 @@ public struct NewServiceView: View {
         .sheet(isPresented: $viewModel.showIconPicker) {
             IconPickerView(viewModel: $viewModel.pickerViewModel, selectedIcon: $viewModel.icon)
         }
+        .onAppear {
+            UIDatePicker.appearance().minuteInterval = 5
+        }
     }
 }
 
