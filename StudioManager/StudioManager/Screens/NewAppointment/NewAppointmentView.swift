@@ -53,9 +53,8 @@ public struct NewAppointmentView: View {
                                     .keyboardType(.numbersAndPunctuation)
                         }
                     }
+                    StudioButton(title: tr.save, enabled: viewModel.validationErrors.isEmpty, action: viewModel.saveAppointment)
                 }
-                StudioButton(title: tr.save, enabled: viewModel.validationErrors.isEmpty, action: viewModel.saveAppointment)
-                    .padding(.bottom, 20)
             }
             .toast(isVisible: $viewModel.showToast, text: tr.appointmentAddedSuccessfully, image: StudioTheme.successImage)
         }
