@@ -53,13 +53,13 @@ class NewAppointmentViewModel: ObservableObject {
         setFields(from: appointment)
     }
     
-    public func fetchData() {
+    func fetchData() {
         allServices = servicesPersistenceService.fetchAll()
         servicesTypes = allServices.map { $0.type }.filter { !$0.isEmpty }
         type = servicesTypes.first ?? ""
     }
     
-    public func saveAppointment() {
+    func saveAppointment() {
         let appointment = StudioAppointment(
             id: self.appointment?.id ?? UUID(),
             date: appointmentDate,
@@ -105,10 +105,6 @@ private extension NewAppointmentViewModel {
         self.inResidence = appointment.inResidence
     }
     
-    func appointmentServiceUpdated() {
-        fetchData()
-    }
-    
     func bind() {
         self.servicesPersistenceService.appointmentServiceUpdatedPublisher
             .receive(on: DispatchQueue.main)
@@ -140,6 +136,10 @@ private extension NewAppointmentViewModel {
                 calculateAppointmentTotalCost(pricePerKm: pricePerKmValue, totalDistance: totalDistanceValue)
             }
             .store(in: &subscriptions)
+    }
+    
+    func appointmentServiceUpdated() {
+        fetchData()
     }
     
     func calculateAppointmentTotalCost(pricePerKm: String, totalDistance: String) {

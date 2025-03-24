@@ -12,6 +12,7 @@ public protocol AppointmentServicePersistenceLoader {
     var appointmentServiceUpdatedPublisher: AnyPublisher<Void, Never> { get }
     
     func fetchAll() -> [Service]
+    func getService(for id: UUID) -> Service?
     func add(service: Service)
     func delete(service: Service) -> Bool
 }

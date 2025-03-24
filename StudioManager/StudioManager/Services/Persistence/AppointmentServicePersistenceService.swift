@@ -35,6 +35,23 @@ class AppointmentServicePersistenceService: AppointmentServicePersistenceLoader 
         return services
     }
     
+    func getService(for id: UUID) -> Service? {
+        var service: Service?
+        context.performAndWait {
+            let request = NSFetchRequest<ServiceEntity>(entityName: AppointmentServicePersistenceService.typeEntity)
+            request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+            do {
+                let result = try context.fetch(request)
+                if let serviceEntity = result.first {
+                    service = Service.map(type: serviceEntity)
+                }
+            } catch {
+                print("Error fetching service: \(error)")
+            }
+        }
+        return service
+    }
+    
     func add(service: Service) {
         context.performAndWait {
             let request = NSFetchRequest<ServiceEntity>(entityName: AppointmentServicePersistenceService.typeEntity)
