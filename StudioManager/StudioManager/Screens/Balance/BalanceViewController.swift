@@ -91,7 +91,7 @@ public class BalanceViewController: UIViewController {
     }()
         
     private lazy var addExpenseButton: UIView = {
-        let studioButton = StudioButton(title: tr.addExpense, buttonType: .secondary, action: addExpensesButtonTapped)
+        let studioButton = StudioButton(title: tr.addExpense, buttonType: .secondary, destructive: true, action: addExpensesButtonTapped)
         let hostingController = UIHostingController(rootView: studioButton)
         addChild(hostingController)
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
