@@ -7,7 +7,6 @@ Beauty Studio Manager is a comprehensive application designed to help beauty stu
 - [Overview](#overview)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
-- [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -27,11 +26,14 @@ Beauty Studio Manager is built with a focus on simplicity and efficiency. The ap
 
 ## Features
 
+- **Agenda:**  
+  Check your appointments agenda for 'Today', 'Week', 'Month', 'All'.
+
 - **Service Creation and Editing:**  
   Easily add, edit, or remove beauty services.
 
 - **Appointment Booking:**  
-  Schedule appointments with automatic duration calculation (e.g., adding 1 hour to a 9 AM appointment will set the end time to 10 AM).
+  Schedule appointments with automatic duration calculation (e.g., adding 1 hour to a 9 AM appointment will set the end time to 10 AM). And in case you need to drive to your customer location the cost of travel is calculated for you based on Kms and cost per Km.
 
 - **Direct Calendar Integration:**  
   Add all created appointments directly to your device’s calendar for seamless scheduling and reminders.
@@ -47,6 +49,9 @@ Beauty Studio Manager is built with a focus on simplicity and efficiency. The ap
 
 - **Core Data Integration:**  
   Persist all data locally with Core Data for offline access and reliability.
+
+- **Balance**
+  In the Balance View, you can see which services are generating the most income, record your studio’s expenses, and have all the information automatically saved and displayed for you.
 
 ## Tech Stack
 
@@ -67,20 +72,6 @@ Beauty Studio Manager is built with a focus on simplicity and efficiency. The ap
 
 - **Xcode:**  
   The project is built and managed using Xcode.
-
-## Usage
-
-- **Manage Services:**  
-  Use the Services tab to add, edit, or remove the beauty services offered by your studio.
-
-- **Book Appointments:**  
-  In the Appointments section, select a service and schedule an appointment. The app automatically calculates the end time based on the service duration.
-
-- **Direct Calendar Integration:**  
-  Easily add all created appointments directly to your device’s calendar to help you keep track of your schedule.
-
-- **Check Balance:**  
-  The Balance tab provides an overview of your studio's income and expenses, helping you manage your finances effectively.
 
 ## Contributing
 
