@@ -51,4 +51,7 @@ enum StudioTheme {
     
     /// Distance
     static let pricePerKm: Double = 0.4
+    
+    /// Duration
+    static let defaultDuration = 3600.0
 }

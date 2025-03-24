@@ -27,25 +27,14 @@ class NewServiceViewModel: ObservableObject {
         self.service = service
         self.persistenceService = persistenceService
         
-        Publishers.CombineLatest3($name, $price, $duration)
-            .sink { [weak self] name, price, duration in
-                self?.validationErrors = ServiceValidator.validate(name: name, price: price, duration: duration)
-            }
-            .store(in: &subscriptions)
-        
-        $name
-            .sink { [weak self] name in
-                self?.updateIconBasedOnName(name)
-            }
-            .store(in: &subscriptions)
-        
+        bind()
         resetAllFields()
         setFields(from: service)
     }
     
     func saveService() {
         let service = Service(
-            id: UUID(),
+            id: service?.id ?? UUID(),
             type: name,
             price: StringConverter.convertStringToDouble(price),
             duration: DurationConverter.convertDurationToTimeInterval(duration),
@@ -65,7 +54,7 @@ private extension NewServiceViewModel {
     func resetAllFields() {
         name = ""
         price = ""
-        duration = Date(timeIntervalSince1970: 3600) // 1h in seconds
+        duration = Date(timeIntervalSince1970: StudioTheme.defaultDuration)
         icon = StudioTheme.serviceDefaultImage
     }
     
@@ -75,6 +64,20 @@ private extension NewServiceViewModel {
         price = StringConverter.convertDoubleToString(service.price)
         duration = DurationConverter.convertDurationToDate(service.duration)
         icon = service.icon
+    }
+    
+    func bind() {
+        Publishers.CombineLatest3($name, $price, $duration)
+            .sink { [weak self] name, price, duration in
+                self?.validationErrors = ServiceValidator.validate(name: name, price: price, duration: duration)
+            }
+            .store(in: &subscriptions)
+        
+        $name
+            .sink { [weak self] name in
+                self?.updateIconBasedOnName(name)
+            }
+            .store(in: &subscriptions)
     }
     
     func updateIconBasedOnName(_ name: String?) {
