@@ -50,7 +50,7 @@ Beauty Studio Manager is built with a focus on simplicity and efficiency. The ap
 - **Core Data Integration:**  
   Persist all data locally with Core Data for offline access and reliability.
 
-- **Balance**
+- **Balance:**  
   In the Balance View, you can see which services are generating the most income, record your studio’s expenses, and have all the information automatically saved and displayed for you.
 
 ## Tech Stack
