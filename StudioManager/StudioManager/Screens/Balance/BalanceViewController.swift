@@ -22,67 +22,21 @@ public class BalanceViewController: UIViewController {
         segmentedControl.addTarget(self, action: #selector (segmentedControlValueChanged), for: .valueChanged)
         return segmentedControl
     }()
-    
-    private lazy var expectedBalanceTitleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.font = .preferredFont(forTextStyle: .title1)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.text = tr.incomeTitle
-        label.textColor = .systemGreen
-        return label
+        
+    private lazy var incomeView: BalanceView = {
+        let view = BalanceView(title: tr.incomeTitle, type: .income)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
-    private lazy var expectedBalanceLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.font = .preferredFont(forTextStyle: .title1)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.textColor = .systemGreen
-        return label
+    private lazy var expenseView: BalanceView = {
+        let view = BalanceView(title: tr.expensesTitle, type: .expense)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
-    
-    private lazy var verticalBalanceStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [expectedBalanceTitleLabel, expectedBalanceLabel])
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    private lazy var expenseTitleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.font = .preferredFont(forTextStyle: .title1)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.text = tr.expensesTitle
-        label.textColor = .systemRed
-        return label
-    }()
-    
-    private lazy var expenseLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.font = .preferredFont(forTextStyle: .title1)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.textColor = .systemRed
-        return label
-    }()
-    
-    private lazy var verticalExpenseStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [expenseTitleLabel, expenseLabel])
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
+        
     private lazy var horizontalStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [verticalBalanceStackView, verticalExpenseStackView])
+        let stackView = UIStackView(arrangedSubviews: [incomeView, expenseView])
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 20
@@ -143,17 +97,17 @@ public class BalanceViewController: UIViewController {
     }
     
     private func bind() {
-        viewModel?.$expectedBalance
+        viewModel?.$income
             .receive(on: DispatchQueue.main)
             .sink { [weak self] amount in
-                self?.expectedBalanceLabel.text = amount
+                self?.incomeView.amount = amount
             }
             .store(in: &cancellables)
         
         viewModel?.$expense
             .receive(on: DispatchQueue.main)
             .sink { [weak self] amount in
-                self?.expenseLabel.text = amount
+                self?.expenseView.amount = amount
             }
             .store(in: &cancellables)
         

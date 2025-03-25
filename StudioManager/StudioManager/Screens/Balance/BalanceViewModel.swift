@@ -15,7 +15,7 @@ class BalanceViewModel: ObservableObject {
     private var allExpenses: [Expense] = []
     private var expenses: [Expense] = []
     // Properties
-    @Published private(set) var expectedBalance: String = ""
+    @Published private(set) var income: String = ""
     @Published private(set) var expense: String = ""
     @Published private(set) var errorMessage: String? = nil
     @Published private(set) var pieChartData: [String: Double] = [:]
@@ -60,11 +60,11 @@ class BalanceViewModel: ObservableObject {
 extension BalanceViewModel {
     
     private func calculateBalance() {
-        self.expectedBalance = CalculateBalanceHelper.calculateBalance(appointments: appointments)
+        income = CalculateBalanceHelper.calculateBalance(appointments: appointments)
     }
     
     private func calculateExpense() {
-        self.expense = CalculateBalanceHelper.calculateExpense(expenses: expenses)
+        expense = CalculateBalanceHelper.calculateExpense(expenses: expenses)
     }
     
     private func mapAppointmentsToTypeAmount() {
