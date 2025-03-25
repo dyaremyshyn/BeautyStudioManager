@@ -15,10 +15,10 @@ class BalanceViewModel: ObservableObject {
     private var allExpenses: [Expense] = []
     private var expenses: [Expense] = []
     // Properties
-    @Published private(set) var income: String = ""
-    @Published private(set) var expense: String = ""
+    @Published var income: String = ""
+    @Published var expense: String = ""
     @Published private(set) var errorMessage: String? = nil
-    @Published private(set) var pieChartData: [String: Double] = [:]
+    @Published private(set) var servicesData: [ServiceRevenue] = []
     private var filterCalendar: FilterCalendar = .today
     // Coordinator
     weak var coordinator: BalanceCoordinator?
@@ -35,10 +35,6 @@ class BalanceViewModel: ObservableObject {
         allAppointments = appointmentPersistenceService.fetchAll()
         allExpenses = expensePersistenceService.fetchAll()
         errorMessage = nil
-        
-#if DEBUG
-//        allAppointments = allAppointments.count == 0 ? Appointment.allCustomers : allAppointments
-#endif
         filterBalance(by: filterCalendar)
     }
     
@@ -55,6 +51,10 @@ class BalanceViewModel: ObservableObject {
     public func addExpense() {
         coordinator?.addExpense()
     }
+    
+    func expenseListTapped() {
+        coordinator?.viewExpenses()
+    }
 }
 
 extension BalanceViewModel {
@@ -68,9 +68,13 @@ extension BalanceViewModel {
     }
     
     private func mapAppointmentsToTypeAmount() {
-        pieChartData.removeAll()
+        servicesData.removeAll()
         for appointment in appointments {
-            pieChartData[appointment.type, default: 0] += appointment.price
+            if let index = servicesData.firstIndex(where: { $0.service == appointment.type }) {
+                servicesData[index].revenue += appointment.price
+            } else {
+                servicesData.append(ServiceRevenue(service: appointment.type, revenue: appointment.price))
+            }
         }
     }
 }

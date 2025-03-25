@@ -7,9 +7,11 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 protocol BalanceDelegate {
     func addExpense()
+    func viewExpenses()
 }
 
 class BalanceCoordinator: Coordinator {
@@ -18,12 +20,12 @@ class BalanceCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType = .tabItem
     
-    private lazy var balanceViewController: BalanceViewController = {
+    private lazy var balanceViewController: UIHostingController<BalanceScreen> = {
         let viewController = BalanceComposer.balanceComposedWith(
             appointmentPersistenceService: AppointmentPersistenceService(),
-            expensePersistenceService: ExpensePersistenceService()
+            expensePersistenceService: ExpensePersistenceService(),
+            coordinator: self
         )
-        viewController.viewModel?.coordinator = self
         return viewController
     }()
     
@@ -51,5 +53,9 @@ extension BalanceCoordinator: BalanceDelegate {
         )
         navigationController.pushViewController(expenseViewController, animated: true)
         navigationController.topViewController?.title = tr.expenseTitle
+    }
+    
+    func viewExpenses() {
+        // TODO:
     }
 }

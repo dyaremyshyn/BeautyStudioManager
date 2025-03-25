@@ -89,6 +89,8 @@ extension tr {
 // MARK: Balance view
 extension tr {
     static let addExpense = t("addExpense")
+    static let viewExpenses = t("viewExpenses")
+    static let revenue = t("revenue")
     static let expensesTitle = t("expensesTitle")
     static let incomeTitle = t("incomeTitle")
     static let noDataDescription = t("noDataDescription")

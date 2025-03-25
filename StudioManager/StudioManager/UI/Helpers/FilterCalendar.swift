@@ -11,3 +11,10 @@ public enum FilterCalendar: Int {
     case month = 2
     case all = 3
 }
+
+public enum BalanceCalendarFilter: Int {
+    case today = 0
+    case week = 1
+    case month = 2
+    case year = 3
+}

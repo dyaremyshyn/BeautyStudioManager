@@ -48,6 +48,8 @@ enum StudioTheme {
     static let emptyImage = "text.page.slash"
     static let successImage = "checkmark.circle"
     static let serviceDefaultImage = "default"
+    static let addImage = "plus.circle.fill"
+    static let listImage = "list.bullet.rectangle.portrait"
     
     /// Distance
     static let pricePerKm: Double = 0.4

@@ -18,7 +18,7 @@ enum StudioButtonType {
 
 struct StudioButton: View {
     let title: String?
-    var icon: ImageResource? = nil
+    var icon: String? = nil
     var buttonType: StudioButtonType = .primary
     var enabled: Bool = true
     var destructive: Bool = false
@@ -60,14 +60,13 @@ private extension StudioButton {
     }
     
     @ViewBuilder func getImage() -> some View {
-        let iconSize = StudioTheme.mediumIconSize
         if let icon {
-            Image(icon)
+            Image(systemName: icon)
                 .resizable()
                 .renderingMode(.template)
                 .foregroundStyle(iconColor)
                 .scaledToFit()
-                .frame(width: iconSize, height: iconSize)
+                .mediumSize()
         } else {
             EmptyView()
         }
@@ -125,7 +124,7 @@ private extension StudioButton {
 
         switch buttonType {
         case .primary: return .white
-        case .bottomPage, .secondary, .tertiary, .wrapIcon, .destructive: return .Studio.primary
+        case .bottomPage, .secondary, .tertiary, .wrapIcon, .destructive: return .Text.button
         }
     }
 }
@@ -141,7 +140,7 @@ private extension StudioButtonType {
     var verticalPadding: Double {
         switch self {
         case .primary: return StudioTheme.spacing16
-        case .bottomPage, .secondary,.destructive: return StudioTheme.spacing8
+        case .bottomPage, .secondary, .destructive: return StudioTheme.spacing8
         case .tertiary, .wrapIcon: return StudioTheme.spacing4
         }
     }
@@ -149,8 +148,7 @@ private extension StudioButtonType {
     var font: Font {
         switch self {
         case .primary: return .body.bold()
-        case .tertiary: return .body
-        case .destructive: return .body
+        case .secondary, .destructive: return .body
         default: return .caption
         }
     }
@@ -170,7 +168,7 @@ private extension StudioButtonType {
         StudioButton(title: "Tertiary", buttonType: .tertiary) { }
         StudioButton(title: "Destructive", buttonType: .destructive) { }
         StudioButton(title: "Destructive Secondary", buttonType: .secondary, destructive: true) { }
-        StudioButton(title: nil, icon: .icon, buttonType: .wrapIcon) { }
+        StudioButton(title: nil, icon: "eraser", buttonType: .wrapIcon) { }
         StudioButton(title: "Bottom Page", buttonType: .bottomPage) { }
     }
 }
