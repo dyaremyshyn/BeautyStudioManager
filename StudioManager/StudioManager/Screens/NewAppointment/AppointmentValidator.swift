@@ -24,13 +24,13 @@ enum AppointmentValidator {
         let totalDistance: String?
     }
     
-    static func validate(form: Form) -> [AppointmentValidationError] {
+    static func validate(form: Form, inResidence: Bool) -> [AppointmentValidationError] {
         [
             validate(name: form.name),
             validate(price: form.price),
             validate(date: form.date),
-            validate(pricePerKm: form.pricePerKm),
-            validate(totalDistance: form.totalDistance)
+            validate(pricePerKm: form.pricePerKm, inResidence),
+            validate(totalDistance: form.totalDistance, inResidence)
         ].compactMap { $0 }
     }
 }
@@ -49,11 +49,13 @@ private extension AppointmentValidator {
         return date <= Date() ? .invalidDate : nil
     }
     
-    static func validate(pricePerKm: String?) -> AppointmentValidationError? {
+    static func validate(pricePerKm: String?, _ inResidence: Bool) -> AppointmentValidationError? {
+        guard inResidence else { return nil }
         return isEmptyField(pricePerKm) ? .emptyPricePerKm : nil
     }
     
-    static func validate(totalDistance: String?) -> AppointmentValidationError? {
+    static func validate(totalDistance: String?, _ inResidence: Bool) -> AppointmentValidationError? {
+        guard inResidence else { return nil }
         return isEmptyField(totalDistance) ? .emptyTotalDistance : nil
     }
     
