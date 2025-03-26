@@ -26,29 +26,16 @@ struct BalanceScreen: View {
             chartView()
 
             Spacer()
-
+            
             HStack {
-                Button(action: viewModel.expenseListTapped) {
-                    Label(tr.viewExpenses, systemImage: StudioTheme.listImage)
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(.blue)
-                        .clipShape(Capsule())
-                }
-                
-                Button(action: viewModel.addExpense) {
-                    Label(tr.addExpense, systemImage: StudioTheme.addImage)
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(.red)
-                        .clipShape(Capsule())
-                }
+                StudioButton(title: tr.viewExpenses, icon: StudioTheme.listImage, buttonType: .secondary, action: viewModel.expenseListTapped)
+                StudioButton(title: tr.addExpense, icon: StudioTheme.addImage,  buttonType: .secondary, destructive: true, action: viewModel.expenseListTapped)
             }
             .padding(.bottom, 20)
         }
         .navigationTitle(tr.balanceTitle)
-        .onChange(of: selectedFilter) { _, newFilter in
-            viewModel.filterBalance(by: newFilter)
+        .onChange(of: selectedFilter) { _, selectedFilter in
+            viewModel.filterBalance(by: selectedFilter)
         }
         .onAppear {
             viewModel.fetchAppointments()

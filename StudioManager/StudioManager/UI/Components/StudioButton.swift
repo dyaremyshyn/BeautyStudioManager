@@ -17,7 +17,7 @@ enum StudioButtonType {
 }
 
 struct StudioButton: View {
-    let title: String?
+    let title: String
     var icon: String? = nil
     var buttonType: StudioButtonType = .primary
     var enabled: Bool = true
@@ -25,17 +25,10 @@ struct StudioButton: View {
     let action: () -> Void
     
     var body: some View {
-        Button(action: action, label: {
+        Button(action: action) {
             buttonContents()
-        })
+        }
         .disabled(!enabled)
-        .tint(tintColor)
-        .buttonStyle(.plain)
-        .padding(.vertical, buttonType.verticalPadding)
-        .padding(.horizontal, buttonType.horizontalPadding)
-        .frame(maxWidth: buttonType.width)
-        .background(RoundedRectangle(cornerRadius: StudioTheme.cr8).fill(backgroundShapeStyle()))
-        .overlay(overlayShape())
         .opacity(enabled ? 1 : StudioTheme.opacity05)
         .padding(.horizontal)
     }
@@ -44,18 +37,23 @@ struct StudioButton: View {
 private extension StudioButton {
     @ViewBuilder func buttonContents() -> some View {
         switch buttonType {
-        case .wrapIcon:
-            getImage()
+        case .wrapIcon: getImage()
         default:
-            HStack(spacing: StudioTheme.spacing8) {
-                getImage()
-                if let title {
-                    Text(title)
-                        .font(buttonType.font)
-                        .foregroundStyle(textColor)
-                }
+            if let icon {
+                Label(title, systemImage: icon)
+                    .frame(maxWidth: buttonType.width)
+                    .padding()
+                    .foregroundColor(textColor)
+                    .background(backgroundColor)
+                    .clipShape(.capsule)
+            } else {
+                Text(title)
+                    .frame(maxWidth: buttonType.width)
+                    .padding()
+                    .foregroundColor(textColor)
+                    .background(backgroundColor)
+                    .clipShape(.capsule)
             }
-            .multilineTextAlignment(.center)
         }
     }
     
@@ -71,49 +69,27 @@ private extension StudioButton {
             EmptyView()
         }
     }
-    
-    @ViewBuilder func overlayShape() -> some View {
-        switch buttonType {
-        case .secondary, .bottomPage:
-            RoundedRectangle(cornerRadius: StudioTheme.cr8)
-                .stroke(destructive ? Color.Studio.warning : Color.Text.button, lineWidth: StudioTheme.lineWidth2)
-        case .destructive:
-            RoundedRectangle(cornerRadius: StudioTheme.cr8)
-                .stroke(Color.Studio.warning, lineWidth: StudioTheme.lineWidth2)
-        default:
-            EmptyView()
-        }
-    }
 }
 
 private extension StudioButton {
-    func backgroundShapeStyle() -> some ShapeStyle {
-        if destructive { return .clear }
+    var backgroundColor: Color {
+        if destructive { return .Studio.warning }
         
         switch buttonType {
-        case .primary: return Color.Studio.icons
-        case .bottomPage, .secondary, .tertiary, .wrapIcon: return Color.clear
-        case .destructive: return Color.Studio.warning
-        }
-    }
-    
-    var tintColor: Color {
-        if destructive { return .Studio.warning }
-
-        switch buttonType {
-        case .primary: return .Background._1
-        case .bottomPage, .secondary, .tertiary, .wrapIcon: return .Studio.primary
+        case .primary, .secondary: return .blue
+        case .bottomPage: return .Studio.icons
+        case .tertiary, .wrapIcon: return .clear
         case .destructive: return .Studio.warning
         }
     }
     
     var textColor: Color {
-        if destructive { return .Studio.warning }
+        if destructive { return .white }
         
         switch buttonType {
-        case .primary, .destructive: return .white
-        case .bottomPage, .secondary, .tertiary: return .Text.button
+        case .tertiary:  return .Text.button
         case .wrapIcon: return .clear
+        default: return .white
         }
     }
 
@@ -130,29 +106,6 @@ private extension StudioButton {
 }
 
 private extension StudioButtonType {
-    var horizontalPadding: Double {
-        switch self {
-        case .primary, .secondary, .destructive, .bottomPage: return StudioTheme.spacing16
-        case .tertiary, .wrapIcon: return StudioTheme.spacing8
-        }
-    }
-    
-    var verticalPadding: Double {
-        switch self {
-        case .primary: return StudioTheme.spacing16
-        case .bottomPage, .secondary, .destructive: return StudioTheme.spacing8
-        case .tertiary, .wrapIcon: return StudioTheme.spacing4
-        }
-    }
-        
-    var font: Font {
-        switch self {
-        case .primary: return .body.bold()
-        case .secondary, .destructive: return .body
-        default: return .caption
-        }
-    }
-    
     var width: CGFloat? {
         switch self {
         case .primary, .bottomPage: return .infinity
@@ -163,12 +116,13 @@ private extension StudioButtonType {
 
 #Preview {
     VStack{
-        StudioButton(title: "Primary") { }
+        StudioButton(title: "Primary", icon: StudioTheme.listImage) { }
         StudioButton(title: "Secondary", buttonType: .secondary) { }
         StudioButton(title: "Tertiary", buttonType: .tertiary) { }
         StudioButton(title: "Destructive", buttonType: .destructive) { }
-        StudioButton(title: "Destructive Secondary", buttonType: .secondary, destructive: true) { }
-        StudioButton(title: nil, icon: "eraser", buttonType: .wrapIcon) { }
+        StudioButton(title: "", icon: "eraser", buttonType: .wrapIcon) { }
         StudioButton(title: "Bottom Page", buttonType: .bottomPage) { }
+        StudioButton(title: "Disabled", buttonType: .secondary, enabled: false) { }
     }
+    .frame(maxWidth: .infinity)
 }
