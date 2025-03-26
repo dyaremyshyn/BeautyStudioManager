@@ -78,7 +78,7 @@ private extension NewAppointmentView {
     @ViewBuilder
     private func datePicker(_ title: String, selection: Binding<Date>, errors: [AppointmentValidationError] = []) -> some View {
         VStack(alignment: .leading) {
-            DatePicker(title, selection: selection, displayedComponents: [.date, .hourAndMinute])
+            StudioDatePicker(title: title, selection: selection, minuteInterval: 30, mode: .dateAndTime)
             if let firstError = errors.first(where: { viewModel.validationErrors.contains($0) }) {
                 Text(firstError.translatedError)
                     .font(.caption)

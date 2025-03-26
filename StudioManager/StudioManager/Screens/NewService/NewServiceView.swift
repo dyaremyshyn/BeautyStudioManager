@@ -33,9 +33,6 @@ public struct NewServiceView: View {
         .sheet(isPresented: $viewModel.showIconPicker) {
             IconPickerView(viewModel: $viewModel.pickerViewModel, selectedIcon: $viewModel.icon)
         }
-        .onAppear {
-            UIDatePicker.appearance().minuteInterval = 5
-        }
     }
 }
 
@@ -56,7 +53,7 @@ private extension NewServiceView {
     @ViewBuilder
     private func datePicker(_ title: String, selection: Binding<Date>, errors: [ServiceValidationError] = []) -> some View {
         VStack(alignment: .leading) {
-            DatePicker(title, selection: selection, displayedComponents: [.hourAndMinute])
+            StudioDatePicker(title: title, selection: selection, minuteInterval: 10, mode: .time)
             if let firstError = errors.first(where: { viewModel.validationErrors.contains($0) }) {
                 Text(firstError.translatedError)
                     .font(.caption)
