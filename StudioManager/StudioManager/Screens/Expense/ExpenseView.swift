@@ -17,7 +17,7 @@ public struct ExpenseView: View {
                     textField(tr.expenseName, text: $viewModel.expenseName, errors: [.emptyName])
                     textField(tr.expensePrice, text: $viewModel.expensePrice, errors: [.emptyPrice])
                         .keyboardType(.numbersAndPunctuation)
-                    DatePicker(tr.date, selection: $viewModel.expenseDate, displayedComponents: [.date, .hourAndMinute])
+                    StudioDatePicker(title: tr.date, selection: $viewModel.expenseDate, mode: .date)
                 }
             }
             StudioButton(title: tr.save, enabled: viewModel.validationErrors.isEmpty, action: viewModel.saveExpense)

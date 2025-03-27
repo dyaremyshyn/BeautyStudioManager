@@ -29,7 +29,7 @@ struct BalanceScreen: View {
             
             HStack {
                 StudioButton(title: tr.viewExpenses, icon: StudioTheme.listImage, buttonType: .secondary, action: viewModel.expenseListTapped)
-                StudioButton(title: tr.addExpense, icon: StudioTheme.addImage,  buttonType: .secondary, destructive: true, action: viewModel.expenseListTapped)
+                StudioButton(title: tr.addExpense, icon: StudioTheme.addImage,  buttonType: .secondary, destructive: true, action: viewModel.addExpense)
             }
             .padding(.bottom, 20)
         }

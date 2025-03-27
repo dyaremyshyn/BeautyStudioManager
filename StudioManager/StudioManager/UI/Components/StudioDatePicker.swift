@@ -10,7 +10,7 @@ import SwiftUI
 struct StudioDatePicker: View {
     let title: String
     @Binding var selection: Date
-    var minuteInterval: Int
+    var minuteInterval: Int = 0
     var mode: UIDatePicker.Mode = .dateAndTime
 
     var body: some View {

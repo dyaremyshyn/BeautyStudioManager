@@ -17,6 +17,7 @@ enum tr {
 extension tr {
     static let save = t("save")
     static let date = t("date")
+    static let delete = t("delete")
     static let servicesTitle = t("servicesTitle")
     static let filterToday = t("filterToday")
     static let filterWeek = t("filterWeek")
@@ -115,4 +116,10 @@ extension tr {
 extension tr {
     static let iconsTitle = t("iconsTitle")
     static let suggestionsSubtitle = t("suggestionsSubtitle")
+}
+
+// MARK: ExpenseList view
+extension tr {
+    static let emptyExpenseList = t("emptyExpenseList")
+    static let errorDeletingExpense = t("errorDeletingExpense")
 }

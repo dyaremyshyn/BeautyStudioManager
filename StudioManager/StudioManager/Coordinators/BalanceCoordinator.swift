@@ -56,6 +56,10 @@ extension BalanceCoordinator: BalanceDelegate {
     }
     
     func viewExpenses() {
-        // TODO:
+        let screen = ExpenseListComposer.expenseListComposedWith(
+            persistenceService: ExpensePersistenceService()
+        )
+        navigationController.pushViewController(screen, animated: true)
+        navigationController.topViewController?.title = tr.expensesTitle
     }
 }

@@ -67,4 +67,26 @@ class ExpensePersistenceService: ExpensePersistenceLoader {
             }
         }
     }
+    
+    func delete(expenseId: UUID) -> Bool {
+        var success = false
+        context.performAndWait {
+            let request = NSFetchRequest<ExpenseEntity>(entityName: ExpensePersistenceService.expenseEntity)
+            request.predicate = NSPredicate(format: "id == %@", expenseId as CVarArg)
+            do {
+                let result = try context.fetch(request)
+                if let entity = result.first {
+                    context.delete(entity)
+                    try context.save()
+                    success = true
+                } else {
+                    success = false
+                }
+            } catch {
+                print("Error deleting service: \(error)")
+                success = false
+            }
+        }
+        return success
+    }
 }

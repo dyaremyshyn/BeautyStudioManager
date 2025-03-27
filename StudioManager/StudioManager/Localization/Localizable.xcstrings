@@ -307,6 +307,23 @@
         }
       }
     },
+    "delete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apagar"
+          }
+        }
+      }
+    },
     "editAppointmentTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -371,6 +388,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nome da cliente vazio"
+          }
+        }
+      }
+    },
+    "emptyExpenseList" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your expense list is currently empty. Start tracking your spending by adding your first expense!"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A sua lista de despesas está vazia. Comece a acompanhar seus gastos adicionando sua primeira despesa!"
           }
         }
       }
@@ -490,6 +524,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ocorreu um erro ao eliminar uma marcação"
+          }
+        }
+      }
+    },
+    "errorDeletingExpense" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error occurred while deleting expense"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ocorreu um erro ao eliminar uma despesa"
           }
         }
       }

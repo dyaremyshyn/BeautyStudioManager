@@ -7,18 +7,18 @@
 
 import Foundation
 
-public struct Expense: Equatable, Identifiable {
+public struct Expense: Equatable, Identifiable, Hashable {
     public let id: UUID
-    public let name: String?
+    public let name: String
     public let amount: Double
     public let date: Date
     
     public static func map(expense: ExpenseEntity) -> Expense {
         Expense(
-            id: expense.id  ?? UUID(),
-            name: expense.name,
+            id: expense.id ?? UUID(),
+            name: expense.name ?? "",
             amount: expense.amount,
-            date: expense.date!
+            date: expense.date ?? .now
         )
     }
 }

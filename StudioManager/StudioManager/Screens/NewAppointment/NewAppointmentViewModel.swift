@@ -115,19 +115,19 @@ private extension NewAppointmentViewModel {
             Publishers.CombineLatest4($clientName, $price, $appointmentDate, $pricePerKm),
             Publishers.CombineLatest($totalDistance, $inResidence)
         )
-        .sink { [weak self] (left, right) in
-            let (clientName, price, appointmentDate, pricePerKm) = left
-            let (totalDistance, inResidence) = right
-            let form = AppointmentValidator.Form(
-                name: clientName,
-                price: price,
-                date: appointmentDate,
-                pricePerKm: pricePerKm,
-                totalDistance: totalDistance
-            )
-            self?.validationErrors = AppointmentValidator.validate(form: form, inResidence: inResidence ?? false)
-        }
-        .store(in: &subscriptions)
+            .sink { [weak self] (left, right) in
+                let (clientName, price, appointmentDate, pricePerKm) = left
+                let (totalDistance, inResidence) = right
+                let form = AppointmentValidator.Form(
+                    name: clientName,
+                    price: price,
+                    date: appointmentDate,
+                    pricePerKm: pricePerKm,
+                    totalDistance: totalDistance
+                )
+                self?.validationErrors = AppointmentValidator.validate(form: form, inResidence: inResidence ?? false)
+            }
+            .store(in: &subscriptions)
         
         Publishers.CombineLatest($pricePerKm, $totalDistance)
             .sink { [weak self] pricePerKm, totalDistance in
