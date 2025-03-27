@@ -1038,6 +1038,23 @@
         }
       }
     },
+    "serviceColor" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set the service color"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Defina a cor do serviço"
+          }
+        }
+      }
+    },
     "serviceDetails" : {
       "extractionState" : "manual",
       "localizations" : {

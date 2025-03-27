@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import CoreGraphics
 
 class NewAppointmentViewModel: ObservableObject {
     private var allServices: [Service] = []
@@ -21,6 +22,7 @@ class NewAppointmentViewModel: ObservableObject {
     @Published var totalDistance: String!
     private var servicePrice: Double = 0
     private var duration: Double = 0
+    private var color: CGColor = .random
     private var icon: String = StudioTheme.serviceDefaultImage
     @Published var type: String = "Studio" {
         didSet {
@@ -28,6 +30,7 @@ class NewAppointmentViewModel: ObservableObject {
             price = servicePrice.formatted()
             duration = allServices.first(where: { $0.type == type })?.duration ?? 0
             icon = allServices.first(where: { $0.type == type})?.icon ?? StudioTheme.serviceDefaultImage
+            color = allServices.first(where: { $0.type == type})?.color ?? .random
         }
     }
     
@@ -70,7 +73,8 @@ class NewAppointmentViewModel: ObservableObject {
             phoneNumber: clientPhoneNumber,
             duration: duration,
             addedToCalendar: false,
-            icon: icon
+            icon: icon,
+            color: color
         )
         
         // Save created appointment to core data

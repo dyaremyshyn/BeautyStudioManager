@@ -14,19 +14,9 @@ struct ServiceRevenue: Identifiable {
     var revenue: Double
     let color: Color
     
-    init(service: String, revenue: Double, color: Color = .random) {
+    init(service: String, revenue: Double, color: CGColor) {
         self.service = service
         self.revenue = revenue
-        self.color = color
-    }
-}
-
-extension Color {
-    static var random: Color {
-        Color(
-            red: Double.random(in: 0...1),
-            green: Double.random(in: 0...1),
-            blue: Double.random(in: 0...1)
-        )
+        self.color = Color(cgColor: color)
     }
 }

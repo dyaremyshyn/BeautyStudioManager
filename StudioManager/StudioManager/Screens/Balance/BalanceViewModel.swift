@@ -73,7 +73,7 @@ extension BalanceViewModel {
             if let index = servicesData.firstIndex(where: { $0.service == appointment.type }) {
                 servicesData[index].revenue += appointment.price
             } else {
-                servicesData.append(ServiceRevenue(service: appointment.type, revenue: appointment.price))
+                servicesData.append(ServiceRevenue(service: appointment.type, revenue: appointment.price, color: appointment.color))
             }
         }
     }

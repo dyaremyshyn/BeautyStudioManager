@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 enum StudioSection: CaseIterable {
     case main
@@ -22,6 +23,7 @@ public struct StudioAppointment: Equatable, Identifiable, Hashable {
     let duration: Double
     let addedToCalendar: Bool
     let icon: String
+    let color: CGColor
         
     public static func map(appointment: StudioEntity) -> StudioAppointment {
         StudioAppointment(
@@ -34,7 +36,8 @@ public struct StudioAppointment: Equatable, Identifiable, Hashable {
             phoneNumber: appointment.phoneNumber,
             duration: appointment.duration,
             addedToCalendar: appointment.addedToCalendar,
-            icon: appointment.icon ?? StudioTheme.serviceDefaultImage
+            icon: appointment.icon ?? StudioTheme.serviceDefaultImage,
+            color: appointment.color?.unarchiveColor ?? .random
         )
     }
 }

@@ -53,6 +53,7 @@ class AppointmentPersistenceService: AppointmentPersistenceLoader {
                 newEntry.addedToCalendar = appointment.addedToCalendar
                 newEntry.duration = appointment.duration
                 newEntry.icon = appointment.icon
+                newEntry.color = appointment.color.archiveColor
             }
             
             do {

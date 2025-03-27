@@ -110,6 +110,7 @@ extension tr {
     static let skincareService = t("skincareService")
     static let liftingService = t("liftingService")
     static let eyebrowsService = t("eyebrowsService")
+    static let serviceColor = t("serviceColor")
 }
 
 // MARK: Icon Picker

@@ -24,6 +24,7 @@ public struct NewServiceView: View {
                     textField(tr.servicePrice, text: $viewModel.price, errors: [.emptyPrice])
                         .keyboardType(.numbersAndPunctuation)
                     datePicker(tr.serviceDuration, selection: $viewModel.duration, errors: [.invalidDuration])
+                    ColorPicker(tr.serviceColor, selection: $viewModel.colorSelected)
                 }
             }
             StudioButton(title: tr.save, enabled: viewModel.validationErrors.isEmpty, action: viewModel.saveService)

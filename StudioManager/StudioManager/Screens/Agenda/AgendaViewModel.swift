@@ -75,7 +75,8 @@ class AgendaViewModel: ObservableObject {
             phoneNumber: appointment.phoneNumber,
             duration: appointment.duration,
             addedToCalendar: true,
-            icon: appointment.icon
+            icon: appointment.icon,
+            color: appointment.color
         )
         self.allAppointments[index] = updatedAppointment
         persistenceService.add(appointment: updatedAppointment)

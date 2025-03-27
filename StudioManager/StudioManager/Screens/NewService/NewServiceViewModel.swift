@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import CoreGraphics
 
 class NewServiceViewModel: ObservableObject {
     @Published var name: String!
@@ -17,6 +18,7 @@ class NewServiceViewModel: ObservableObject {
     @Published var showToast: Bool = false
     @Published var showIconPicker: Bool = false
     @Published var pickerViewModel = IconPickerViewModel()
+    @Published var colorSelected: CGColor = .init(red: 0, green: 0, blue: 0, alpha: 1)
 
     private var subscriptions: [AnyCancellable] = []
     
@@ -38,7 +40,8 @@ class NewServiceViewModel: ObservableObject {
             type: name,
             price: StringConverter.convertStringToDouble(price),
             duration: DurationConverter.convertDurationToTimeInterval(duration),
-            icon: icon
+            icon: icon,
+            color: colorSelected
         )
         
         // Save created service to core data
@@ -56,6 +59,7 @@ private extension NewServiceViewModel {
         price = ""
         duration = Date(timeIntervalSince1970: StudioTheme.defaultDuration)
         icon = StudioTheme.serviceDefaultImage
+        colorSelected = .init(red: 0, green: 0, blue: 0, alpha: 1)
     }
     
     func setFields(from service: Service?) {
@@ -64,6 +68,7 @@ private extension NewServiceViewModel {
         price = StringConverter.convertDoubleToString(service.price)
         duration = DurationConverter.convertDurationToDate(service.duration)
         icon = service.icon
+        colorSelected = service.color
     }
     
     func bind() {
@@ -97,3 +102,5 @@ private extension NewServiceViewModel {
         }
     }
 }
+
+
