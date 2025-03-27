@@ -39,6 +39,7 @@ struct BalanceScreen: View {
         }
         .onAppear {
             viewModel.fetchAppointments()
+            UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(resource: .Text.button)
         }
     }
 }
