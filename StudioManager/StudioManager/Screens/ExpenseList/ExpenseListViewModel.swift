@@ -9,7 +9,18 @@ import Foundation
 
 class ExpenseListViewModel : ObservableObject {
     @Published private(set) var expenses: [Expense] = []
-    @Published private(set) var errorMessage: String? = nil
+    @Published var showToast: Bool = false
+    var groupedExpenses: [Int: [Int: [Expense]]] {
+        let calendar = Calendar.current
+        let byYear = Dictionary(grouping: expenses) { expense in
+            calendar.component(.year, from: expense.date)
+        }
+        return byYear.mapValues { expenses in
+            Dictionary(grouping: expenses) { expense in
+                calendar.component(.month, from: expense.date)
+            }
+        }
+    }
     
     private let persistenceService: ExpensePersistenceLoader
 
@@ -24,7 +35,7 @@ class ExpenseListViewModel : ObservableObject {
     func deleteExpense(_ expenseId: UUID) {
         let success = persistenceService.delete(expenseId: expenseId)
         guard success else {
-            errorMessage = tr.errorDeletingExpense
+            showToast = true
             return
         }
         fetchData()

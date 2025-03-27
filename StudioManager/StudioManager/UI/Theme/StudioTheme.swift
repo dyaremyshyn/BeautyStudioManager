@@ -50,6 +50,7 @@ enum StudioTheme {
     static let serviceDefaultImage = "default"
     static let addImage = "plus.circle.fill"
     static let listImage = "list.bullet.rectangle.portrait"
+    static let errorImage = "xmark.circle"
     
     /// Distance
     static let pricePerKm: Double = 0.4
