@@ -52,5 +52,5 @@ private extension ExpenseValidationError {
 }
 
 #Preview {
-    ExpenseView(viewModel: ExpenseViewModel(persistenceService: ExpensePersistenceService()))
+    ExpenseView(viewModel: ExpenseViewModel(expense: nil, persistenceService: ExpensePersistenceService()))
 }

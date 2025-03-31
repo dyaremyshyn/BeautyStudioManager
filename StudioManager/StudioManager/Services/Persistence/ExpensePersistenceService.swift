@@ -45,19 +45,15 @@ class ExpensePersistenceService: ExpensePersistenceLoader {
     func add(expense: Expense) {
         context.performAndWait {
             if let existingExpense = fetchExpenseEntity(for: expense) {
-                // Atualiza o expense existente
                 existingExpense.name = expense.name
                 existingExpense.date = expense.date
                 existingExpense.amount = expense.amount
-                print("Expense entity with id \(expense.id) updated successfully")
             } else {
-                // Cria um novo expense
                 let newExpense = ExpenseEntity(context: context)
                 newExpense.id = expense.id
                 newExpense.name = expense.name
                 newExpense.date = expense.date
                 newExpense.amount = expense.amount
-                print("Expense entity created with id \(expense.id)")
             }
             
             do {

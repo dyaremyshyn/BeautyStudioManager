@@ -10,6 +10,7 @@ import Foundation
 class ExpenseListViewModel : ObservableObject {
     @Published private(set) var expenses: [Expense] = []
     @Published var showToast: Bool = false
+    var coordinator: ExpenseListCoordinator?
     var groupedExpenses: [Int: [Int: [Expense]]] {
         let calendar = Calendar.current
         let byYear = Dictionary(grouping: expenses) { expense in
@@ -23,7 +24,7 @@ class ExpenseListViewModel : ObservableObject {
     }
     
     private let persistenceService: ExpensePersistenceLoader
-
+    
     init(persistenceService: ExpensePersistenceLoader) {
         self.persistenceService = persistenceService
     }
@@ -39,5 +40,9 @@ class ExpenseListViewModel : ObservableObject {
             return
         }
         fetchData()
+    }
+    
+    func editExpense(_ expense: Expense) {
+        coordinator?.editExpense(expense: expense)
     }
 }

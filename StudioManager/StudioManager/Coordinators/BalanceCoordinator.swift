@@ -20,10 +20,14 @@ class BalanceCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType = .tabItem
     
+    private lazy var expenseService: ExpensePersistenceLoader = {
+        ExpensePersistenceService()
+    }()
+    
     private lazy var balanceViewController: UIHostingController<BalanceScreen> = {
         let viewController = BalanceComposer.balanceComposedWith(
             appointmentPersistenceService: AppointmentPersistenceService(),
-            expensePersistenceService: ExpensePersistenceService(),
+            expensePersistenceService: expenseService,
             coordinator: self
         )
         return viewController
@@ -47,9 +51,10 @@ extension BalanceCoordinator: CoordinatorFinishDelegate {
 
 extension BalanceCoordinator: BalanceDelegate {
     
-    public func addExpense() {
+    func addExpense() {
         let expenseViewController = ExpenseComposer.expenseComposedWith(
-            persistenceLoader: ExpensePersistenceService()
+            expense: nil,
+            persistenceLoader: expenseService
         )
         navigationController.pushViewController(expenseViewController, animated: true)
         navigationController.topViewController?.title = tr.expenseTitle
@@ -57,7 +62,8 @@ extension BalanceCoordinator: BalanceDelegate {
     
     func viewExpenses() {
         let screen = ExpenseListComposer.expenseListComposedWith(
-            persistenceService: ExpensePersistenceService()
+            persistenceService: expenseService,
+            coordinator: ExpenseListCoordinator(navigationController: navigationController)
         )
         navigationController.pushViewController(screen, animated: true)
         navigationController.topViewController?.title = tr.expensesTitle

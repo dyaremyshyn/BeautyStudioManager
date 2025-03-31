@@ -31,6 +31,9 @@ struct ExpenseListScreen: View {
                                                     viewModel.deleteExpense(expense.id)
                                                 }
                                             }
+                                            .onTapGesture {
+                                                viewModel.editExpense(expense)
+                                            }
                                     }
                                 }
                             }

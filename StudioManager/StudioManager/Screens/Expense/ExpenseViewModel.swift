@@ -14,13 +14,16 @@ class ExpenseViewModel: ObservableObject {
     @Published var expenseDate: Date!
     @Published var validationErrors: [ExpenseValidationError] = []
     @Published var showToast: Bool = false
+    private let expense: Expense?
     private var subscriptions: [AnyCancellable] = []
     
     private let persistenceService: ExpensePersistenceLoader
     
-    init(persistenceService: ExpensePersistenceLoader) {
+    init(expense: Expense?, persistenceService: ExpensePersistenceLoader) {
+        self.expense = expense
         self.persistenceService = persistenceService
         resetAllFields()
+        setFields(for: expense)
         
         Publishers.CombineLatest($expenseName, $expensePrice)
             .sink { [weak self] name, price in
@@ -31,9 +34,9 @@ class ExpenseViewModel: ObservableObject {
     
     public func saveExpense() {
         let expense = Expense(
-            id: UUID(),
+            id: expense?.id ?? UUID(),
             name: expenseName,
-            amount: Double(expensePrice) ?? 0,
+            amount: StringConverter.convertStringToDouble(expensePrice),
             date: expenseDate
         )
         
@@ -44,10 +47,19 @@ class ExpenseViewModel: ObservableObject {
         // Reset all fields
         resetAllFields()
     }
-    
-    private func resetAllFields() {
+}
+
+private extension ExpenseViewModel {
+    func resetAllFields() {
         expenseName = ""
         expensePrice = ""
         expenseDate = .now
+    }
+    
+    func setFields(for expense: Expense?) {
+        guard let expense else { return }
+        expenseName = expense.name
+        expensePrice = expense.amount.formatted()
+        expenseDate = expense.date
     }
 }
