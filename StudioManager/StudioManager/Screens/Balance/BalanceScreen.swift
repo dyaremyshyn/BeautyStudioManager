@@ -27,7 +27,7 @@ struct BalanceScreen: View {
 
             Spacer()
             
-            HStack {
+            HStack(spacing: 0) {
                 StudioButton(title: tr.viewExpenses, icon: StudioTheme.listImage, buttonType: .secondary, action: viewModel.expenseListTapped)
                 StudioButton(title: tr.addExpense, icon: StudioTheme.addImage,  buttonType: .secondary, destructive: true, action: viewModel.addExpense)
             }
@@ -58,40 +58,16 @@ private extension BalanceScreen {
     
     @ViewBuilder func chartView() -> some View {
         if viewModel.servicesData.isEmpty {
-            Spacer()
-            Text(tr.noDataDescription)
-                .font(.system(size: 17, weight: .medium))
-                .foregroundColor(.gray)
-                .multilineTextAlignment(.center)
-                .padding()
+            StudioEmptyView(imageName: "") {
+                Text(tr.noDataDescription)
+                    .font(.system(size: 17, weight: .medium))
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+                    .padding()
+            }
         } else {
-            Chart(viewModel.servicesData) { service in
-                SectorMark(
-                    angle: .value(tr.revenue, service.revenue),
-                    innerRadius: .ratio(0.6),
-                    angularInset: 2.0
-                )
-                .foregroundStyle(service.color)
-            }
-            .frame(height: 220)
-            .padding()
-            
-            VStack(alignment: .leading, spacing: 8) {
-                ForEach(viewModel.servicesData) { service in
-                    HStack {
-                        Circle()
-                            .fill(service.color)
-                            .frame(width: 12, height: 12)
-                        Text(formatServiceRevenue(service.service, service.revenue))
-                            .font(.body)
-                    }
-                }
-            }
+            DonutChartView(serviceRevenues: viewModel.servicesData)
         }
-    }
-    
-    private func formatServiceRevenue(_ service: String, _ revenue: Double) -> String {
-        String(format: "%@: €%.2f", service, revenue)
     }
 }
 

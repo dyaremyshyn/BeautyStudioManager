@@ -37,7 +37,7 @@ struct StudioButton: View {
 private extension StudioButton {
     @ViewBuilder func buttonContents() -> some View {
         switch buttonType {
-        case .wrapIcon: getImage()
+        case .wrapIcon: wrapIcon()
         default:
             if let icon {
                 Label(title, systemImage: icon)
@@ -57,7 +57,7 @@ private extension StudioButton {
         }
     }
     
-    @ViewBuilder func getImage() -> some View {
+    @ViewBuilder func wrapIcon() -> some View {
         if let icon {
             Image(systemName: icon)
                 .resizable()
@@ -123,6 +123,11 @@ private extension StudioButtonType {
         StudioButton(title: "", icon: "eraser", buttonType: .wrapIcon) { }
         StudioButton(title: "Bottom Page", buttonType: .bottomPage) { }
         StudioButton(title: "Disabled", buttonType: .secondary, enabled: false) { }
+        
+        HStack {
+            StudioButton(title: "View Expenses", icon: StudioTheme.listImage, buttonType: .secondary) { }
+            StudioButton(title: "View Expenses", icon: StudioTheme.listImage, buttonType: .secondary) { }
+        }
     }
     .frame(maxWidth: .infinity)
 }
