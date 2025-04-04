@@ -36,6 +36,7 @@ extension tr {
 extension tr {
     static let agendaTitle = t("agendaTitle")
     static let balanceTitle = t("balanceTitle")
+    static let settingsTitle = t("settingsTitle")
 }
 
 // MARK: Agenda view
