@@ -59,7 +59,7 @@ private extension ExpenseListScreen {
                     .foregroundStyle(.gray)
             }
             Spacer()
-            Text(String(format: "%.2f€", expense.amount))
+            Text(String(format: "%.2f€", expense.price))
                 .font(.subheadline)
                 .foregroundStyle(Color.Studio.warning)
         }

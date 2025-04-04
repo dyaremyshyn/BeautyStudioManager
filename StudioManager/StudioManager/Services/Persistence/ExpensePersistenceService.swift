@@ -47,13 +47,13 @@ class ExpensePersistenceService: ExpensePersistenceLoader {
             if let existingExpense = fetchExpenseEntity(for: expense) {
                 existingExpense.name = expense.name
                 existingExpense.date = expense.date
-                existingExpense.amount = expense.amount
+                existingExpense.amount = expense.price
             } else {
                 let newExpense = ExpenseEntity(context: context)
                 newExpense.id = expense.id
                 newExpense.name = expense.name
                 newExpense.date = expense.date
-                newExpense.amount = expense.amount
+                newExpense.amount = expense.price
             }
             
             do {

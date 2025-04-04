@@ -36,7 +36,7 @@ class ExpenseViewModel: ObservableObject {
         let expense = Expense(
             id: expense?.id ?? UUID(),
             name: expenseName,
-            amount: StringConverter.convertStringToDouble(expensePrice),
+            price: StringConverter.convertStringToDouble(expensePrice),
             date: expenseDate
         )
         
@@ -59,7 +59,7 @@ private extension ExpenseViewModel {
     func setFields(for expense: Expense?) {
         guard let expense else { return }
         expenseName = expense.name
-        expensePrice = expense.amount.formatted()
+        expensePrice = expense.price.formatted()
         expenseDate = expense.date
     }
 }

@@ -17,6 +17,7 @@ class BalanceViewModel: ObservableObject {
     // Properties
     @Published var income: String = ""
     @Published var expense: String = ""
+    @Published var balance: String = ""
     @Published private(set) var errorMessage: String? = nil
     @Published private(set) var servicesData: [ServiceRevenue] = []
     private var filterCalendar: FilterCalendar = .today
@@ -44,7 +45,6 @@ class BalanceViewModel: ObservableObject {
         expenses = FilterCalendarHelper.filterExpense(by: filterCalendar, expenses: allExpenses)
         
         calculateBalance()
-        calculateExpense()
         mapAppointmentsToTypeAmount()
     }
     
@@ -57,17 +57,15 @@ class BalanceViewModel: ObservableObject {
     }
 }
 
-extension BalanceViewModel {
+private extension BalanceViewModel {
     
-    private func calculateBalance() {
-        income = CalculateBalanceHelper.calculateBalance(appointments: appointments)
-    }
-    
-    private func calculateExpense() {
+    func calculateBalance() {
+        income = CalculateBalanceHelper.calculateIncome(appointments: appointments)
         expense = CalculateBalanceHelper.calculateExpense(expenses: expenses)
+        balance = CalculateBalanceHelper.calculateBalance(appointments: appointments, expenses: expenses)
     }
-    
-    private func mapAppointmentsToTypeAmount() {
+        
+    func mapAppointmentsToTypeAmount() {
         servicesData.removeAll()
         for appointment in appointments {
             if let index = servicesData.firstIndex(where: { $0.service == appointment.type }) {

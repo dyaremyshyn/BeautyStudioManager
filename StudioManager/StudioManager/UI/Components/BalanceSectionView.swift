@@ -10,6 +10,7 @@ import SwiftUI
 enum BalanceType {
     case income
     case expense
+    case balance
 }
 
 struct BalanceSectionView: View {
@@ -19,20 +20,44 @@ struct BalanceSectionView: View {
 
     var body: some View {
         VStack {
-            Text(title)
-                .font(.title)
-                .foregroundColor(type == .income ? .Studio.success : .Studio.warning)
+            Text(formatAmount(amount))
+                .font(.headline)
+                .foregroundColor(type.color)
                 .multilineTextAlignment(.center)
-            Text(amount)
-                .font(.title)
-                .foregroundColor(type == .income ? .Studio.success : .Studio.warning)
+            Text(title)
+                .font(.subheadline)
+                .foregroundColor(type.color)
                 .multilineTextAlignment(.center)
         }
         .padding()
+    }
+    
+    private func formatAmount(_ amount: String) -> String {
+        return String(format: "%@%@", type.prefix, amount)
+    }
+}
+
+private extension BalanceType {
+    var color: Color {
+        switch self {
+        case .income: return .Studio.success
+        case .expense: return .Studio.warning
+        case .balance: return .blue
+        }
+    }
+    
+    var prefix: String {
+        switch self {
+        case .income: return "+"
+        case .expense: return "-"
+        case .balance: return ""
+        }
     }
 }
 
 #Preview {
     @Previewable @State var amount: String = "250€"
     BalanceSectionView(title: "Income", type: .income, amount: $amount)
+    BalanceSectionView(title: "Expense", type: .expense, amount: $amount)
+    BalanceSectionView(title: "Balance", type: .balance, amount: $amount)
 }

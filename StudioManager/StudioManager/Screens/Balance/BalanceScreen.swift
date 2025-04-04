@@ -17,9 +17,10 @@ struct BalanceScreen: View {
         VStack {
             calendarFilterView()
 
-            HStack(spacing: 20) {
+            HStack {
                 BalanceSectionView(title: tr.incomeTitle, type: .income, amount: $viewModel.income)
                 BalanceSectionView(title: tr.expensesTitle, type: .expense, amount: $viewModel.expense)
+                BalanceSectionView(title: tr.balanceTitle, type: .balance, amount: $viewModel.balance)
             }
             .padding(.horizontal)
                         

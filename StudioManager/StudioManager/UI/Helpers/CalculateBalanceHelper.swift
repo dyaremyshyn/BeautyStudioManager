@@ -9,21 +9,23 @@ import Foundation
 
 struct CalculateBalanceHelper {
     
-    public static func calculateBalance(appointments: [StudioAppointment]) -> String {
-        var totalAmount: Double = 0
-        
-        for appointment in appointments {
-            totalAmount += appointment.price
-        }
-        return String(format: "%.2f", totalAmount) + "€"
+    static func calculateIncome(appointments: [StudioAppointment]) -> String {
+        return calculateTotal(items: appointments) { $0.price }
     }
     
-    public static func calculateExpense(expenses: [Expense]) -> String {
-        var totalAmount: Double = 0
-        
-        for expense in expenses {
-            totalAmount += expense.amount
-        }
+    static func calculateExpense(expenses: [Expense]) -> String {
+        return calculateTotal(items: expenses) { $0.price }
+    }
+    
+    static func calculateBalance(appointments: [StudioAppointment], expenses: [Expense]) -> String {
+        let income = appointments.reduce(0) { $0 + $1.price }
+        let expense = expenses.reduce(0) { $0 + $1.price }
+        let balance = income - expense
+        return String(format: "%.2f", balance) + "€"
+    }
+    
+    private static func calculateTotal<T>(items: [T], valueExtractor: (T) -> Double) -> String {
+        let totalAmount = items.reduce(0) { $0 + valueExtractor($1) }
         return String(format: "%.2f", totalAmount) + "€"
     }
 }
