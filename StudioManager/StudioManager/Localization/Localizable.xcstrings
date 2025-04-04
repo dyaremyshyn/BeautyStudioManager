@@ -970,6 +970,40 @@
         }
       }
     },
+    "notificationDailyReminder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily Reminder"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lembrete Diário"
+          }
+        }
+      }
+    },
+    "notificationDailyReminderBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Don’t forget to add the new appointments."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não se esqueça de adicionar as novas marcações."
+          }
+        }
+      }
+    },
     "pricePerKm" : {
       "extractionState" : "manual",
       "localizations" : {

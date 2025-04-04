@@ -124,3 +124,9 @@ extension tr {
     static let emptyExpenseList = t("emptyExpenseList")
     static let errorDeletingExpense = t("errorDeletingExpense")
 }
+
+// MARK: Notification
+extension tr {
+    static let notificationDailyReminder = t("notificationDailyReminder")
+    static let notificationDailyReminderBody = t("notificationDailyReminderBody")
+}
