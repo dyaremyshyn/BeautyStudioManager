@@ -74,11 +74,13 @@ class NewAppointmentViewModel: ObservableObject {
             duration: duration,
             addedToCalendar: false,
             icon: icon,
-            color: color
+            color: color,
+            calendarEventId: appointment?.calendarEventId ?? nil
         )
         
         // Save created appointment to core data
         appointmentsPersistenceService.add(appointment: appointment)
+        CalendarService.updateEvent(to: appointment)
         showToast = true
 
         // Reset fields after saving if needed

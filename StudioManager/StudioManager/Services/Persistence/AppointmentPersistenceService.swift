@@ -41,6 +41,7 @@ class AppointmentPersistenceService: AppointmentPersistenceLoader {
                 existingEntity.inResidence = appointment.inResidence
                 existingEntity.addedToCalendar = appointment.addedToCalendar
                 existingEntity.duration = appointment.duration
+                existingEntity.calendarEventId = appointment.calendarEventId
             } else {
                 let newEntry = StudioEntity(context: context)
                 newEntry.id = appointment.id
@@ -54,6 +55,7 @@ class AppointmentPersistenceService: AppointmentPersistenceLoader {
                 newEntry.duration = appointment.duration
                 newEntry.icon = appointment.icon
                 newEntry.color = appointment.color.archiveColor
+                newEntry.calendarEventId = appointment.calendarEventId
             }
             
             do {

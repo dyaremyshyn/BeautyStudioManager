@@ -16,6 +16,7 @@
     </entity>
     <entity name="StudioEntity" representedClassName="StudioEntity" syncable="YES" codeGenerationType="class">
         <attribute name="addedToCalendar" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="calendarEventId" optional="YES" attributeType="String"/>
         <attribute name="color" optional="YES" attributeType="Binary"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>

@@ -38,7 +38,8 @@ public struct Appointment {
         duration: 3600,
         addedToCalendar: false,
         icon: StudioTheme.serviceDefaultImage,
-        color: .random
+        color: .random,
+        calendarEventId: nil
     )
     
     static let allCustomers = [
@@ -53,7 +54,8 @@ public struct Appointment {
             duration: 3600,
             addedToCalendar: false,
             icon: StudioTheme.serviceDefaultImage,
-            color: .random
+            color: .random,
+            calendarEventId: nil
         ),
         StudioAppointment(
             id: UUID(),
@@ -66,7 +68,8 @@ public struct Appointment {
             duration: 3600,
             addedToCalendar: false,
             icon: StudioTheme.serviceDefaultImage,
-            color: .random
+            color: .random,
+            calendarEventId: nil
         ),
         StudioAppointment(
             id: UUID(),
@@ -79,7 +82,8 @@ public struct Appointment {
             duration: 3600,
             addedToCalendar: false,
             icon: StudioTheme.serviceDefaultImage,
-            color: .random
+            color: .random,
+            calendarEventId: nil
         ),
         StudioAppointment(
             id: UUID(),
@@ -92,7 +96,8 @@ public struct Appointment {
             duration: 3600,
             addedToCalendar: false,
             icon: StudioTheme.serviceDefaultImage,
-            color: .random
+            color: .random,
+            calendarEventId: nil
         ),
         StudioAppointment(
             id: UUID(),
@@ -105,7 +110,8 @@ public struct Appointment {
             duration: 3600,
             addedToCalendar: false,
             icon: StudioTheme.serviceDefaultImage,
-            color: .random
+            color: .random,
+            calendarEventId: nil
         )
     ]
 }

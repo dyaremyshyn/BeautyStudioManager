@@ -130,3 +130,9 @@ extension tr {
     static let notificationDailyReminder = t("notificationDailyReminder")
     static let notificationDailyReminderBody = t("notificationDailyReminderBody")
 }
+
+// MARK: Calendar
+extension tr {
+    static let calendarAppointmentPrice = t("calendarAppointmentPrice")
+    static let calendarInResidence = t("calendarInResidence")
+}

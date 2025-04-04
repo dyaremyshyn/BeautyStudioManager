@@ -38,6 +38,10 @@ class AgendaViewModel: ObservableObject {
     
     public func removeAppointment(index: Int) {
         let appointment = appointments[index]
+        
+        // Remove calendar event
+        CalendarService.deleteEvent(eventId: appointment.calendarEventId)
+        
         // First remove the appointment from persistence
         let success = persistenceService.delete(appointment: appointment)
         guard success else {
@@ -55,15 +59,15 @@ class AgendaViewModel: ObservableObject {
         let addCalendarAppointments = allAppointments.filter { !$0.addedToCalendar }
         self.successMessage = addCalendarAppointments.isEmpty ? tr.noAppointmentsToAddToCalendar : nil
         addCalendarAppointments.forEach { appointment in
-            CalendarEventHelper.createEvent(to: appointment) { [weak self] result in
-                self?.errorMessage = result == false ? tr.errorAddingAppointmentToCalendar : nil
-                self?.successMessage = result ? tr.appointmentsAddedToCalendar : nil
+            CalendarService.createEvent(to: appointment) { [weak self] result in
+                self?.errorMessage = result == nil ? tr.errorAddingAppointmentToCalendar : nil
+                self?.successMessage = result != nil ? tr.appointmentsAddedToCalendar : nil
+                self?.appointmentsAddedToCalendar(appointment: appointment, index: self?.allAppointments.firstIndex(where: { $0.id == appointment.id }), eventId: result)
             }
-            appointmentsAddedToCalendar(appointment: appointment, index: allAppointments.firstIndex(where: { $0.id == appointment.id }))
         }
     }
     
-    private func appointmentsAddedToCalendar(appointment: StudioAppointment, index: Int?) {
+    private func appointmentsAddedToCalendar(appointment: StudioAppointment, index: Int?, eventId: String?) {
         guard let index else { return }
         let updatedAppointment = StudioAppointment(
             id: appointment.id,
@@ -76,9 +80,11 @@ class AgendaViewModel: ObservableObject {
             duration: appointment.duration,
             addedToCalendar: true,
             icon: appointment.icon,
-            color: appointment.color
+            color: appointment.color,
+            calendarEventId: eventId
         )
         self.allAppointments[index] = updatedAppointment
+        filterAppointments(by: filterCalendar)
         persistenceService.add(appointment: updatedAppointment)
     }
 }
