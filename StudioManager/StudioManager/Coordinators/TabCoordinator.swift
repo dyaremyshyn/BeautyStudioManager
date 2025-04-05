@@ -106,6 +106,8 @@ class TabCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
 }
 
 class CustomTabBar: UITabBar {
+    private var topBorderLayer: CALayer?
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layer.shadowOffset = CGSize(width: 0, height: -1)
@@ -113,8 +115,15 @@ class CustomTabBar: UITabBar {
         layer.shadowOpacity = 0.4
         layer.shadowColor = UIColor.black.cgColor
         
-        // TabBar border
-        layer.borderWidth = 0.5
-        layer.borderColor = UIColor.lightGray.cgColor
+        topBorderLayer?.removeFromSuperlayer()
+        
+        // Cria uma nova camada para a border no topo
+        let borderHeight: CGFloat = 0.5
+        let borderLayer = CALayer()
+        borderLayer.frame = CGRect(x: 0, y: 0, width: bounds.width, height: borderHeight)
+        borderLayer.backgroundColor = UIColor.lightGray.cgColor
+        
+        layer.addSublayer(borderLayer)
+        topBorderLayer = borderLayer
     }
 }
