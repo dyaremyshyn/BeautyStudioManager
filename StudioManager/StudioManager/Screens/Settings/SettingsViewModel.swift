@@ -10,5 +10,11 @@ import Foundation
 class SettingsViewModel: ObservableObject {
     weak var coordinator: SettingsCoordinator?
 
+    func onAppearanceTapped() {
+        // TODO:
+    }
     
+    func onCurrencyTapped() {
+        // TODO:
+    }
 }

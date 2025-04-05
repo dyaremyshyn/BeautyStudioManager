@@ -137,3 +137,9 @@ extension tr {
     static let calendarAppointmentPrice = t("calendarAppointmentPrice")
     static let calendarInResidence = t("calendarInResidence")
 }
+
+// MARK: Settings
+extension tr {
+    static let appearanceTitle = t("appearanceTitle")
+    static let currencyTitle = t("currencyTitle")
+}

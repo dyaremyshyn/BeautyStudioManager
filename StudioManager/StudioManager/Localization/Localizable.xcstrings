@@ -52,6 +52,23 @@
         }
       }
     },
+    "appearanceTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appearance"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aparência"
+          }
+        }
+      }
+    },
     "appointmentAddedSuccessfully" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -320,6 +337,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Telemóvel da Cliente"
+          }
+        }
+      }
+    },
+    "currencyTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Currency"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moeda"
           }
         }
       }
@@ -816,9 +850,6 @@
           }
         }
       }
-    },
-    "Hello, World!" : {
-
     },
     "iconsTitle" : {
       "extractionState" : "manual",
