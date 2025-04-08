@@ -57,7 +57,7 @@ class NewAppointmentViewModel: ObservableObject {
     }
     
     func fetchData() {
-        allServices = servicesPersistenceService.fetchAll()
+        allServices = servicesPersistenceService.fetchAll().sorted { $0.type < $1.type }
         servicesTypes = allServices.map { $0.type }.filter { !$0.isEmpty }
         type = servicesTypes.first ?? ""
     }

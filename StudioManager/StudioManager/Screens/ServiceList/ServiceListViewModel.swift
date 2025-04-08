@@ -20,7 +20,7 @@ class ServiceListViewModel: ObservableObject {
     }
     
     public func fetchData() {
-        services = persistenceService.fetchAll()
+        services = persistenceService.fetchAll().sorted { $0.type < $1.type }
         errorMessage = nil
     }
     
