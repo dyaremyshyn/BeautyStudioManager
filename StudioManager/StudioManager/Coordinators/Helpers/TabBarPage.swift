@@ -35,11 +35,11 @@ enum TabBarPage {
     
     func getIconName() -> String {
         switch self {
-        case .agenda: return "list.bullet.clipboard"
-        case .newAppointment: return "plus.circle" // "note.text.badge.plus" 
-        case .balance: return "chart.xyaxis.line"
-        case .services: return "list.bullet.rectangle"
-        case .settings: return "gearshape"
+        case .agenda: return StudioTheme.agendaImage
+        case .newAppointment: return StudioTheme.newAppointmentImage
+        case .balance: return StudioTheme.balanceImage
+        case .services: return StudioTheme.servicesImage
+        case .settings: return StudioTheme.settingsImage
         }
     }
 }
