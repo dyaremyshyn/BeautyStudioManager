@@ -37,12 +37,9 @@ struct OnboardingView: View {
                     .padding(.horizontal)
                     .transition(.opacity)
                     .padding(.bottom, 5)
-                Text(description)
-                    .font(.subheadline)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
-                    .transition(.opacity)
             }
+            TypingText(text: description, isExpanded: $textVisible)
+
             Spacer()
         }
         .onAppear {
