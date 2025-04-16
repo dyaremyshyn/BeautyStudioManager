@@ -60,10 +60,10 @@ class AgendaViewModel: ObservableObject {
         let addCalendarAppointments = allAppointments.filter { !$0.addedToCalendar }
         self.successMessage = addCalendarAppointments.isEmpty ? tr.noAppointmentsToAddToCalendar : nil
         addCalendarAppointments.forEach { appointment in
-            CalendarService.createEvent(to: appointment) { [weak self] result in
-                self?.errorMessage = result == nil ? tr.errorAddingAppointmentToCalendar : nil
-                self?.successMessage = result != nil ? tr.appointmentsAddedToCalendar : nil
-                self?.appointmentsAddedToCalendar(appointment: appointment, index: self?.allAppointments.firstIndex(where: { $0.id == appointment.id }), eventId: result)
+            CalendarService.createEvent(to: appointment) { [weak self] eventId in
+                self?.errorMessage = eventId == nil ? tr.errorAddingAppointmentToCalendar : nil
+                self?.successMessage = eventId != nil ? tr.appointmentsAddedToCalendar : nil
+                self?.appointmentsAddedToCalendar(appointment: appointment, index: self?.allAppointments.firstIndex(where: { $0.id == appointment.id }), eventId: eventId)
             }
         }
     }
