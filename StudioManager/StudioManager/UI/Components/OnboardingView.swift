@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct OnboardingView: View {
+struct OnboardingView<Content: View>: View {
     let imageName: String
     let title: String
-    let description: String
-    
+    let text: String
+    @ViewBuilder var content: () -> Content
     @State private var imageVisible: Bool = false
     @State private var textVisible: Bool = false
 
@@ -38,8 +38,7 @@ struct OnboardingView: View {
                     .transition(.opacity)
                     .padding(.bottom, 5)
             }
-            TypingText(text: description, isExpanded: $textVisible)
-
+            TypingText(text: text, animate: $textVisible, content: content)
             Spacer()
         }
         .onAppear {
@@ -52,10 +51,19 @@ struct OnboardingView: View {
                 }
             }
         }
+        .onDisappear {
+            textVisible = false
+            imageVisible = false
+        }
     }
 }
 
 #Preview {
-    let description = "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
-    OnboardingView(imageName: "list.bullet.clipboard", title: "Title", description: description)
+    let description = "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form."
+    OnboardingView(imageName: "list.bullet.clipboard", title: "Title", text: description) {
+        HStack {
+            Image(systemName: StudioTheme.addToCalendarImage)
+            Text("Content goes here.")
+        }
+    }
 }

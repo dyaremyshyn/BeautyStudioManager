@@ -8,45 +8,71 @@
 
 import SwiftUI
 
-struct TypingText: View {
+struct TypingText<Content: View>: View {
     var text: String
-    @Binding var isExpanded: Bool
+    @Binding var animate: Bool
+    @ViewBuilder var content: () -> Content
     @State private var displayedText = ""
     @State private var currentCharacterIndex: String.Index!
+    @State private var typingTimer: Timer? = nil
     
     var body: some View {
         VStack{
             Text(displayedText)
                 .font(.subheadline)
                 .padding(.horizontal)
-        }
-        .onChange(of: isExpanded) { _, newValue in
-            if newValue {
-                startTypingEffect()
+            
+            if displayedText == text {
+                content()
+                    .transition(.opacity)
+                    .padding(.vertical)
             }
+        }
+        .onChange(of: animate) { _, _ in
+            if animate {
+                startTypingEffect()
+            } else {
+                stopTypingEffect()
+            }
+        }
+        .onDisappear {
+            stopTypingEffect()
+            displayedText = ""
         }
     }
     
     private func startTypingEffect() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             currentCharacterIndex = text.startIndex
-            Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { timer in
-                displayedText.append(text[currentCharacterIndex])
-                currentCharacterIndex = text.index(after: currentCharacterIndex)
-                
-                if currentCharacterIndex == text.endIndex {
+            displayedText = ""
+            typingTimer?.invalidate()
+            typingTimer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { timer in
+                if currentCharacterIndex < text.endIndex {
+                    displayedText.append(text[currentCharacterIndex])
+                    currentCharacterIndex = text.index(after: currentCharacterIndex)
+                } else {
                     timer.invalidate()
+                    typingTimer = nil
                 }
             }
         }
     }
+    
+    private func stopTypingEffect() {
+        typingTimer?.invalidate()
+        typingTimer = nil
+    }
 }
 
 #Preview {
-    @Previewable @State var isExpanded: Bool = true
+    @Previewable @State var animate: Bool = true
     let description = "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
 
-    Button("Toggle") { isExpanded.toggle() }
-    TypingText(text: description, isExpanded: $isExpanded)
-    
+    Button("Toggle") { animate.toggle() }
+    TypingText(text: description, animate: $animate) {
+        HStack {
+            Image(systemName: StudioTheme.addToCalendarImage)
+            Text("Content goes here.")
+        }
+    }
 }

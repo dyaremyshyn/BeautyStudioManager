@@ -143,3 +143,15 @@ extension tr {
     static let appearanceTitle = t("appearanceTitle")
     static let currencyTitle = t("currencyTitle")
 }
+
+// MARK: Onboarding
+extension tr {
+    static let onboardingTitle = t("onboardingTitle")
+    static let getStartedTitle = t("getStartedTitle")
+    static let onboardingAgendaDescription = t("onboardingAgendaDescription")
+    static let onboardingAgendaCalendar = t("onboardingAgendaCalendar")
+    static let onboardingBalanceDescription = t("onboardingBalanceDescription")
+    static let onboardingNewAppointmentDescription = t("onboardingNewAppointmentDescription")
+    static let onboardingServicesDescription = t("onboardingServicesDescription")
+    static let onboardingAddServiceDescription = t("onboardingAddServiceDescription")
+}

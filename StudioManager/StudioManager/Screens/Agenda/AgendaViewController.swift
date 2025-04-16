@@ -75,7 +75,12 @@ public class AgendaViewController: UIViewController {
         view.addSubview(segmentedControl)
         view.addSubview(tableView)
         
-        let addToCalendar = UIBarButtonItem(image: UIImage(systemName: "calendar.badge.plus"), style: .done, target: self, action: #selector(saveToCalendarTapped))
+        let addToCalendar = UIBarButtonItem(
+            image: UIImage(systemName: StudioTheme.addToCalendarImage),
+            style: .done,
+            target: self,
+            action: #selector(saveToCalendarTapped)
+        )
         addToCalendar.tintColor = .Text.button
         navigationItem.rightBarButtonItem = addToCalendar
         

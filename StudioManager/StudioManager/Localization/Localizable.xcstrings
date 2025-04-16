@@ -834,6 +834,23 @@
         }
       }
     },
+    "getStartedTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get Started"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Começar"
+          }
+        }
+      }
+    },
     "hairstylesService" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1068,6 +1085,121 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Não se esqueça de adicionar as novas marcações."
+          }
+        }
+      }
+    },
+    "onboardingAddServiceDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap this button to add a new service."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clique neste botão para adicionar um novo serviço."
+          }
+        }
+      }
+    },
+    "onboardingAgendaCalendar" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clicking this button will add all appointments to your calendar."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clicando neste botão irá adicionar todas as marcações ao seu calendário."
+          }
+        }
+      }
+    },
+    "onboardingAgendaDescription" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View and edit your appointments effortlessly by day, week, month, or all at once. You can also set calendar alerts directly from this screen to stay updated."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Veja e edite facilmente as suas marcações por dia, semana, mês ou todas em conjunto. Nesta vista, também pode adicionar alertas ao calendário para estar sempre atualizado."
+          }
+        }
+      }
+    },
+    "onboardingBalanceDescription" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View your income, expenses, and overall balance by day, week, month, or year. Check out insightful charts detailing your provided services. Additionally, easily manage your expenses by viewing existing entries or adding new ones."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Veja o seu rendimento, despesas e balanço geral por dia, semana, mês ou ano. Consulte gráficos detalhados dos serviços que prestou. Além disso, pode facilmente gerir as suas despesas, consultando as entradas existentes ou adicionando novas despesas."
+          }
+        }
+      }
+    },
+    "onboardingNewAppointmentDescription" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Easily create a new appointment by entering your client’s name, selecting the desired service and date, and indicating if a home visit is required."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicione facilmente uma nova marcação preenchendo o nome da cliente, selecionando o serviço pretendido e a data, e indicando se é necessária a deslocação ao domicílio."
+          }
+        }
+      }
+    },
+    "onboardingServicesDescription" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manage the services your studio offers by adding, editing, or removing them. These services will be available for selection when creating new appointments."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gira os serviços que o seu estúdio fornece, adicionando, editando ou eliminando-os. Estes serviços estarão disponíveis para seleção ao criar novas marcações."
+          }
+        }
+      }
+    },
+    "onboardingTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Onboarding"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Onboarding"
           }
         }
       }

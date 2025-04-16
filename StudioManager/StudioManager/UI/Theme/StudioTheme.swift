@@ -57,6 +57,8 @@ enum StudioTheme {
     static let balanceImage = "chart.xyaxis.line"
     static let servicesImage = "list.bullet.rectangle"
     static let settingsImage = "gearshape"
+    static let addToCalendarImage = "calendar.badge.plus"
+    static let addServiceImage = "plus"
     
     /// Distance
     static let pricePerKm: Double = 0.4
