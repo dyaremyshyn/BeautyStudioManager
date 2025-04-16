@@ -76,7 +76,10 @@ private extension BalanceScreen {
     BalanceScreen(
         viewModel: BalanceViewModel(
             appointmentPersistenceService: AppointmentPersistenceService(),
-            expensePersistenceService: ExpensePersistenceService()
+            expensePersistenceService: ExpensePersistenceService(),
+            coordinator: BalanceCoordinator(
+                navigationController: UINavigationController()
+            )
         )
     )
 }

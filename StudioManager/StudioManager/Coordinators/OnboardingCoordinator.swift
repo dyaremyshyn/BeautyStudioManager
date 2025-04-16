@@ -48,6 +48,6 @@ extension OnboardingCoordinator: OnboardingDelegate {
     func getStarted() {
         let appCoordinator = AppCoordinator(navigationController: navigationController)
         appCoordinator.start()
-        self.navigationController.setViewControllers(appCoordinator.navigationController.viewControllers, animated: true)
+        navigationController = appCoordinator.navigationController
     }
 }

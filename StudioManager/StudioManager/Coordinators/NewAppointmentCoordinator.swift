@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 import SwiftUI
 
+protocol NewAppointmentDelegate {
+    func goToServiceTab()
+}
+
 class NewAppointmentCoordinator: Coordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
@@ -21,11 +25,7 @@ class NewAppointmentCoordinator: Coordinator {
             appointment: nil,
             appointmentsPersistenceService: AppointmentPersistenceService(),
             servicePersistenceService: servicePersistenceService,
-            onNavigateToServiceList: { [weak self] in
-                if let tabBarController = self?.navigationController.tabBarController {
-                    tabBarController.selectedIndex = TabBarPage.services.getIndex()
-                }
-            }
+            coordinator: self
         )
         return viewController
     }()
@@ -44,5 +44,13 @@ class NewAppointmentCoordinator: Coordinator {
 extension NewAppointmentCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
         childCoordinators = childCoordinators.filter { $0.type != childCoordinator.type }
+    }
+}
+
+extension NewAppointmentCoordinator: NewAppointmentDelegate {
+    func goToServiceTab() {
+        if let tabBarController = navigationController.tabBarController {
+            tabBarController.selectedIndex = TabBarPage.services.getIndex()
+        }
     }
 }

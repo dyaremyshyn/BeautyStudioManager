@@ -11,12 +11,13 @@ class ServiceListViewModel: ObservableObject {
     @Published private(set) var services: [Service] = []
     @Published private(set) var errorMessage: String? = nil
     // Coordinator
-    weak var coordinator: ServicesListCoordinator?
+    private var coordinator: ServicesListCoordinator
     // Services
     private let persistenceService: AppointmentServicePersistenceLoader
 
-    init(persistenceService: AppointmentServicePersistenceLoader) {
+    init(persistenceService: AppointmentServicePersistenceLoader, coordinator: ServicesListCoordinator) {
         self.persistenceService = persistenceService
+        self.coordinator = coordinator
     }
     
     public func fetchData() {
@@ -25,11 +26,11 @@ class ServiceListViewModel: ObservableObject {
     }
     
     public func serviceTapped(_ service: Service) {
-        coordinator?.goToService(service: service)
+        coordinator.goToService(service: service)
     }
     
     public func addService() {
-        coordinator?.goToService(service: nil)
+        coordinator.goToService(service: nil)
     }
     
     public func removeService(index: Int) {
@@ -37,7 +38,7 @@ class ServiceListViewModel: ObservableObject {
         // First remove from persistence
         let success = persistenceService.delete(service: service)
         guard success else {
-            errorMessage = "Erro ao apagar serviço"
+            errorMessage = tr.serviceDeleteErrorMessage
             return
         }
         // Remove service

@@ -25,6 +25,8 @@ public struct StudioAppointment: Equatable, Identifiable, Hashable {
     let icon: String
     let color: CGColor
     let calendarEventId: String?
+    let totalDistance: String
+    let pricePerKm: String
         
     public static func map(appointment: StudioEntity) -> StudioAppointment {
         StudioAppointment(
@@ -39,7 +41,9 @@ public struct StudioAppointment: Equatable, Identifiable, Hashable {
             addedToCalendar: appointment.addedToCalendar,
             icon: appointment.icon ?? StudioTheme.serviceDefaultImage,
             color: appointment.color?.unarchiveColor ?? .random,
-            calendarEventId: appointment.calendarEventId
+            calendarEventId: appointment.calendarEventId,
+            totalDistance: StringConverter.convertDoubleToString(appointment.totalDistance),
+            pricePerKm: StringConverter.convertDoubleToString(appointment.pricePerKm)
         )
     }
 }

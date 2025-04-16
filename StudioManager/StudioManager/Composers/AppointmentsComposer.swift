@@ -7,12 +7,12 @@
 
 import Foundation
 
-public final class AppointmentsComposer {
+final class AppointmentsComposer {
     
     private init() {}
     
-    public static func appointmentsComposedWith(persistenceService: AppointmentPersistenceLoader) -> AgendaViewController {
-        let viewModel = AgendaViewModel(persistenceService: persistenceService)
+    static func appointmentsComposedWith(persistenceService: AppointmentPersistenceLoader, coordinator: AgendaCoordinator) -> AgendaViewController {
+        let viewModel = AgendaViewModel(persistenceService: persistenceService, coordinator: coordinator)
         let viewController = AgendaViewController.makeWith(viewModel: viewModel)
         return viewController
     }

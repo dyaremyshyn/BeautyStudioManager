@@ -18,11 +18,12 @@ class AgendaCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType = .tabItem
     
+    private lazy var servicePersistenceService: AppointmentServicePersistenceService = AppointmentServicePersistenceService()
     private lazy var appointmentListViewController: AgendaViewController = {
         let viewController = AppointmentsComposer.appointmentsComposedWith(
-            persistenceService: AppointmentPersistenceService()
+            persistenceService: AppointmentPersistenceService(),
+            coordinator: self
         )
-        viewController.viewModel?.coordinator = self
         return viewController
     }()
     
@@ -47,8 +48,11 @@ extension AgendaCoordinator: AppointmentsListDelegate {
         let editAppointmentController = NewAppointmentComposer.newAppointmentComposedWith(
             appointment: appointment,
             appointmentsPersistenceService: AppointmentPersistenceService(),
-            servicePersistenceService: AppointmentServicePersistenceService(),
-            onNavigateToServiceList: {}
+            servicePersistenceService: servicePersistenceService,
+            coordinator: NewAppointmentCoordinator(
+                navigationController: navigationController,
+                servicePersistenceService: servicePersistenceService
+            )
         )
         navigationController.pushViewController(editAppointmentController, animated: true)
         navigationController.topViewController?.title = tr.editAppointmentTitle

@@ -42,6 +42,8 @@ class AppointmentPersistenceService: AppointmentPersistenceLoader {
                 existingEntity.addedToCalendar = appointment.addedToCalendar
                 existingEntity.duration = appointment.duration
                 existingEntity.calendarEventId = appointment.calendarEventId
+                existingEntity.pricePerKm = StringConverter.convertStringToDouble(appointment.pricePerKm)
+                existingEntity.totalDistance = StringConverter.convertStringToDouble(appointment.totalDistance)
             } else {
                 let newEntry = StudioEntity(context: context)
                 newEntry.id = appointment.id
@@ -56,6 +58,8 @@ class AppointmentPersistenceService: AppointmentPersistenceLoader {
                 newEntry.icon = appointment.icon
                 newEntry.color = appointment.color.archiveColor
                 newEntry.calendarEventId = appointment.calendarEventId
+                newEntry.pricePerKm = StringConverter.convertStringToDouble(appointment.pricePerKm)
+                newEntry.totalDistance = StringConverter.convertStringToDouble(appointment.totalDistance)
             }
             
             do {

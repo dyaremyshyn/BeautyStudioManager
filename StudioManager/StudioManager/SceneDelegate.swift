@@ -11,19 +11,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    private lazy var appCoordinator: AppCoordinator = AppCoordinator(navigationController: UINavigationController())
+    private lazy var navigationController: UINavigationController = UINavigationController()
     private lazy var onboardingSeen: Bool = UserDefaults.standard.bool(forKey: "onboardingSeen")
-    private lazy var onboardingCoordinator: OnboardingCoordinator = OnboardingCoordinator(navigationController: UINavigationController())
+    private lazy var appCoordinator: AppCoordinator = {
+        let coordinator = AppCoordinator(navigationController: navigationController)
+        coordinator.start()
+        return coordinator
+    }()
+    private lazy var onboardingCoordinator: OnboardingCoordinator = {
+        let coordinator = OnboardingCoordinator(navigationController: navigationController)
+        coordinator.start()
+        return coordinator
+    }()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
         if !onboardingSeen {
-            onboardingCoordinator.start()
             window?.rootViewController = onboardingCoordinator.navigationController
         } else {
-            appCoordinator.start()
             window?.rootViewController = appCoordinator.navigationController
         }
         window?.makeKeyAndVisible()

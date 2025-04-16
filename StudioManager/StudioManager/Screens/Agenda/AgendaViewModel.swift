@@ -12,13 +12,14 @@ class AgendaViewModel: ObservableObject {
     @Published private(set) var appointments: [StudioAppointment] = []
     @Published private(set) var errorMessage: String? = nil
     @Published private(set) var successMessage: String? = nil
-    weak var coordinator: AgendaCoordinator?
+    private var coordinator: AgendaCoordinator
     private var filterCalendar: FilterCalendar = .today
     
     private let persistenceService: AppointmentPersistenceLoader
     
-    init(persistenceService: AppointmentPersistenceLoader) {
+    init(persistenceService: AppointmentPersistenceLoader, coordinator: AgendaCoordinator) {
         self.persistenceService = persistenceService
+        self.coordinator = coordinator
     }
     
     public func fetchAppointments() {
@@ -33,7 +34,7 @@ class AgendaViewModel: ObservableObject {
     }
     
     public func goToAppointmentDetails(appointment: StudioAppointment) {
-        coordinator?.goToAppointmentDetails(appointment: appointment)
+        coordinator.goToAppointmentDetails(appointment: appointment)
     }
     
     public func removeAppointment(index: Int) {
@@ -81,7 +82,9 @@ class AgendaViewModel: ObservableObject {
             addedToCalendar: true,
             icon: appointment.icon,
             color: appointment.color,
-            calendarEventId: eventId
+            calendarEventId: eventId,
+            totalDistance: appointment.totalDistance,
+            pricePerKm: appointment.pricePerKm
         )
         self.allAppointments[index] = updatedAppointment
         filterAppointments(by: filterCalendar)

@@ -39,7 +39,9 @@ public struct Appointment {
         addedToCalendar: false,
         icon: StudioTheme.serviceDefaultImage,
         color: .random,
-        calendarEventId: nil
+        calendarEventId: nil,
+        totalDistance: "",
+        pricePerKm: ""
     )
     
     static let allCustomers = [
@@ -55,7 +57,9 @@ public struct Appointment {
             addedToCalendar: false,
             icon: StudioTheme.serviceDefaultImage,
             color: .random,
-            calendarEventId: nil
+            calendarEventId: nil,
+            totalDistance: "",
+            pricePerKm: ""
         ),
         StudioAppointment(
             id: UUID(),
@@ -69,7 +73,9 @@ public struct Appointment {
             addedToCalendar: false,
             icon: StudioTheme.serviceDefaultImage,
             color: .random,
-            calendarEventId: nil
+            calendarEventId: nil,
+            totalDistance: "",
+            pricePerKm: ""
         ),
         StudioAppointment(
             id: UUID(),
@@ -83,7 +89,9 @@ public struct Appointment {
             addedToCalendar: false,
             icon: StudioTheme.serviceDefaultImage,
             color: .random,
-            calendarEventId: nil
+            calendarEventId: nil,
+            totalDistance: "",
+            pricePerKm: ""
         ),
         StudioAppointment(
             id: UUID(),
@@ -97,7 +105,9 @@ public struct Appointment {
             addedToCalendar: false,
             icon: StudioTheme.serviceDefaultImage,
             color: .random,
-            calendarEventId: nil
+            calendarEventId: nil,
+            totalDistance: "",
+            pricePerKm: ""
         ),
         StudioAppointment(
             id: UUID(),
@@ -111,7 +121,9 @@ public struct Appointment {
             addedToCalendar: false,
             icon: StudioTheme.serviceDefaultImage,
             color: .random,
-            calendarEventId: nil
+            calendarEventId: nil,
+            totalDistance: "",
+            pricePerKm: ""
         )
     ]
 }

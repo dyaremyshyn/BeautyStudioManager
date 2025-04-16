@@ -20,9 +20,11 @@ class ServicesListCoordinator: Coordinator {
     
     private let servicePersistenceService: AppointmentServicePersistenceLoader
     
-    private lazy var balanceViewController: ServiceListViewController = {
-        let viewController = ServiceListComposer.servicesComposedWith(persistenceService: servicePersistenceService)
-        viewController.viewModel?.coordinator = self
+    private lazy var viewController: ServiceListViewController = {
+        let viewController = ServiceListComposer.servicesComposedWith(
+            persistenceService: servicePersistenceService,
+            coordinator: self
+        )
         return viewController
     }()
     
@@ -32,7 +34,7 @@ class ServicesListCoordinator: Coordinator {
     }
     
     func start() {
-        navigationController.pushViewController(balanceViewController, animated: true)
+        navigationController.pushViewController(viewController, animated: true)
     }
 }
 

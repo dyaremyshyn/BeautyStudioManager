@@ -17,7 +17,7 @@ class NewAppointmentViewModel: ObservableObject {
     @Published var clientPhoneNumber: String!
     @Published var appointmentDate: Date!
     @Published var price: String!
-    @Published var inResidence: Bool!
+    @Published var inResidence: Bool = false
     @Published var pricePerKm: String!
     @Published var totalDistance: String!
     private var servicePrice: Double = 0
@@ -36,6 +36,7 @@ class NewAppointmentViewModel: ObservableObject {
     
     private let appointmentsPersistenceService: AppointmentPersistenceLoader
     private let servicesPersistenceService: AppointmentServicePersistenceLoader
+    private let coordinator: NewAppointmentCoordinator
     private var subscriptions: [AnyCancellable] = []
     @Published var validationErrors: [AppointmentValidationError] = []
     @Published var showToast: Bool = false
@@ -43,11 +44,13 @@ class NewAppointmentViewModel: ObservableObject {
     init(
         appointment: StudioAppointment?,
         appointmentsPersistenceService: AppointmentPersistenceLoader,
-        servicesPersistenceService: AppointmentServicePersistenceLoader
+        servicesPersistenceService: AppointmentServicePersistenceLoader,
+        coordinator: NewAppointmentCoordinator
     ) {
         self.appointment = appointment
         self.appointmentsPersistenceService = appointmentsPersistenceService
         self.servicesPersistenceService = servicesPersistenceService
+        self.coordinator = coordinator
         
         bind()
         
@@ -75,7 +78,9 @@ class NewAppointmentViewModel: ObservableObject {
             addedToCalendar: false,
             icon: icon,
             color: color,
-            calendarEventId: appointment?.calendarEventId ?? nil
+            calendarEventId: appointment?.calendarEventId ?? nil,
+            totalDistance: totalDistance,
+            pricePerKm: pricePerKm
         )
         
         // Save created appointment to core data
@@ -85,6 +90,10 @@ class NewAppointmentViewModel: ObservableObject {
 
         // Reset fields after saving if needed
         resetFields()
+    }
+    
+    func addServiceTapped() {
+        coordinator.goToServiceTab()
     }
 }
 
@@ -109,6 +118,8 @@ private extension NewAppointmentViewModel {
         self.price = StringConverter.convertDoubleToString(appointment.price)
         self.type = appointment.type
         self.inResidence = appointment.inResidence
+        self.totalDistance = appointment.totalDistance
+        self.pricePerKm = appointment.pricePerKm
     }
     
     func bind() {
@@ -131,7 +142,7 @@ private extension NewAppointmentViewModel {
                     pricePerKm: pricePerKm,
                     totalDistance: totalDistance
                 )
-                self?.validationErrors = AppointmentValidator.validate(form: form, inResidence: inResidence ?? false)
+                self?.validationErrors = AppointmentValidator.validate(form: form, inResidence: inResidence)
             }
             .store(in: &subscriptions)
         
@@ -141,6 +152,17 @@ private extension NewAppointmentViewModel {
                 let pricePerKmValue = pricePerKm ?? ""
                 let totalDistanceValue = totalDistance ?? ""
                 calculateAppointmentTotalCost(pricePerKm: pricePerKmValue, totalDistance: totalDistanceValue)
+            }
+            .store(in: &subscriptions)
+        
+        $inResidence
+            .sink { [weak self] inResidence in
+                guard let self else { return }
+                if inResidence {
+                    calculateAppointmentTotalCost(pricePerKm: self.pricePerKm, totalDistance: self.totalDistance)
+                } else {
+                    self.price = StringConverter.convertDoubleToString(self.servicePrice)
+                }
             }
             .store(in: &subscriptions)
     }

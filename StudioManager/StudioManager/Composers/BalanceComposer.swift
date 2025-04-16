@@ -14,13 +14,13 @@ final class BalanceComposer {
     static func balanceComposedWith(
         appointmentPersistenceService: AppointmentPersistenceLoader,
         expensePersistenceService: ExpensePersistenceLoader,
-        coordinator: BalanceCoordinator? = nil
+        coordinator: BalanceCoordinator
     ) -> UIHostingController<BalanceScreen> {
         let viewModel = BalanceViewModel(
             appointmentPersistenceService: appointmentPersistenceService,
-            expensePersistenceService: expensePersistenceService
+            expensePersistenceService: expensePersistenceService,
+            coordinator: coordinator
         )
-        viewModel.coordinator = coordinator
         let balanceScreen = BalanceScreen(viewModel: viewModel)
         return UIHostingController(rootView: balanceScreen)
     }

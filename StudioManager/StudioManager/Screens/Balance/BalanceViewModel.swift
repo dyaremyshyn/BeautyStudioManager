@@ -22,14 +22,15 @@ class BalanceViewModel: ObservableObject {
     @Published private(set) var servicesData: [ServiceRevenue] = []
     private var filterCalendar: FilterCalendar = .today
     // Coordinator
-    weak var coordinator: BalanceCoordinator?
+    private var coordinator: BalanceCoordinator
     // Services
     private let appointmentPersistenceService: AppointmentPersistenceLoader
     private let expensePersistenceService: ExpensePersistenceLoader
 
-    init(appointmentPersistenceService: AppointmentPersistenceLoader, expensePersistenceService: ExpensePersistenceLoader) {
+    init(appointmentPersistenceService: AppointmentPersistenceLoader, expensePersistenceService: ExpensePersistenceLoader, coordinator: BalanceCoordinator) {
         self.appointmentPersistenceService = appointmentPersistenceService
         self.expensePersistenceService = expensePersistenceService
+        self.coordinator = coordinator
     }
     
     public func fetchAppointments() {
@@ -49,11 +50,11 @@ class BalanceViewModel: ObservableObject {
     }
     
     public func addExpense() {
-        coordinator?.addExpense()
+        coordinator.addExpense()
     }
     
     func expenseListTapped() {
-        coordinator?.viewExpenses()
+        coordinator.viewExpenses()
     }
 }
 

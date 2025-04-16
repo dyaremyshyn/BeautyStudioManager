@@ -1289,6 +1289,23 @@
         }
       }
     },
+    "serviceDeleteErrorMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error deleting service"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro ao apagar serviço"
+          }
+        }
+      }
+    },
     "serviceDetails" : {
       "extractionState" : "manual",
       "localizations" : {

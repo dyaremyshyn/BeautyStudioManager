@@ -112,6 +112,7 @@ extension tr {
     static let liftingService = t("liftingService")
     static let eyebrowsService = t("eyebrowsService")
     static let serviceColor = t("serviceColor")
+    static let serviceDeleteErrorMessage = t("serviceDeleteErrorMessage")
 }
 
 // MARK: Icon Picker

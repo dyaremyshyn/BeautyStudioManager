@@ -8,22 +8,23 @@
 import Foundation
 import SwiftUI
 
-public final class NewAppointmentComposer {
+final class NewAppointmentComposer {
     
     private init() {}
     
-    public static func newAppointmentComposedWith(
+    static func newAppointmentComposedWith(
         appointment: StudioAppointment?,
         appointmentsPersistenceService: AppointmentPersistenceLoader,
         servicePersistenceService: AppointmentServicePersistenceLoader,
-        onNavigateToServiceList: @escaping () -> Void
+        coordinator: NewAppointmentCoordinator
     ) -> UIHostingController<NewAppointmentView> {
         let viewModel = NewAppointmentViewModel(
             appointment: appointment,
             appointmentsPersistenceService: appointmentsPersistenceService,
-            servicesPersistenceService: servicePersistenceService
+            servicesPersistenceService: servicePersistenceService,
+            coordinator: coordinator
         )
-        let newAppointmentView = NewAppointmentView(viewModel: viewModel, onNavigateToServiceList: onNavigateToServiceList)
+        let newAppointmentView = NewAppointmentView(viewModel: viewModel) 
         // Wrap the SwiftUI view in a UIHostingController
         let hostingController = UIHostingController(rootView: newAppointmentView)
         return hostingController
