@@ -44,9 +44,13 @@ struct SettingsScreen: View {
                 .foregroundStyle(Color.Text.button)
         }
         .padding()
-        .onTapGesture {
-            tap()
-        }
+        .background(
+            RoundedRectangle(cornerRadius: StudioTheme.cr10)
+                .fill(Color(.systemBackground))
+                .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
+        )
+        .padding(.horizontal)
+        .onTapGesture(perform: tap)
     }
 }
 
