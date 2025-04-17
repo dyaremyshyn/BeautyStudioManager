@@ -9,7 +9,7 @@ import UIKit
 import SwiftUI
 import Combine
 
-public class AgendaViewController: UIViewController {
+class AgendaViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     var viewModel: AgendaViewModel? {
         didSet { bind() }
@@ -152,18 +152,18 @@ public class AgendaViewController: UIViewController {
 }
 
 // MARK: - Filter calendar
-extension AgendaViewController {
+private extension AgendaViewController {
     
-    @objc private func segmentedControlValueChanged() {
+    @objc func segmentedControlValueChanged() {
         let filterCalendar = FilterCalendar(rawValue: segmentedControl.selectedSegmentIndex) ?? .today
         viewModel?.filterAppointments(by: filterCalendar)
     }
 }
 
 // MARK: - Add to calendar
-extension AgendaViewController {
+private extension AgendaViewController {
     
-    @objc private func saveToCalendarTapped() {
+    @objc func saveToCalendarTapped() {
         viewModel?.addAppointmentsToCalendar()
     }
 }
@@ -171,9 +171,28 @@ extension AgendaViewController {
 // MARK: - UITableViewDelegate - didSelectRowAt
 extension AgendaViewController: UITableViewDelegate {
 
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let selectedAppointment = dataSource?.itemIdentifier(for: indexPath) {
             viewModel?.goToAppointmentDetails(appointment: selectedAppointment)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let appointment = dataSource?.itemIdentifier(for: indexPath),
+              let phoneNumber = appointment.phoneNumber,
+              !phoneNumber.isEmpty else {
+            return nil
+        }
+
+        let callAction = UIContextualAction(style: .normal, title: tr.call) { _, _, completion in
+            if let url = URL(string: "tel://\(phoneNumber.onlyDigits())"),
+               UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            }
+            completion(true)
+        }
+
+        callAction.backgroundColor = .systemGreen
+        return UISwipeActionsConfiguration(actions: [callAction])
     }
 }

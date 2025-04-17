@@ -121,7 +121,7 @@ class AppointmentsViewCell: UITableViewCell {
         inResidenceLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8).isActive = true
     }
     
-    public func configure(model: StudioAppointment) {
+    func configure(model: StudioAppointment) {
         clientNameLabel.text = model.name
         appointmentTypeLabel.text = model.type
         appointmentDateLabel.text = model.date.appointmentDate

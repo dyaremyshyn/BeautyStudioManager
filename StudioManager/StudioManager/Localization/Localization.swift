@@ -30,6 +30,7 @@ extension tr {
     static let emptyName = t("emptyName")
     static let emptyPrice = t("emptyPrice")
     static let invalidDate = t("invalidDate")
+    static let call = t("call")
 }
 
 // MARK: Tab
