@@ -54,11 +54,12 @@ enum StudioTheme {
     
     static let agendaImage = "list.bullet.clipboard"
     static let newAppointmentImage = "plus.circle" // "note.text.badge.plus"
-    static let balanceImage = "chart.xyaxis.line"
+    static let balanceImage = "chart.pie"
     static let servicesImage = "list.bullet.rectangle"
     static let settingsImage = "gearshape"
     static let addToCalendarImage = "calendar.badge.plus"
     static let addServiceImage = "plus"
+    static let compareBalanceImage = "chart.xyaxis.line"
     
     /// Distance
     static let pricePerKm: Double = 0.4

@@ -42,6 +42,15 @@ struct BalanceScreen: View {
             viewModel.fetchAppointments()
             UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(resource: .Text.button)
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: viewModel.compareBalanceTapped) {
+                    Image(systemName: StudioTheme.compareBalanceImage)
+                        .renderingMode(.template)
+                        .foregroundColor(.Text.button)
+                }
+            }
+        }
     }
 }
 

@@ -12,6 +12,7 @@ import SwiftUI
 protocol BalanceDelegate {
     func addExpense()
     func viewExpenses()
+    func compareBalances()
 }
 
 class BalanceCoordinator: Coordinator {
@@ -67,5 +68,9 @@ extension BalanceCoordinator: BalanceDelegate {
         )
         navigationController.pushViewController(screen, animated: true)
         navigationController.topViewController?.title = tr.expensesTitle
+    }
+    
+    func compareBalances() {
+        // TODO: 
     }
 }

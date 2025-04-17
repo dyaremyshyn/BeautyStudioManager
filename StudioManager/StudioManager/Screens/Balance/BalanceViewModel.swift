@@ -33,14 +33,14 @@ class BalanceViewModel: ObservableObject {
         self.coordinator = coordinator
     }
     
-    public func fetchAppointments() {
+    func fetchAppointments() {
         allAppointments = appointmentPersistenceService.fetchAll()
         allExpenses = expensePersistenceService.fetchAll()
         errorMessage = nil
         filterBalance(by: filterCalendar)
     }
     
-    public func filterBalance(by filterCalendar: FilterCalendar) {
+    func filterBalance(by filterCalendar: FilterCalendar) {
         self.filterCalendar = filterCalendar
         appointments = FilterCalendarHelper.filterBalance(by: filterCalendar, appointments: allAppointments)
         expenses = FilterCalendarHelper.filterExpense(by: filterCalendar, expenses: allExpenses)
@@ -49,12 +49,16 @@ class BalanceViewModel: ObservableObject {
         mapAppointmentsToTypeAmount()
     }
     
-    public func addExpense() {
+    func addExpense() {
         coordinator.addExpense()
     }
     
     func expenseListTapped() {
         coordinator.viewExpenses()
+    }
+    
+    func compareBalanceTapped() {
+        coordinator.compareBalances()
     }
 }
 

@@ -30,9 +30,9 @@ struct DonutChartView: View {
                 HStack {
                     Circle()
                         .fill(service.color)
-                        .frame(width: 12, height: 12)
+                        .frame(width: 10, height: 10)
                     Text(formatServiceRevenue(service.service, service.revenue))
-                        .font(.body)
+                        .font(.footnote)
                 }
             }
         }
